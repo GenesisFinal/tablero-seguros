@@ -648,57 +648,74 @@
         <!-- ==================================================================== -->
         <section id="tab-balances" class="tab-content hidden space-y-6">
             <div class="main-card rounded-2xl p-6">
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
+                
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792]">Estados Contables SSN</span>
-                            <span class="text-xs txt-muted font-mono">Marzo 2026 vs Marzo 2025</span>
+                            <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792] font-mono">Estados Contables Oficiales SSN</span>
+                            <span class="text-xs txt-muted font-mono" id="balances-period-badge">Marzo 2026 vs Marzo 2025</span>
                         </div>
-                        <h2 class="text-xl font-bold txt-primary">
-                            Balances Generales y Rubros Contables
+                        <h2 class="text-2xl font-extrabold tracking-tight txt-primary">
+                            Balances Generales y Estados de Resultados
                         </h2>
-                    </div>
-
-                    <!-- Selectors -->
-                    <div class="flex flex-wrap items-center gap-3">
-                        <select id="select-balances-view" onchange="renderBalancesTable()" class="ui-input text-xs rounded-xl px-3 py-2 font-medium">
-                            <option value="patrimonial">Seguros Patrimoniales & ART</option>
-                            <option value="personas">Seguros de Personas</option>
-                            <option value="retiro">Seguros de Retiro</option>
-                        </select>
-
-                        <select id="select-balances-rubro" onchange="renderBalancesTable()" class="ui-input text-xs rounded-xl px-3 py-2 font-medium">
-                            <option value="all">Todos los Rubros (Completo)</option>
-                            <option value="Activos">Total Activos</option>
-                            <option value="Inversiones">Inversiones</option>
-                            <option value="Disponibilidades">Disponibilidades</option>
-                            <option value="Compromisos Técnicos">Compromisos Técnicos</option>
-                            <option value="Patrimonio Neto">Patrimonio Neto</option>
-                            <option value="Resultado del Ejercicio">Resultado del Ejercicio</option>
-                        </select>
-
-                        <input type="text" id="input-balances-search" oninput="renderBalancesTable()" placeholder="Filtrar entidad..." class="ui-input text-xs rounded-xl px-3 py-2 w-44 font-medium">
+                        <p class="text-xs txt-secondary mt-1">
+                            Auditoría contable completa de Activos, Pasivos, Patrimonio Neto y Resultados para todas las entidades y ramos del mercado asegurador.
+                        </p>
                     </div>
                 </div>
 
-                <!-- Balances Table -->
-                <div class="overflow-x-auto max-h-[500px] overflow-y-auto border rounded-xl mt-6 border-slate-200 dark:border-slate-800">
-                    <table class="w-full text-left text-xs font-mono data-table">
-                        <thead class="uppercase text-[10px] sticky-header">
-                            <tr id="tbl-balances-thead-row">
-                                <th class="py-3 px-3">Entidad Aseguradora</th>
-                                <th class="py-3 px-3 text-right">Inversiones ($M)</th>
-                                <th class="py-3 px-3 text-right">Activos ($M)</th>
-                                <th class="py-3 px-3 text-right">Compromisos Técnicos ($M)</th>
-                                <th class="py-3 px-3 text-right">Patrimonio Neto ($M)</th>
-                                <th class="py-3 px-3 text-right">Resultado Ejercicio ($M)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl-balances-body">
-                            <!-- Populated dynamically -->
-                        </tbody>
-                    </table>
+                <!-- 3 Cascading Selectors Bar -->
+                <div class="subtle-card rounded-2xl p-4 my-6 border border-slate-200 dark:border-slate-800">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        
+                        <!-- Selector 1: Tipo de Estado Contable -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="select-balances-view" class="text-[11px] font-bold uppercase tracking-wider txt-muted flex items-center gap-1.5">
+                                <i class="fas fa-file-invoice text-[#e20039]"></i> 1. Tipo de Estado Contable:
+                            </label>
+                            <select id="select-balances-view" onchange="onBalancesViewChange()" class="ui-input text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm cursor-pointer w-full">
+                                <option value="patrimonial" selected>Estado de Situación Patrimonial (Activo / Pasivo / PN)</option>
+                                <option value="edr">Estado de Resultados (Pérdidas y Ganancias)</option>
+                                <option value="tecnico">Apertura de Resultado Técnico</option>
+                                <option value="financiero">Apertura de Rendimiento Financiero</option>
+                            </select>
+                        </div>
+
+                        <!-- Selector 2: Segmento / Ramo -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="select-balances-rubro" class="text-[11px] font-bold uppercase tracking-wider txt-muted flex items-center gap-1.5">
+                                <i class="fas fa-filter text-[#4183ca]"></i> 2. Segmento de Mercado:
+                            </label>
+                            <select id="select-balances-rubro" onchange="onBalancesRubroChange()" class="ui-input text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm cursor-pointer w-full">
+                                <option value="total_mercado" selected>Total del Mercado Consolidado</option>
+                                <option value="patrimoniales">Seguros Patrimoniales</option>
+                                <option value="art">Riesgos del Trabajo (ART)</option>
+                                <option value="personas">Seguros de Personas</option>
+                                <option value="retiro">Exclusivas Retiro</option>
+                                <option value="mixtas">Aseguradoras Mixtas</option>
+                                <option value="pasajeros">Transporte Automotor (Pasajeros)</option>
+                            </select>
+                        </div>
+
+                        <!-- Selector 3: Compañía Aseguradora -->
+                        <div class="flex flex-col gap-1.5">
+                            <label for="select-balances-company" class="text-[11px] font-bold uppercase tracking-wider txt-muted flex items-center gap-1.5">
+                                <i class="fas fa-building text-[#3ac792]"></i> 3. Aseguradora / Entidad:
+                            </label>
+                            <select id="select-balances-company" onchange="renderBalancesSubtabData()" class="ui-input text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm cursor-pointer w-full">
+                                <option value="ALL" selected>Todas (Totales del Segmento)</option>
+                            </select>
+                        </div>
+
+                    </div>
                 </div>
+
+                <!-- Dynamic Balances Render Container -->
+                <div id="balances-display-container" class="space-y-6">
+                    <!-- Populated dynamically by renderBalancesSubtabData() -->
+                </div>
+
             </div>
         </section>
 
@@ -1154,6 +1171,7 @@
                     renderMensualTable();
                 }
                 if (tabId === 'rankings' && !charts.rankingBar) renderRankingBarChart();
+                if (tabId === 'balances') renderBalancesSubtabData();
                 if (tabId === 'personas' && !charts.personasDoughnut) renderPersonasChart();
                 if (tabId === 'inversiones' && !charts.inversionesDoughnut) renderInversionesCharts();
                 if (tabId === 'comparador') renderComparatorDropdowns();
@@ -1713,45 +1731,482 @@
             document.body.removeChild(link);
         }
 
-        // Tab 4: Balances SSN
-        function renderBalancesTable() {
+        // Tab 4: Balances & Estados Contables SSN (100% Dynamic Engine)
+        function onBalancesViewChange() {
+            onBalancesRubroChange();
+        }
+
+        function onBalancesRubroChange() {
             const data = window.INSURANCE_DATA || {};
-            const balances = data.ssn_balances || {};
-            const view = document.getElementById('select-balances-view')?.value || 'patrimonial';
-            const search = (document.getElementById('input-balances-search')?.value || '').toLowerCase().trim();
+            const balancesObj = data.ssn_balances || {};
+            const d26 = balancesObj.data_2026 || {};
 
-            const d26 = balances.data_2026 ? balances.data_2026[view] : {};
-            const tbody = document.getElementById('tbl-balances-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
+            const selView = document.getElementById('select-balances-view');
+            const selRubro = document.getElementById('select-balances-rubro');
+            const selComp = document.getElementById('select-balances-company');
 
-            if (!d26 || typeof d26 !== 'object' || Object.keys(d26).length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center txt-muted">No hay balances registrados para este segmento.</td></tr>';
-                return;
+            if (!selRubro || !selComp) return;
+
+            const vKey = selView ? selView.value : 'patrimonial';
+            const rubroKey = selRubro.value;
+
+            if (rubroKey === 'total_mercado') {
+                selComp.innerHTML = '<option value="ALL" selected>Todas (Totales del Mercado Consolidado)</option>';
+                selComp.disabled = true;
+                selComp.classList.add('opacity-60');
+            } else {
+                selComp.disabled = false;
+                selComp.classList.remove('opacity-60');
+
+                const catData = (d26[vKey] || d26.patrimonial || {})[rubroKey] || {};
+                const comps = catData.companies || [];
+
+                const addedNames = {};
+                let optHtml = '<option value="ALL" selected>Todas (Totales del Segmento)</option>';
+
+                comps.forEach(c => {
+                    const name = (c && c.name) ? c.name.trim() : '';
+                    const nameUpper = name.toUpperCase();
+
+                    if (name && !nameUpper.includes('NAN') && !nameUpper.includes('NULL') && !addedNames[nameUpper]) {
+                        addedNames[nameUpper] = true;
+                        optHtml += `<option value="${name}">${name}</option>`;
+                    }
+                });
+
+                selComp.innerHTML = optHtml;
             }
 
-            Object.keys(d26).forEach(entidad => {
-                if (search && !entidad.toLowerCase().includes(search)) return;
+            renderBalancesSubtabData();
+        }
 
-                const row = d26[entidad] || {};
-                const isLaSegunda = entidad.toUpperCase().includes('SEGUNDA');
+        function renderBalancesSubtabData() {
+            const data = window.INSURANCE_DATA || {};
+            const balancesObj = data.ssn_balances || {};
 
-                const tr = document.createElement('tr');
-                if (isLaSegunda) tr.className = 'highlight-lasegunda font-bold';
+            const period26 = balancesObj.period_2026 || 'Marzo 2026';
+            const period25 = balancesObj.period_2025 || 'Marzo 2025';
+            const d26 = balancesObj.data_2026 || {};
+            const d25 = balancesObj.data_2025 || {};
 
-                tr.innerHTML = `
-                    <td class="py-3 px-3 font-semibold txt-primary flex items-center gap-2">
-                        ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
-                        <span>${entidad}</span>
-                    </td>
-                    <td class="py-3 px-3 text-right font-mono">${fmtARS(row.Inversiones || row.inversiones)}</td>
-                    <td class="py-3 px-3 text-right font-mono">${fmtARS(row.Activos || row.activos)}</td>
-                    <td class="py-3 px-3 text-right font-mono">${fmtARS(row['Compromisos Técnicos'] || row.compromisos_tecnicos)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'txt-primary'}">${fmtARS(row['Patrimonio Neto'] || row.patrimonio_neto)}</td>
-                    <td class="py-3 px-3 text-right font-mono ${(row['Resultado del Ejercicio'] || 0) >= 0 ? 'text-[#3ac792] font-bold' : 'text-[#e20039] font-bold'}">${fmtARS(row['Resultado del Ejercicio'] || row.resultado)}</td>
+            const selView = document.getElementById('select-balances-view');
+            const selRubro = document.getElementById('select-balances-rubro');
+            const selCompany = document.getElementById('select-balances-company');
+
+            const vKey = selView ? selView.value : 'patrimonial';
+            const rKey = selRubro ? selRubro.value : 'total_mercado';
+            const cName = selCompany ? selCompany.value : 'ALL';
+
+            const container = document.getElementById('balances-display-container');
+            if (!container) return;
+
+            const fmtMoney = (val) => {
+                if (val === null || val === undefined || isNaN(val)) return '-';
+                const absVal = Math.abs(val);
+                const formatted = absVal.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                return (val < 0 ? '-$ ' : '$ ') + formatted;
+            };
+
+            const fmtPctLocal = (val) => {
+                if (val === null || val === undefined || isNaN(val)) return '-';
+                return (val > 0 ? '+' : '') + Number(val).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+            };
+
+            const getRowValues = (dataStore, viewK, rubroK, compName) => {
+                const vObj = dataStore[viewK] || {};
+                const catObj = vObj[rubroK] || {};
+                if (compName !== 'ALL') {
+                    const targetName = (compName || '').trim().toUpperCase();
+                    if (catObj.companies) {
+                        const found = catObj.companies.find(x => (x.name || '').trim().toUpperCase() === targetName);
+                        if (found) return found.vals || [];
+                    }
+                    for (let altK in vObj) {
+                        const altCat = vObj[altK];
+                        if (altCat && altCat.companies) {
+                            const altFound = altCat.companies.find(x => (x.name || '').trim().toUpperCase() === targetName);
+                            if (altFound) return altFound.vals || [];
+                        }
+                    }
+                    return [];
+                }
+                return catObj.total_row || [];
+            };
+
+            const r26 = getRowValues(d26, vKey, rKey, cName);
+            const r25 = getRowValues(d25, vKey, rKey, cName);
+
+            const rubroLabel = selRubro ? selRubro.options[selRubro.selectedIndex].text : 'Total del Mercado';
+            const titleSuffix = cName !== 'ALL' ? cName : rubroLabel;
+            const isLaSegunda = titleSuffix.toUpperCase().includes('SEGUNDA');
+
+            let html = '';
+
+            // ================================================================
+            // VIEW 1: ESTADO DE SITUACIÓN PATRIMONIAL (ACTIVO / PASIVO / PN)
+            // ================================================================
+            if (vKey === 'patrimonial') {
+                const totAct26 = r26[6] || 0.0, totAct25 = r25[6] || 0.0;
+                const totPas26 = r26[11] || 0.0, totPas25 = r25[11] || 0.0;
+                const pn26 = r26[12] || 0.0, pn25 = r25[12] || 0.0;
+
+                const yoyAct = totAct25 !== 0 ? ((totAct26 - totAct25) / Math.abs(totAct25)) * 100 : null;
+                const yoyPas = totPas25 !== 0 ? ((totPas26 - totPas25) / Math.abs(totPas25)) * 100 : null;
+                const yoyPn = pn25 !== 0 ? ((pn26 - pn25) / Math.abs(pn25)) * 100 : null;
+
+                // 3 Top Summary KPI Cards
+                html += `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="subtle-card rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+                            <div class="flex items-center justify-between text-xs txt-muted font-bold uppercase">
+                                <span>Total Activo</span>
+                                <i class="fas fa-wallet text-[#4183ca]"></i>
+                            </div>
+                            <div class="text-2xl font-bold font-mono text-[#4183ca] mt-2">${fmtMoney(totAct26)} M</div>
+                            <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                                <span class="txt-secondary">Marzo 2025: ${fmtMoney(totAct25)} M</span>
+                                <span class="${yoyAct >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'} font-bold">${fmtPctLocal(yoyAct)}</span>
+                            </div>
+                        </div>
+
+                        <div class="subtle-card rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+                            <div class="flex items-center justify-between text-xs txt-muted font-bold uppercase">
+                                <span>Total Pasivo</span>
+                                <i class="fas fa-file-invoice-dollar text-[#ff593e]"></i>
+                            </div>
+                            <div class="text-2xl font-bold font-mono text-[#ff593e] mt-2">${fmtMoney(totPas26)} M</div>
+                            <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                                <span class="txt-secondary">Marzo 2025: ${fmtMoney(totPas25)} M</span>
+                                <span class="${yoyPas >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'} font-bold">${fmtPctLocal(yoyPas)}</span>
+                            </div>
+                        </div>
+
+                        <div class="subtle-card rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+                            <div class="flex items-center justify-between text-xs txt-muted font-bold uppercase">
+                                <span>Patrimonio Neto</span>
+                                <i class="fas fa-shield-halved text-[#e20039]"></i>
+                            </div>
+                            <div class="text-2xl font-bold font-mono text-[#e20039] mt-2">${fmtMoney(pn26)} M</div>
+                            <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                                <span class="txt-secondary">Marzo 2025: ${fmtMoney(pn25)} M</span>
+                                <span class="${yoyPn >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'} font-bold">${fmtPctLocal(yoyPn)}</span>
+                            </div>
+                        </div>
+                    </div>
                 `;
-                tbody.appendChild(tr);
-            });
+
+                const actRows = [
+                    { label: 'Disponibilidades', val26: r26[0], val25: r25[0] },
+                    { label: 'Inversiones', val26: r26[1], val25: r25[1] },
+                    { label: 'Créditos', val26: r26[2], val25: r25[2] },
+                    { label: 'Inmuebles', val26: r26[3], val25: r25[3] },
+                    { label: 'Bienes de Uso', val26: r26[4], val25: r25[4] },
+                    { label: 'Otros Activos', val26: r26[5], val25: r25[5] }
+                ];
+
+                const pasRows = [
+                    { label: 'Deudas c/Asegurados', val26: r26[7], val25: r25[7] },
+                    { label: 'Otras Deudas', val26: r26[8], val25: r25[8] },
+                    { label: 'Compromisos Técnicos', val26: r26[9], val25: r25[9] },
+                    { label: 'Previsiones', val26: r26[10], val25: r25[10] }
+                ];
+
+                html += `<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">`;
+
+                // Tabla Activo
+                html += `
+                    <div class="subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-bold txt-primary mb-4 flex items-center justify-between">
+                                <span class="flex items-center gap-2"><i class="fas fa-wallet text-[#4183ca]"></i> Estructura del Activo ($ en Millones)</span>
+                                <span class="brand-badge bg-[#4183ca]/15 text-[#4183ca] font-mono">${titleSuffix}</span>
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs text-left data-table">
+                                    <thead class="uppercase text-[10px] font-mono sticky-header">
+                                        <tr>
+                                            <th class="py-2.5 px-3">Rubro del Activo</th>
+                                            <th class="py-2.5 px-3 text-right">Marzo 2026 ($M)</th>
+                                            <th class="py-2.5 px-3 text-right">% s/Activo</th>
+                                            <th class="py-2.5 px-3 text-right">Marzo 2025 ($M)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="font-mono">
+                `;
+
+                actRows.forEach(row => {
+                    const pct = totAct26 !== 0 ? ((row.val26 || 0) / totAct26) * 100 : 0;
+                    html += `
+                        <tr>
+                            <td class="py-2.5 px-3 font-sans font-medium txt-primary">${row.label}</td>
+                            <td class="py-2.5 px-3 text-right font-bold text-[#4183ca]">${fmtMoney(row.val26)}</td>
+                            <td class="py-2.5 px-3 text-right txt-muted">${pct.toFixed(2)}%</td>
+                            <td class="py-2.5 px-3 text-right txt-muted">${fmtMoney(row.val25)}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                        <tr class="bg-slate-100 dark:bg-slate-900 font-bold border-t-2 border-[#4183ca]/40">
+                            <td class="py-3 px-3 font-sans text-sm text-[#4183ca]">TOTAL ACTIVO</td>
+                            <td class="py-3 px-3 text-right text-[#4183ca] text-sm">${fmtMoney(totAct26)}</td>
+                            <td class="py-3 px-3 text-right text-[#4183ca]">100,00%</td>
+                            <td class="py-3 px-3 text-right txt-primary">${fmtMoney(totAct25)}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs font-bold font-mono">
+                        <span class="txt-muted font-sans font-medium">Variación Interanual Total Activo:</span>
+                        <span class="${yoyAct >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'}">${fmtPctLocal(yoyAct)}</span>
+                    </div>
+                    </div>
+                `;
+
+                // Tabla Pasivo y PN
+                html += `
+                    <div class="subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-bold txt-primary mb-4 flex items-center justify-between">
+                                <span class="flex items-center gap-2"><i class="fas fa-file-invoice-dollar text-[#e20039]"></i> Estructura del Pasivo y PN ($ en Millones)</span>
+                                <span class="brand-badge bg-[#e20039]/15 text-[#e20039] font-mono">${titleSuffix}</span>
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs text-left data-table">
+                                    <thead class="uppercase text-[10px] font-mono sticky-header">
+                                        <tr>
+                                            <th class="py-2.5 px-3">Rubro Pasivo / PN</th>
+                                            <th class="py-2.5 px-3 text-right">Marzo 2026 ($M)</th>
+                                            <th class="py-2.5 px-3 text-right">% s/Pasivo</th>
+                                            <th class="py-2.5 px-3 text-right">Marzo 2025 ($M)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="font-mono">
+                `;
+
+                pasRows.forEach(row => {
+                    const pct = totPas26 !== 0 ? ((row.val26 || 0) / totPas26) * 100 : 0;
+                    html += `
+                        <tr>
+                            <td class="py-2.5 px-3 font-sans font-medium txt-primary">${row.label}</td>
+                            <td class="py-2.5 px-3 text-right font-bold text-[#ff593e]">${fmtMoney(row.val26)}</td>
+                            <td class="py-2.5 px-3 text-right txt-muted">${pct.toFixed(2)}%</td>
+                            <td class="py-2.5 px-3 text-right txt-muted">${fmtMoney(row.val25)}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                        <tr class="bg-slate-100 dark:bg-slate-900 font-bold border-t border-slate-200 dark:border-slate-800">
+                            <td class="py-2.5 px-3 font-sans text-xs text-[#ff593e]">TOTAL PASIVO</td>
+                            <td class="py-2.5 px-3 text-right text-[#ff593e] text-xs">${fmtMoney(totPas26)}</td>
+                            <td class="py-2.5 px-3 text-right text-[#ff593e]">100,00%</td>
+                            <td class="py-2.5 px-3 text-right txt-primary">${fmtMoney(totPas25)}</td>
+                        </tr>
+                        <tr class="bg-[#fee2e2]/60 dark:bg-[#e20039]/20 font-bold border-t-2 border-[#e20039]">
+                            <td class="py-3 px-3 font-sans text-sm text-[#e20039]">PATRIMONIO NETO</td>
+                            <td class="py-3 px-3 text-right text-[#e20039] text-sm">${fmtMoney(pn26)}</td>
+                            <td class="py-3 px-3 text-right text-[#e20039]">-</td>
+                            <td class="py-3 px-3 text-right txt-primary">${fmtMoney(pn25)}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs font-bold font-mono">
+                        <span class="txt-muted font-sans font-medium">Variación Interanual Patrimonio Neto:</span>
+                        <span class="${yoyPn >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'}">${fmtPctLocal(yoyPn)}</span>
+                    </div>
+                    </div>
+                `;
+
+                html += `</div>`;
+
+            // ================================================================
+            // VIEW 2: ESTADO DE RESULTADOS (EDR)
+            // ================================================================
+            } else if (vKey === 'edr') {
+                const edrRows = [
+                    { label: 'Resultado Técnico Seg. Directo (1)', i26: 0, i25: 0 },
+                    { label: 'Resultado Técnico Reaseg. Activo (2)', i26: 1, i25: 1 },
+                    { label: 'Otros Ingresos (3)', i26: 2, i25: 2 },
+                    { label: 'Otros Egresos (4)', i26: 3, i25: 3 },
+                    { label: 'Resultado Técnico Total (5 = 1 + 2 + 3 + 4)', i26: 4, i25: 4, isHighlight: true, color: 'text-[#4183ca]' },
+                    { label: 'Resultado Financiero (6)', i26: 5, i25: 5, isHighlight: true, color: 'text-[#3ac792]' },
+                    { label: 'Rdo. Operaciones Ordinarias (7 = 5 + 6)', i26: 6, i25: 6 },
+                    { label: 'Rdo. Operaciones Extraordinarias (8)', i26: 7, i25: 7 },
+                    { label: 'Impuesto a las Ganancias (9)', i26: 8, i25: 8 },
+                    { label: 'RESULTADO DEL EJERCICIO (10 = 7 + 8 + 9)', i26: 9, i25: 9, isFinal: true, color: 'text-[#e20039]' }
+                ];
+
+                html += `
+                    <div class="subtle-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
+                            <h3 class="text-base font-bold txt-primary flex items-center gap-2">
+                                <i class="fas fa-chart-line text-[#e20039]"></i> Estado de Resultados ($ en Millones)
+                            </h3>
+                            <span class="brand-badge bg-[#e20039]/15 text-[#e20039] font-mono">${titleSuffix}</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs text-left data-table">
+                                <thead class="uppercase text-[10px] font-mono sticky-header">
+                                    <tr>
+                                        <th class="py-3 px-3">Renglón del Estado de Resultados</th>
+                                        <th class="py-3 px-3 text-right">Marzo 2026 ($M)</th>
+                                        <th class="py-3 px-3 text-right">Marzo 2025 ($M)</th>
+                                        <th class="py-3 px-3 text-right">Variación YoY %</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-mono">
+                `;
+
+                edrRows.forEach(row => {
+                    const v26 = r26[row.i26], v25 = r25[row.i25];
+                    const yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
+                    const rowClass = row.isFinal ? 'bg-[#fee2e2]/60 dark:bg-[#e20039]/20 font-bold border-t-2 border-[#e20039]' : (row.isHighlight ? 'bg-slate-100 dark:bg-slate-900/60 font-bold' : '');
+
+                    html += `
+                        <tr class="${rowClass}">
+                            <td class="py-2.5 px-3 font-sans font-medium ${row.isFinal ? 'text-sm text-[#e20039] font-bold' : (row.isHighlight ? 'text-[#4183ca] font-bold' : 'txt-primary')}">${row.label}</td>
+                            <td class="py-2.5 px-3 text-right font-bold ${row.color || 'txt-primary'}">${fmtMoney(v26)}</td>
+                            <td class="py-2.5 px-3 text-right txt-muted">${fmtMoney(v25)}</td>
+                            <td class="py-2.5 px-3 text-right font-bold ${yoy >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'}">${fmtPctLocal(yoy)}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+
+            // ================================================================
+            // VIEW 3: APERTURA DEL RESULTADO TÉCNICO
+            // ================================================================
+            } else if (vKey === 'tecnico') {
+                const tecRows = [
+                    { label: 'Primas Netas Devengadas', i: 0 },
+                    { label: 'Siniestros Netos Devengados', i: 1 },
+                    { label: 'Rescates', i: 2 },
+                    { label: 'Rentas Vitalicias y Periódicas', i: 3 },
+                    { label: 'Gastos Totales', i: 4 },
+                    { label: 'Total Seguros Directos', i: 5, isHighlight: true },
+                    { label: 'Primas Netas (Reaseguros Activos)', i: 6 },
+                    { label: 'Siniestros Netos (Reaseguros Activos)', i: 7 },
+                    { label: 'Gastos de Producción (Reaseguros Activos)', i: 8 },
+                    { label: 'Total Reaseguros Activos', i: 9, isHighlight: true },
+                    { label: 'Gastos de Prevención', i: 10 },
+                    { label: 'Otros Ingresos', i: 11 },
+                    { label: 'Otros Egresos', i: 12 },
+                    { label: 'Otras Indemnizaciones y Beneficios', i: 13 },
+                    { label: 'RESULTADO TÉCNICO TOTAL', i: 14, isHighlight: true, isFinal: true }
+                ];
+
+                html += `
+                    <div class="subtle-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
+                            <h3 class="text-base font-bold txt-primary flex items-center gap-2">
+                                <i class="fas fa-calculator text-[#3ac792]"></i> Apertura de Resultado Técnico ($ en Millones)
+                            </h3>
+                            <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792] font-mono">${titleSuffix}</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs text-left data-table">
+                                <thead class="uppercase text-[10px] font-mono sticky-header">
+                                    <tr>
+                                        <th class="py-3 px-3">Renglón Resultado Técnico</th>
+                                        <th class="py-3 px-3 text-right">Marzo 2026 ($M)</th>
+                                        <th class="py-3 px-3 text-right">Marzo 2025 ($M)</th>
+                                        <th class="py-3 px-3 text-right">Variación YoY %</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-mono">
+                `;
+
+                tecRows.forEach(row => {
+                    const v26 = r26[row.i], v25 = r25[row.i];
+                    const yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
+                    const rowClass = row.isFinal ? 'bg-[#fee2e2]/60 dark:bg-[#e20039]/20 font-bold border-t-2 border-[#e20039]' : (row.isHighlight ? 'bg-slate-100 dark:bg-slate-900/60 font-bold' : '');
+
+                    html += `
+                        <tr class="${rowClass}">
+                            <td class="py-2.5 px-3 font-sans font-medium ${row.isFinal ? 'text-sm text-[#e20039] font-bold' : (row.isHighlight ? 'text-[#3ac792] font-bold' : 'txt-primary')}">${row.label}</td>
+                            <td class="py-2.5 px-3 text-right font-bold ${row.isFinal ? 'text-[#e20039]' : 'text-[#3ac792]'}">${fmtMoney(v26)}</td>
+                            <td class="py-2.5 px-3 text-right txt-muted">${fmtMoney(v25)}</td>
+                            <td class="py-2.5 px-3 text-right font-bold ${yoy >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'}">${fmtPctLocal(yoy)}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+
+            // ================================================================
+            // VIEW 4: APERTURA DEL RENDIMIENTO FINANCIERO
+            // ================================================================
+            } else if (vKey === 'financiero') {
+                const finRows = [
+                    { label: 'Rentas de Inversiones', i: 0 },
+                    { label: 'Utilidades / Pérdidas por Realización', i: 1 },
+                    { label: 'Diferencias de Cotización', i: 2 },
+                    { label: 'Ajuste por Inflación (RECPAM)', i: 3 },
+                    { label: 'Gastos Financieros', i: 4 },
+                    { label: 'Otros Rendimientos Financieros', i: 5 },
+                    { label: 'RESULTADO FINANCIERO TOTAL', i: 6, isHighlight: true, isFinal: true }
+                ];
+
+                html += `
+                    <div class="subtle-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
+                            <h3 class="text-base font-bold txt-primary flex items-center gap-2">
+                                <i class="fas fa-coins text-[#f8cc59]"></i> Apertura de Rendimiento Financiero ($ en Millones)
+                            </h3>
+                            <span class="brand-badge bg-[#f8cc59]/20 text-[#b91f38] dark:text-[#f8cc59] font-mono">${titleSuffix}</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs text-left data-table">
+                                <thead class="uppercase text-[10px] font-mono sticky-header">
+                                    <tr>
+                                        <th class="py-3 px-3">Renglón Financiero</th>
+                                        <th class="py-3 px-3 text-right">Marzo 2026 ($M)</th>
+                                        <th class="py-3 px-3 text-right">Marzo 2025 ($M)</th>
+                                        <th class="py-3 px-3 text-right">Variación YoY %</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-mono">
+                `;
+
+                finRows.forEach(row => {
+                    const v26 = r26[row.i], v25 = r25[row.i];
+                    const yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
+                    const rowClass = row.isFinal ? 'bg-[#fee2e2]/60 dark:bg-[#e20039]/20 font-bold border-t-2 border-[#e20039]' : (row.isHighlight ? 'bg-slate-100 dark:bg-slate-900/60 font-bold' : '');
+
+                    html += `
+                        <tr class="${rowClass}">
+                            <td class="py-2.5 px-3 font-sans font-medium ${row.isFinal ? 'text-sm text-[#e20039] font-bold' : (row.isHighlight ? 'text-[#4183ca] font-bold' : 'txt-primary')}">${row.label}</td>
+                            <td class="py-2.5 px-3 text-right font-bold ${row.isFinal ? 'text-[#e20039]' : 'text-[#4183ca]'}">${fmtMoney(v26)}</td>
+                            <td class="py-2.5 px-3 text-right txt-muted">${fmtMoney(v25)}</td>
+                            <td class="py-2.5 px-3 text-right font-bold ${yoy >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'}">${fmtPctLocal(yoy)}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
         }
 
         // Tab 5: Grupo La Segunda
@@ -2194,7 +2649,7 @@
             initLaSegundaTab();
             initRetiroTab();
             renderRankingsTable();
-            renderBalancesTable();
+            renderBalancesSubtabData();
 
             const data = window.INSURANCE_DATA || {};
             if (data.update_time_human) {
