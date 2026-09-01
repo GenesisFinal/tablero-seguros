@@ -243,37 +243,34 @@
                 </div>
             </div>
 
-            <!-- TABS NAVIGATION -->
-            <nav class="flex space-x-1 overflow-x-auto py-2 scrollbar-none border-t border-slate-200 dark:border-slate-800">
-                <button onclick="switchTab('primas')" id="tab-btn-primas" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 bg-[#e20039] text-white shadow-sm">
-                    <i class="fas fa-chart-pie"></i> Primas Mercado
+            <!-- TABS NAVIGATION (2 FILAS - SIN SCROLL) -->
+            <nav class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 py-2.5 border-t border-slate-200 dark:border-slate-800">
+                <button onclick="switchTab('primas')" id="tab-btn-primas" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 bg-[#e20039] text-white shadow-sm">
+                    <i class="fas fa-chart-pie"></i> <span>Primas Mercado</span>
                 </button>
-                <button onclick="switchTab('mensual')" id="tab-btn-mensual" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-chart-line"></i> Evolución Mensual
+                <button onclick="switchTab('mensual')" id="tab-btn-mensual" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 txt-muted hover:text-[#e20039] hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fas fa-chart-line"></i> <span>Evolución Mensual</span>
                 </button>
-                <button onclick="switchTab('rankings')" id="tab-btn-rankings" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-trophy"></i> Rankings SSN (12)
+                <button onclick="switchTab('rankings')" id="tab-btn-rankings" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 txt-muted hover:text-[#e20039] hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fas fa-trophy"></i> <span>Rankings SSN (12)</span>
                 </button>
-                <button onclick="switchTab('balances')" id="tab-btn-balances" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-scale-balanced"></i> Balances & Contabilidad
+                <button onclick="switchTab('balances')" id="tab-btn-balances" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 txt-muted hover:text-[#e20039] hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fas fa-scale-balanced"></i> <span>Balances & Contabilidad</span>
                 </button>
-                <button onclick="switchTab('lasegunda')" id="tab-btn-lasegunda" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-building"></i> Grupo La Segunda
+                <button onclick="switchTab('lasegunda')" id="tab-btn-lasegunda" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 txt-muted hover:text-[#e20039] hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fas fa-building"></i> <span>Grupo La Segunda</span>
                 </button>
-                <button onclick="switchTab('personas')" id="tab-btn-personas" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-user-shield"></i> Seguros Personas
+                <button onclick="switchTab('personas')" id="tab-btn-personas" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 txt-muted hover:text-[#e20039] hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fas fa-user-shield"></i> <span>Seguros Personas</span>
                 </button>
-                <button onclick="switchTab('retiro')" id="tab-btn-retiro" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-piggy-bank"></i> Seguros Retiro
+                <button onclick="switchTab('retiro')" id="tab-btn-retiro" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 txt-muted hover:text-[#e20039] hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fas fa-piggy-bank"></i> <span>Seguros Retiro</span>
                 </button>
-                <button onclick="switchTab('inversiones')" id="tab-btn-inversiones" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-coins text-[#f8cc59]"></i> Inversiones SSN
+                <button onclick="switchTab('inversiones')" id="tab-btn-inversiones" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 txt-muted hover:text-[#e20039] hover:bg-slate-100 dark:hover:bg-slate-800/60">
+                    <i class="fas fa-coins text-[#f8cc59]"></i> <span>Inversiones SSN</span>
                 </button>
-                <button onclick="switchTab('ratios')" id="tab-btn-ratios" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-gauge-high text-[#3ac792]"></i> Solvencia & Ratios
-                </button>
-                <button onclick="switchTab('comparador')" id="tab-btn-comparador" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
-                    <i class="fas fa-arrows-split-up-and-left text-[#4183ca]"></i> Comparador Cara a Cara
+                <button onclick="switchTab('comparador')" id="tab-btn-comparador" class="nav-tab px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 txt-muted hover:text-[#e20039] hover:bg-slate-100 dark:hover:bg-slate-800/60 col-span-2 sm:col-span-1 md:col-span-2">
+                    <i class="fas fa-arrows-split-up-and-left text-[#4183ca]"></i> <span>Comparador Cara a Cara</span>
                 </button>
             </nav>
         </div>
