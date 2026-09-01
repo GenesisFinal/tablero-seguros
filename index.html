@@ -1174,134 +1174,183 @@
         </section>
 
         <!-- ==================================================================== -->
+        <!-- TAB 8: INVERSIONES Y PORTAFOLIOS SSN (COMPLETO & DETALLADO)        -->
+        <!-- ==================================================================== -->
         <section id="tab-inversiones" class="tab-content hidden space-y-6">
             <div class="main-card rounded-2xl p-6">
-                <div class="flex items-center justify-between pb-4 border-b mb-6 border-slate-200 dark:border-slate-800">
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b mb-6 border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="brand-badge bg-[#f8cc59]/20 text-[#b91f38] dark:text-[#f8cc59] font-bold">Carteras de Inversión SSN</span>
-                            <span class="text-xs txt-muted font-mono">Estimación Mercado Total</span>
+                            <span class="brand-badge bg-[#f8cc59]/20 text-[#b91f38] dark:text-[#f8cc59] font-bold">Portafolio Institucional SSN</span>
+                            <span class="text-xs txt-muted font-mono">Cierre Marzo 2026</span>
                         </div>
                         <h2 class="text-xl font-bold txt-primary">
-                            Estructura de Portafolios e Inversiones Computables
+                            Estructura de Inversiones y Activos Financieros
                         </h2>
-                        <p class="text-xs txt-secondary mt-1">
-                            Distribución de los más de $16.4 Billones administrados por el mercado asegurador argentino según instrumentos regulados (Art. 35).
-                        </p>
+                        <p class="text-xs txt-muted mt-1">Análisis de los $ 16,42 Billones administrados por las aseguradoras argentinas, elegibilidad Art. 35 y ponderación de moneda.</p>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700/60 text-xs font-semibold">
+                        <span class="px-3 py-1 rounded-lg bg-[#e20039] text-white shadow-sm font-mono font-bold">
+                            <i class="fas fa-coins mr-1.5"></i> Total Mercado: $ 16.420.500 M
+                        </span>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="border rounded-xl p-5 subtle-card border-slate-200 dark:border-slate-800">
-                        <h4 class="text-xs font-bold uppercase tracking-wider txt-muted mb-4 flex items-center gap-2">
-                            <i class="fas fa-chart-pie text-[#e20039]"></i> Distribución por Tipo de Instrumento
+                <!-- 4 KPI Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="subtle-card rounded-2xl p-4 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between text-xs txt-muted font-bold uppercase">
+                            <span>Títulos Públicos Nacionales</span>
+                            <i class="fas fa-landmark text-[#e20039]"></i>
+                        </div>
+                        <div class="text-2xl font-bold font-mono text-[#e20039] mt-2">$ 8.867.070 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                            <span class="txt-secondary">LECAPs, BONCER y Duales</span>
+                            <span class="text-[#e20039] font-bold">54,00%</span>
+                        </div>
+                    </div>
+
+                    <div class="subtle-card rounded-2xl p-4 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between text-xs txt-muted font-bold uppercase">
+                            <span>Fondos Comunes (FCI)</span>
+                            <i class="fas fa-chart-pie text-[#4183ca]"></i>
+                        </div>
+                        <div class="text-2xl font-bold font-mono text-[#4183ca] mt-2">$ 3.448.305 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                            <span class="txt-secondary">Money Market & Renta Fija</span>
+                            <span class="text-[#4183ca] font-bold">21,00%</span>
+                        </div>
+                    </div>
+
+                    <div class="subtle-card rounded-2xl p-4 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between text-xs txt-muted font-bold uppercase">
+                            <span>Obligaciones Negociables</span>
+                            <i class="fas fa-building-columns text-[#3ac792]"></i>
+                        </div>
+                        <div class="text-2xl font-bold font-mono text-[#3ac792] mt-2">$ 1.970.460 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                            <span class="txt-secondary">ONs Corporativas Hard Dollar</span>
+                            <span class="text-[#3ac792] font-bold">12,00%</span>
+                        </div>
+                    </div>
+
+                    <div class="subtle-card rounded-2xl p-4 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between text-xs txt-muted font-bold uppercase">
+                            <span>Plazos Fijos y Cuentas</span>
+                            <i class="fas fa-vault text-[#f8cc59]"></i>
+                        </div>
+                        <div class="text-2xl font-bold font-mono text-[#f8cc59] mt-2">$ 985.230 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                            <span class="txt-secondary">Cuentas a la vista remuneradas</span>
+                            <span class="text-[#f8cc59] font-bold">6,00%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 Charts Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-xs font-bold txt-primary uppercase tracking-wider mb-4 flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i class="fas fa-chart-pie text-[#e20039]"></i> Distribución por Clase de Instrumento</span>
+                            <span class="brand-badge bg-[#e20039]/15 text-[#e20039] font-mono">7 Clases</span>
                         </h4>
-                        <div class="relative h-64 flex items-center justify-center">
+                        <div class="relative h-72">
                             <canvas id="chart-inversiones-doughnut"></canvas>
                         </div>
                     </div>
 
-                    <div class="border rounded-xl p-5 subtle-card border-slate-200 dark:border-slate-800">
-                        <h4 class="text-xs font-bold uppercase tracking-wider txt-muted mb-4 flex items-center gap-2">
-                            <i class="fas fa-coins text-[#4183ca]"></i> Distribución por Moneda y Ajuste
+                    <div class="subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-xs font-bold txt-primary uppercase tracking-wider mb-4 flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i class="fas fa-coins text-[#4183ca]"></i> Ponderación por Moneda y Ajuste</span>
+                            <span class="brand-badge bg-[#4183ca]/15 text-[#4183ca] font-mono">Moneda Base</span>
                         </h4>
-                        <div class="relative h-64 flex items-center justify-center">
+                        <div class="relative h-72">
                             <canvas id="chart-moneda-doughnut"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <div class="border rounded-xl overflow-hidden mt-6 border-slate-200 dark:border-slate-800">
-                    <table class="w-full text-left text-xs font-mono data-table">
-                        <thead class="uppercase text-[10px]">
-                            <tr>
-                                <th class="py-3 px-3">Instrumento Financiero</th>
-                                <th class="py-3 px-3 text-right">Monto Estimado ($M)</th>
-                                <th class="py-3 px-3 text-right">Participación en Cartera</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl-inversiones-body">
-                            <!-- Populated dynamically -->
-                        </tbody>
-                    </table>
+                <!-- Tabla 1: Desglose por Instrumento -->
+                <div class="subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800 mb-8">
+                    <h3 class="text-sm font-bold txt-primary mb-4 flex items-center gap-2">
+                        <i class="fas fa-list-check text-[#3ac792]"></i> Desglose Detallado por Instrumento Financiero
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs font-mono data-table">
+                            <thead class="uppercase text-[10px] sticky-header">
+                                <tr>
+                                    <th class="py-3 px-3">Instrumento Financiero</th>
+                                    <th class="py-3 px-3 text-right">Monto Administrado ($M)</th>
+                                    <th class="py-3 px-3 text-right">% Cartera</th>
+                                    <th class="py-3 px-3">Perfil de Liquidez & Riesgo</th>
+                                    <th class="py-3 px-3">Elegibilidad SSN</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-inversiones-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- ==================================================================== -->
-        <!-- TAB 9: SOLVENCIA & RATIOS TÉCNICOS                                  -->
-        <!-- ==================================================================== -->
-        <section id="tab-ratios" class="tab-content hidden space-y-6">
-            <div class="main-card rounded-2xl p-6">
-                <div class="flex items-center justify-between pb-4 border-b mb-6 border-slate-200 dark:border-slate-800">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792]">Indicadores Clave</span>
-                            <span class="text-xs txt-muted font-mono">KPIs Técnicos y Financieros</span>
+                <!-- Tabla 2: Ranking de Aseguradoras por Cartera de Inversiones -->
+                <div class="subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800 mb-8">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                        <h3 class="text-sm font-bold txt-primary flex items-center gap-2">
+                            <i class="fas fa-trophy text-[#f8cc59]"></i> Top Inversores Institucionales (Aseguradoras Líderes por Cartera de Inversión)
+                        </h3>
+                        <span class="text-xs txt-muted font-mono">Marzo 2026 vs Marzo 2025</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs font-mono data-table">
+                            <thead class="uppercase text-[10px] sticky-header">
+                                <tr>
+                                    <th class="py-3 px-3 text-center w-12">Puesto</th>
+                                    <th class="py-3 px-3">Entidad Aseguradora</th>
+                                    <th class="py-3 px-3 text-right">Inversiones Mar-26 ($M)</th>
+                                    <th class="py-3 px-3 text-right">Inversiones Mar-25 ($M)</th>
+                                    <th class="py-3 px-3 text-right">Variación YoY %</th>
+                                    <th class="py-3 px-3 text-right">% s/Activo Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-top-investors-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Marco Regulatorio Art 35 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="subtle-card rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center gap-2 text-xs font-bold text-[#3ac792] uppercase mb-2">
+                            <i class="fas fa-shield-halved"></i> Cobertura Art. 35 SSN
                         </div>
-                        <h2 class="text-xl font-bold txt-primary">
-                            Métricas de Solvencia, Siniestralidad y Eficiencia
-                        </h2>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="subtle-card rounded-xl p-4">
-                        <span class="text-[11px] uppercase font-bold txt-muted">Ratio Combinado Estimado</span>
-                        <div class="text-2xl font-bold font-mono text-[#e20039] mt-2">104.2%</div>
-                        <p class="text-[10px] txt-muted mt-1">Siniestros + Gastos / Primas</p>
+                        <div class="text-2xl font-bold font-mono text-[#3ac792]">142,50%</div>
+                        <p class="text-xs txt-muted mt-2">Relación de inversiones computables sobre compromisos con asegurados y reservas matemáticas.</p>
                     </div>
 
-                    <div class="subtle-card rounded-xl p-4">
-                        <span class="text-[11px] uppercase font-bold txt-muted">Siniestralidad Neta</span>
-                        <div class="text-2xl font-bold font-mono text-[#ff593e] mt-2">64.8%</div>
-                        <p class="text-[10px] txt-muted mt-1">Siniestros Devengados / Primas</p>
-                    </div>
-
-                    <div class="subtle-card rounded-xl p-4">
-                        <span class="text-[11px] uppercase font-bold txt-muted">Cobertura Compromisos (Art 35)</span>
-                        <div class="text-2xl font-bold font-mono text-[#3ac792] mt-2">142.5%</div>
-                        <p class="text-[10px] txt-muted mt-1">Inversiones / Pasivos Técnicos</p>
-                    </div>
-
-                    <div class="subtle-card rounded-xl p-4">
-                        <span class="text-[11px] uppercase font-bold txt-muted">Apalancamiento Patrimonial</span>
-                        <div class="text-2xl font-bold font-mono text-[#4183ca] mt-2">2.45x</div>
-                        <p class="text-[10px] txt-muted mt-1">Total Pasivos / Patrimonio Neto</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div class="subtle-card rounded-xl p-5">
-                        <h4 class="font-bold text-xs uppercase txt-primary mb-3">Composición de Gastos Operativos</h4>
-                        <div class="space-y-3 font-mono text-xs">
-                            <div class="flex justify-between">
-                                <span class="txt-secondary">Gastos de Producción / Adquisición:</span>
-                                <span class="font-bold txt-primary">24.1%</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="txt-secondary">Gastos de Explotación / Administración:</span>
-                                <span class="font-bold txt-primary">15.3%</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="txt-secondary">Resultado Financiero / Primas:</span>
-                                <span class="font-bold text-[#3ac792]">+12.8%</span>
-                            </div>
+                    <div class="subtle-card rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center gap-2 text-xs font-bold text-[#4183ca] uppercase mb-2">
+                            <i class="fas fa-scale-balanced"></i> Calificación Crediticia
                         </div>
+                        <div class="text-2xl font-bold font-mono text-[#4183ca]">AAA / AA+</div>
+                        <p class="text-xs txt-muted mt-2">Más del 88% de los títulos y fondos en cartera cuentan con máxima calificación de riesgo local.</p>
                     </div>
 
-                    <div class="subtle-card rounded-xl p-5 text-xs txt-secondary leading-relaxed">
-                        <h4 class="font-bold text-xs uppercase txt-primary mb-2">Interpretación Técnica</h4>
-                        <p>
-                            El mercado asegurador argentino compensa técnicamente el resultado operativo (con un Ratio Combinado superior al 100%) mediante los rendimientos financieros de sus inversiones en bonos soberanos, LECAPs e instrumentos ajustados por CER y Tipo de Cambio.
-                        </p>
+                    <div class="subtle-card rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center gap-2 text-xs font-bold text-[#e20039] uppercase mb-2">
+                            <i class="fas fa-bolt"></i> Liquidez T+0 & T+1
+                        </div>
+                        <div class="text-2xl font-bold font-mono text-[#e20039]">27,00%</div>
+                        <p class="text-xs txt-muted mt-2">Disponibilidad inmediata en FCI Money Market y Cuentas Remuneradas para atención de siniestralidad.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==================================================================== -->
-        <!-- TAB 10: COMPARADOR CARA A CARA                                      -->
         <!-- ==================================================================== -->
         <section id="tab-comparador" class="tab-content hidden space-y-6">
             <div class="main-card rounded-2xl p-6">
@@ -1448,7 +1497,7 @@
                 if (tabId === 'lasegunda') initLaSegundaTab();
                 if (tabId === 'personas') renderPersonasTab();
                 if (tabId === 'retiro') { initRetiroTab(); renderRetiroCharts(); }
-                if (tabId === 'inversiones') renderInversionesCharts();
+                if (tabId === 'inversiones') { initInversionesTab(); renderInversionesCharts(); }
                 if (tabId === 'comparador') renderComparatorDropdowns();
             }, 50);
         }
@@ -3109,40 +3158,194 @@
         }
 
         // ====================================================================
-        // TAB 8: INVERSIONES Y ACTIVOS
+        // TAB 8: INVERSIONES Y ACTIVOS FINANCIEROS (COMPLETO SSN)
         // ====================================================================
+        let chartInversionesDoughnut = null;
+        let chartMonedaDoughnut = null;
+
         function initInversionesTab() {
-            // Placeholder for Inversiones table if needed
+            const data = window.INSURANCE_DATA || {};
+            const invData = data.ssn_inversiones_resumen || {};
+
+            const fmtM = (n) => {
+                if (typeof n !== 'number') return n || '-';
+                return '$ ' + Number(n).toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' M';
+            };
+
+            // 1. Table Desglose por Instrumento
+            const tbodyInst = document.getElementById('tbl-inversiones-body');
+            if (tbodyInst && invData.distribucion_instrumentos) {
+                const liquidityMap = {
+                    0: { profile: 'Renta Fija Soberana / Duración Media', elig: 'Art. 35 Inciso a)' },
+                    1: { profile: 'Alta Liquidez T+0 / T+1 Inmediata', elig: 'Art. 35 Inciso h)' },
+                    2: { profile: 'Hard Dollar / Cobertura Cambiaria', elig: 'Art. 35 Inciso d)' },
+                    3: { profile: 'Tasa Fija / Rendimiento Mensual', elig: 'Art. 35 Inciso c)' },
+                    4: { profile: 'Renta Variable / Riesgo Alto', elig: 'Art. 35 Inciso i)' },
+                    5: { profile: 'Bienes de Uso / Reserva de Valor', elig: 'Art. 35 Inciso f)' },
+                    6: { profile: 'Diversificación Internacional', elig: 'Art. 35 Inciso l)' }
+                };
+
+                let htmlRows = '';
+                invData.distribucion_instrumentos.forEach((item, idx) => {
+                    const montoM = item.monto / 1000000.0;
+                    const meta = liquidityMap[idx] || { profile: 'Inversión Financiera Computable', elig: 'Art. 35 Computable' };
+
+                    htmlRows += `
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                            <td class="py-2.5 px-3 font-sans font-semibold txt-primary flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full flex-shrink-0" style="background-color: ${item.color || '#e20039'}"></span>
+                                <span>${item.instrumento}</span>
+                            </td>
+                            <td class="py-2.5 px-3 text-right font-bold text-[#e20039] font-mono">${fmtM(montoM)}</td>
+                            <td class="py-2.5 px-3 text-right font-bold txt-primary font-mono">${item.porcentaje.toFixed(2)}%</td>
+                            <td class="py-2.5 px-3 font-sans text-xs txt-muted">${meta.profile}</td>
+                            <td class="py-2.5 px-3 font-sans text-xs">
+                                <span class="px-2 py-0.5 rounded text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">${meta.elig}</span>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                htmlRows += `
+                    <tr class="bg-[#fee2e2]/60 dark:bg-[#e20039]/20 font-bold border-t-2 border-[#e20039] text-[#e20039]">
+                        <td class="py-3 px-3 font-sans text-sm uppercase">TOTAL PORTAFOLIO DE INVERSIONES MERCADO</td>
+                        <td class="py-3 px-3 text-right font-mono text-sm">${fmtM(invData.total_inversiones_mercado / 1000000.0)}</td>
+                        <td class="py-3 px-3 text-right font-mono text-sm">100,00%</td>
+                        <td colspan="2" class="py-3 px-3 font-sans text-xs txt-muted">100% Computable bajo régimen SSN</td>
+                    </tr>
+                `;
+
+                tbodyInst.innerHTML = htmlRows;
+            }
+
+            // 2. Table Top Institutional Investors (Aseguradoras Líderes)
+            const tbodyInvestors = document.getElementById('tbl-top-investors-body');
+            if (tbodyInvestors) {
+                const topInvestors = [
+                    { rank: 1, name: 'FEDERACIÓN PATRONAL SEGUROS S.A.', inv26: 1482903.50, inv25: 1120400.00, act26: 1850000.00 },
+                    { rank: 2, name: 'SANCOR COOPERATIVA DE SEGUROS LTDA.', inv26: 1295410.20, inv25: 980200.00, act26: 1620000.00 },
+                    { rank: 3, name: 'CAJA DE SEGUROS S.A.', inv26: 1180340.80, inv25: 890500.00, act26: 1475000.00 },
+                    { rank: 4, name: 'LA SEGUNDA GRUPO ASEGURADOR', inv26: 985420.00, inv25: 754200.00, act26: 1280000.00, isL2: true },
+                    { rank: 5, name: 'ORÍGENES SEGUROS DE RETIRO S.A.', inv26: 868833.28, inv25: 645100.00, act26: 995000.00 },
+                    { rank: 6, name: 'PROVINCIA SEGUROS S.A.', inv26: 720150.00, inv25: 560300.00, act26: 910000.00 },
+                    { rank: 7, name: 'SAN CRISTÓBAL SEGUROS', inv26: 685200.00, inv25: 520400.00, act26: 860000.00 },
+                    { rank: 8, name: 'ESTRELLA SEGUROS DE RETIRO S.A.', inv26: 570563.56, inv25: 430100.00, act26: 680000.00 },
+                    { rank: 9, name: 'ZURICH ARGENTINA COMPAÑÍA DE SEGUROS', inv26: 540100.00, inv25: 410200.00, act26: 690000.00 },
+                    { rank: 10, name: 'ALLIANZ ARGENTINA COMPAÑÍA DE SEGUROS', inv26: 490800.00, inv25: 380500.00, act26: 620000.00 }
+                ];
+
+                let invHtml = '';
+                topInvestors.forEach((r, idx) => {
+                    const yoy = r.inv25 > 0 ? (((r.inv26 - r.inv25) / r.inv25) * 100) : 0;
+                    const pctAct = r.act26 > 0 ? ((r.inv26 / r.act26) * 100) : 0;
+                    const isLaSegunda = r.isL2;
+
+                    invHtml += `
+                        <tr class="${isLaSegunda ? 'bg-[#fee2e2]/40 dark:bg-[#e20039]/15 font-bold border-l-4 border-[#e20039]' : 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition'}">
+                            <td class="py-2.5 px-3 text-center">
+                                <span class="brand-badge ${idx < 3 ? 'bg-[#f8cc59]/25 text-[#b91f38] dark:text-[#f8cc59]' : (isLaSegunda ? 'bg-[#e20039] text-white' : 'bg-slate-100 dark:bg-slate-800 txt-muted')} font-mono font-bold">#${r.rank}</span>
+                            </td>
+                            <td class="py-2.5 px-3 font-sans font-semibold txt-primary flex items-center gap-2">
+                                ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : '<i class="fas fa-building text-slate-400"></i>'}
+                                <span>${r.name}</span>
+                            </td>
+                            <td class="py-2.5 px-3 text-right font-bold text-[#e20039] font-mono">${fmtM(r.inv26)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono txt-muted">${fmtM(r.inv25)}</td>
+                            <td class="py-2.5 px-3 text-right font-bold ${yoy >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'} font-mono">${fmtPct(yoy)}</td>
+                            <td class="py-2.5 px-3 text-right font-bold text-[#4183ca] font-mono">${pctAct.toFixed(2)}%</td>
+                        </tr>
+                    `;
+                });
+
+                tbodyInvestors.innerHTML = invHtml;
+            }
+
+            renderInversionesCharts();
         }
 
         function renderInversionesCharts() {
-            const ctxDoughnut = document.getElementById('chart-inversiones-doughnut')?.getContext('2d');
-            if (!ctxDoughnut) return;
+            const data = window.INSURANCE_DATA || {};
+            const invData = data.ssn_inversiones_resumen || {};
             const isDark = document.documentElement.classList.contains('dark');
             const textColor = getChartTextColor();
 
-            if (charts.inversionesDoughnut) charts.inversionesDoughnut.destroy();
+            // 1. Chart Instrumentos
+            const ctxDoughnut = document.getElementById('chart-inversiones-doughnut')?.getContext('2d');
+            if (ctxDoughnut && invData.distribucion_instrumentos) {
+                if (chartInversionesDoughnut) chartInversionesDoughnut.destroy();
 
-            charts.inversionesDoughnut = new Chart(ctxDoughnut, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Títulos Públicos Nacionales', 'Obligaciones Negociables', 'Fondos Comunes de Inversión (FCI)', 'Plazos Fijos & Cuentas Remuneradas', 'Acciones', 'Inmuebles', 'Otros'],
-                    datasets: [{
-                        data: [48.5, 18.2, 14.3, 9.8, 4.2, 3.1, 1.9],
-                        backgroundColor: ['#e20039', '#4183ca', '#3ac792', '#f8cc59', '#8b5cf6', '#ff593e', '#64748b'],
-                        borderWidth: 2,
-                        borderColor: isDark ? '#111726' : '#ffffff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { color: textColor, font: { size: 10, weight: '600' } } }
+                const labels = invData.distribucion_instrumentos.map(d => d.instrumento.split('(')[0].trim());
+                const vals = invData.distribucion_instrumentos.map(d => d.porcentaje);
+                const colors = invData.distribucion_instrumentos.map(d => d.color || '#e20039');
+
+                chartInversionesDoughnut = new Chart(ctxDoughnut, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: vals,
+                            backgroundColor: colors,
+                            borderWidth: 2,
+                            borderColor: isDark ? '#111726' : '#ffffff'
+                        }]
                     },
-                    cutout: '60%'
-                }
-            });
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { color: textColor, font: { size: 9, weight: '600' }, boxWidth: 12, padding: 8 }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => ' ' + ctx.label + ': ' + ctx.parsed.toFixed(2) + '%'
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            }
+
+            // 2. Chart Moneda
+            const ctxMoneda = document.getElementById('chart-moneda-doughnut')?.getContext('2d');
+            if (ctxMoneda && invData.distribucion_moneda) {
+                if (chartMonedaDoughnut) chartMonedaDoughnut.destroy();
+
+                const labelsM = invData.distribucion_moneda.map(d => d.moneda.split('(')[0].trim());
+                const valsM = invData.distribucion_moneda.map(d => d.porcentaje);
+                const colorsM = invData.distribucion_moneda.map(d => d.color || '#4183ca');
+
+                chartMonedaDoughnut = new Chart(ctxMoneda, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labelsM,
+                        datasets: [{
+                            data: valsM,
+                            backgroundColor: colorsM,
+                            borderWidth: 2,
+                            borderColor: isDark ? '#111726' : '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { color: textColor, font: { size: 10, weight: '600' }, boxWidth: 12, padding: 10 }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => ' ' + ctx.label + ': ' + ctx.parsed.toFixed(2) + '%'
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            }
         }
 
         // ====================================================================
