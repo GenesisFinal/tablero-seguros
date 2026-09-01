@@ -2516,18 +2516,23 @@
                 tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-slate-400 italic">No hay ramos seleccionados. Seleccione al menos un ramo arriba para calcular el mercado.</td></tr>';
                 const totalBadge = document.getElementById('sp-primas-total-badge');
                 if (totalBadge) totalBadge.innerText = 'Total Mercado Seleccionado: $ 0 M';
-                if (chartSpPrimasRamos) chartSpPrimasRamos.destroy();
+                if (chartSpPrimasRamos) {
+                    chartSpPrimasRamos.destroy();
+                    chartSpPrimasRamos = null;
+                }
                 return;
             }
 
+            // Calculate aggregated sum per company for selected ramos
             const calculatedList = [];
             let totalMarketSum = 0;
 
             companies.forEach(c => {
                 let compSum = 0;
+                const rVals = c.ramos_values || c.ramos || {};
                 spSelectedRamos.forEach(ramo => {
-                    if (c.ramos && c.ramos[ramo]) {
-                        compSum += Number(c.ramos[ramo]);
+                    if (rVals[ramo] !== undefined && rVals[ramo] !== null) {
+                        compSum += Number(rVals[ramo]);
                     }
                 });
                 if (compSum > 0) {
@@ -2539,10 +2544,14 @@
                 }
             });
 
+            // Sort descending by calculated total
             calculatedList.sort((a, b) => b.total - a.total);
 
+            // Update Total Badge
             const totalBadge = document.getElementById('sp-primas-total-badge');
-            if (totalBadge) totalBadge.innerText = `Total Mercado Seleccionado: ${fmtARS(totalMarketSum / 1000000.0)} M (${calculatedList.length} entidades)`;
+            if (totalBadge) {
+                totalBadge.innerText = `Total Mercado Seleccionado: ${fmtARS(totalMarketSum / 1000000.0)} M (${calculatedList.length} entidades activas)`;
+            }
 
             let htmlRows = '';
             calculatedList.forEach((r, idx) => {
@@ -2557,7 +2566,7 @@
                             <span class="brand-badge ${idx < 3 ? 'bg-[#f8cc59]/25 text-[#b91f38] dark:text-[#f8cc59]' : 'bg-slate-100 dark:bg-slate-800 txt-muted'} font-mono font-bold">#${idx + 1}</span>
                         </td>
                         <td class="py-2.5 px-3 font-sans font-semibold txt-primary flex items-center gap-2">
-                            ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
+                            ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : '<i class="fas fa-building text-slate-400"></i>'}
                             ${r.entidad}
                         </td>
                         <td class="py-2.5 px-3 text-right font-bold text-[#e20039] font-mono">${fmtARS(primaM)} M</td>
@@ -2567,7 +2576,11 @@
             });
 
             tbody.innerHTML = htmlRows;
-            renderSpTop10Chart(calculatedList);
+
+            // Render Dynamic Top 10 Chart
+            setTimeout(() => {
+                renderSpTop10Chart(calculatedList);
+            }, 50);
         }
 
         function renderSpTop10Chart(calculatedList) {
@@ -2578,11 +2591,17 @@
             const textColor = getChartTextColor();
             const gridColor = getChartGridColor();
 
-            if (chartSpPrimasRamos) chartSpPrimasRamos.destroy();
+            if (chartSpPrimasRamos) {
+                chartSpPrimasRamos.destroy();
+                chartSpPrimasRamos = null;
+            }
 
-            const top10 = calculatedList.slice(0, 10);
-            const labels = top10.map(r => r.entidad.replace(' SEGUROS DE PERSONAS', '').replace(' SEGUROS', '').replace(' PERSONAS', ''));
+            const top10 = (calculatedList || []).slice(0, 10);
+            if (top10.length === 0) return;
+
+            const labels = top10.map(r => r.entidad.replace(' SEGUROS DE PERSONAS', '').replace(' SEGUROS', '').replace(' PERSONAS', '').replace(' CIA DE SEGUROS', ''));
             const dataVals = top10.map(r => Number((r.total / 1000000.0).toFixed(2)));
+
             const bgColors = top10.map(r => r.entidad.toUpperCase().includes('SEGUNDA') ? '#e20039' : '#3ac792');
 
             chartSpPrimasRamos = new Chart(ctx, {
