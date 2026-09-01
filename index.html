@@ -1567,16 +1567,18 @@
             tbody.innerHTML = '';
 
             const searchVal = (document.getElementById('input-ranking-search')?.value || '').toLowerCase().trim();
+            const isGruposMode = (currentRankingCategory === '1_grupos');
 
             let top5Sum = 0;
             let top10Sum = 0;
             let lsPos = '-';
 
             items.forEach((item, idx) => {
-                const entidad = (item.entidad || item.nombre || item.name || item.grupo || '').trim();
+                const entidad = (item.name || item.entidad || item.nombre || item.grupo || '').trim();
                 const prima = item.prima_ars_m || item.prima || item.monto || 0;
                 const part = item.share || item.participacion || 0;
                 const pos = item.rank || item.posicion || (idx + 1);
+                const entitiesList = item.entities || [];
 
                 if (idx < 5) top5Sum += part;
                 if (idx < 10) top10Sum += part;
@@ -1584,23 +1586,46 @@
                 const isLaSegunda = entidad.toUpperCase().includes('SEGUNDA');
                 if (isLaSegunda && lsPos === '-') lsPos = '#' + pos;
 
-                if (searchVal && !entidad.toLowerCase().includes(searchVal)) {
-                    return;
+                if (searchVal) {
+                    const matchesName = entidad.toLowerCase().includes(searchVal);
+                    const matchesSubEntity = entitiesList.some(e => e.toLowerCase().includes(searchVal));
+                    if (!matchesName && !matchesSubEntity) return;
                 }
 
                 const tr = document.createElement('tr');
                 if (isLaSegunda) tr.className = 'highlight-lasegunda font-bold';
 
+                let entidadHtml = '';
+                if (isGruposMode && entitiesList.length > 0) {
+                    const pills = entitiesList.map(e => `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-sans font-medium"><i class="fas fa-circle-check text-[8px] text-[#3ac792] mr-1"></i>${e}</span>`).join(' ');
+                    entidadHtml = `
+                        <div class="py-1">
+                            <div class="flex items-center gap-2">
+                                ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : '<i class="fas fa-layer-group text-slate-400"></i>'}
+                                <span class="font-bold text-sm txt-primary">${entidad}</span>
+                                <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#e20039]/10 text-[#e20039] font-semibold">${entitiesList.length} empresas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-1 mt-1.5">
+                                ${pills}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    entidadHtml = `
+                        <div class="flex items-center gap-2">
+                            ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
+                            <span class="font-semibold">${entidad}</span>
+                        </div>
+                    `;
+                }
+
                 tr.innerHTML = `
                     <td class="py-3 px-3 text-center font-bold font-mono ${pos <= 3 ? 'text-[#e20039]' : 'txt-muted'}">${pos}</td>
-                    <td class="py-3 px-3 font-semibold txt-primary flex items-center gap-2">
-                        ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
-                        <span>${entidad}</span>
-                    </td>
-                    <td class="py-3 px-3 text-right font-mono">${fmtARS(prima)}</td>
+                    <td class="py-3 px-3 txt-primary">${entidadHtml}</td>
+                    <td class="py-3 px-3 text-right font-mono font-bold">${fmtARS(prima)}</td>
                     <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'txt-secondary'}">${fmtPct(part).replace('+', '')}</td>
                     <td class="py-3 px-3 text-center">
-                        <button onclick="compareWithEntity('${entidad.replace(/'/g, "\'")}')" class="px-2 py-1 rounded subtle-card hover:border-[#e20039] txt-secondary hover:text-[#e20039] text-[10px] font-mono transition-all font-semibold" title="Comparar en Cara a Cara">
+                        <button onclick="compareWithEntity('${entidad.replace(/'/g, "\\'")}')" class="px-2.5 py-1.5 rounded-lg subtle-card hover:border-[#e20039] txt-secondary hover:text-[#e20039] text-[10px] font-mono transition-all font-semibold inline-flex items-center gap-1" title="Comparar en Cara a Cara">
                             <i class="fas fa-arrows-split-up-and-left"></i> Comparar
                         </button>
                     </td>
