@@ -2153,13 +2153,14 @@
             // ================================================================
             } else if (vKey === 'financiero') {
                 const finRows = [
-                    { label: 'Rentas de Inversiones', i: 0 },
-                    { label: 'Utilidades / Pérdidas por Realización', i: 1 },
-                    { label: 'Diferencias de Cotización', i: 2 },
-                    { label: 'Ajuste por Inflación (RECPAM)', i: 3 },
-                    { label: 'Gastos Financieros', i: 4 },
-                    { label: 'Otros Rendimientos Financieros', i: 5 },
-                    { label: 'RESULTADO FINANCIERO TOTAL', i: 6, isHighlight: true, isFinal: true }
+                    { label: 'Rentas de Inversiones (1)', i: 0 },
+                    { label: 'Resultados por Realización (2)', i: 1 },
+                    { label: 'Resultados por Tenencia / Cotización (3)', i: 2 },
+                    { label: 'Otros Ingresos Financieros (4)', i: 3 },
+                    { label: 'Otros Egresos Financieros (5)', i: 4 },
+                    { label: 'Gastos de Explotación y Cargos Financieros (6)', i: 5 },
+                    { label: 'Ajuste por Inflación - RECPAM (7)', i: 6, isRecpam: true, color: 'text-[#ff593e]' },
+                    { label: 'RESULTADO FINANCIERO TOTAL (8 = 1+2+3+4+5+6+7)', i: 7, isHighlight: true, isFinal: true, color: 'text-[#e20039]' }
                 ];
 
                 html += `
