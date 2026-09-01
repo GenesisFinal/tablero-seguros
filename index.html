@@ -2444,7 +2444,7 @@
             const container = document.getElementById('sp-ramos-selector-container');
             if (!container) return;
 
-            if ((!spSelectedRamos || spSelectedRamos.length === 0) && boletin.target_ramos && boletin.target_ramos.length > 0) {
+            if (spSelectedRamos === null && boletin.target_ramos && boletin.target_ramos.length > 0) {
                 spSelectedRamos = boletin.target_ramos.slice();
             }
 
