@@ -1058,7 +1058,7 @@
                 <div id="sr-view-compromisos" class="sr-subtab-pane space-y-6">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <h3 class="text-sm font-bold txt-primary flex items-center gap-2">
-                            <i class="fas fa-vault text-[#4183ca]"></i> Reservas Matemáticas y Compromisos Técnicos ($ en Miles)
+                            <i class="fas fa-vault text-[#4183ca]"></i> Reservas Matemáticas y Compromisos Técnicos ($ en Millones)
                         </h3>
                         <div class="flex items-center gap-2">
                             <button onclick="toggleSrCol('ahorro')" class="px-3 py-1 text-xs font-bold bg-[#4183ca]/10 text-[#4183ca] border border-[#4183ca]/30 rounded-lg hover:bg-[#4183ca]/20 transition">
@@ -1075,18 +1075,18 @@
                             <thead class="uppercase text-[10px] sticky-header">
                                 <tr>
                                     <th class="py-3 px-3">Compañía de Retiro</th>
-                                    <th class="py-3 px-3 text-right">Total ($)</th>
+                                    <th class="py-3 px-3 text-right">Total ($M)</th>
                                     <th class="py-3 px-3 text-right">% Total</th>
-                                    <th class="py-3 px-3 text-right">P. Ahorro ($)</th>
-                                    <th class="py-3 px-3 text-right col-sr-ahorro hidden text-[#4183ca]">Ahorro Indiv.</th>
-                                    <th class="py-3 px-3 text-right col-sr-ahorro hidden text-[#4183ca]">Ahorro Colec.</th>
+                                    <th class="py-3 px-3 text-right">P. Ahorro ($M)</th>
+                                    <th class="py-3 px-3 text-right col-sr-ahorro hidden text-[#4183ca]">Ahorro Indiv. ($M)</th>
+                                    <th class="py-3 px-3 text-right col-sr-ahorro hidden text-[#4183ca]">Ahorro Colec. ($M)</th>
                                     <th class="py-3 px-3 text-right">% Ahorro</th>
-                                    <th class="py-3 px-3 text-right">P. Renta ($)</th>
-                                    <th class="py-3 px-3 text-right col-sr-rentas hidden text-[#3ac792]">Renta Indiv.</th>
-                                    <th class="py-3 px-3 text-right col-sr-rentas hidden text-[#3ac792]">Renta Colec.</th>
+                                    <th class="py-3 px-3 text-right">P. Renta ($M)</th>
+                                    <th class="py-3 px-3 text-right col-sr-rentas hidden text-[#3ac792]">Renta Indiv. ($M)</th>
+                                    <th class="py-3 px-3 text-right col-sr-rentas hidden text-[#3ac792]">Renta Colec. ($M)</th>
                                     <th class="py-3 px-3 text-right">% Renta</th>
-                                    <th class="py-3 px-3 text-right text-[#f8cc59]">RVP + ART ($)</th>
-                                    <th class="py-3 px-3 text-right txt-muted">Otros ($)</th>
+                                    <th class="py-3 px-3 text-right text-[#f8cc59]">RVP + ART ($M)</th>
+                                    <th class="py-3 px-3 text-right txt-muted">Otros ($M)</th>
                                 </tr>
                             </thead>
                             <tbody id="tbl-sr-compromisos-body">
@@ -2835,12 +2835,18 @@
                 return '$ ' + n.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
             };
 
+            const fmtNumM = (n) => {
+                if (typeof n !== 'number') return n || '-';
+                const inMillions = n / 1000.0;
+                return '$ ' + inMillions.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' M';
+            };
+
             const fmtCnt = (n) => {
                 if (typeof n !== 'number') return n || '-';
                 return n.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
             };
 
-            // 1. Compromisos Técnicos Table
+            // 1. Compromisos Técnicos Table ($ en Millones)
             const compBody = document.getElementById('tbl-sr-compromisos-body');
             if (compBody && srData.compromisos_tecnicos) {
                 let htmlRows = '';
@@ -2849,18 +2855,18 @@
                     htmlRows += `
                         <tr class="bg-[#fee2e2]/60 dark:bg-[#e20039]/20 border-b-2 border-[#e20039] font-bold text-[#e20039]">
                             <td class="py-3 px-3 uppercase tracking-wider flex items-center gap-1.5"><i class="fas fa-calculator"></i> ${tr.entidad}</td>
-                            <td class="py-3 px-3 text-right font-mono text-[#e20039]">${fmtNum(tr.total)}</td>
+                            <td class="py-3 px-3 text-right font-mono text-[#e20039]">${fmtNumM(tr.total)}</td>
                             <td class="py-3 px-3 text-right font-mono text-[#e20039]">100,00%</td>
-                            <td class="py-3 px-3 text-right font-mono txt-primary">${fmtNum(tr.ahorro_total)}</td>
-                            <td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-[#4183ca]">${fmtNum(tr.ahorro_indiv)}</td>
-                            <td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-[#4183ca]">${fmtNum(tr.ahorro_colec)}</td>
+                            <td class="py-3 px-3 text-right font-mono txt-primary">${fmtNumM(tr.ahorro_total)}</td>
+                            <td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-[#4183ca]">${fmtNumM(tr.ahorro_indiv)}</td>
+                            <td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-[#4183ca]">${fmtNumM(tr.ahorro_colec)}</td>
                             <td class="py-3 px-3 text-right font-mono text-[#4183ca]">100,00%</td>
-                            <td class="py-3 px-3 text-right font-mono txt-primary">${fmtNum(tr.rentas_total)}</td>
-                            <td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-[#3ac792]">${fmtNum(tr.rentas_indiv)}</td>
-                            <td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-[#3ac792]">${fmtNum(tr.rentas_colec)}</td>
+                            <td class="py-3 px-3 text-right font-mono txt-primary">${fmtNumM(tr.rentas_total)}</td>
+                            <td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-[#3ac792]">${fmtNumM(tr.rentas_indiv)}</td>
+                            <td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-[#3ac792]">${fmtNumM(tr.rentas_colec)}</td>
                             <td class="py-3 px-3 text-right font-mono text-[#3ac792]">100,00%</td>
-                            <td class="py-3 px-3 text-right font-mono text-[#f8cc59]">${fmtNum(tr.rvp_art)}</td>
-                            <td class="py-3 px-3 text-right font-mono txt-muted">${fmtNum(tr.otros)}</td>
+                            <td class="py-3 px-3 text-right font-mono text-[#f8cc59]">${fmtNumM(tr.rvp_art)}</td>
+                            <td class="py-3 px-3 text-right font-mono txt-muted">${fmtNumM(tr.otros)}</td>
                         </tr>
                     `;
                 }
@@ -2876,18 +2882,18 @@
                                 ${isL2 ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
                                 <span>${row.entidad}</span>
                             </td>
-                            <td class="py-2.5 px-3 text-right font-mono txt-primary font-bold">${fmtNum(row.total)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono txt-primary font-bold">${fmtNumM(row.total)}</td>
                             <td class="py-2.5 px-3 text-right font-mono text-[#4183ca] font-semibold">${row.total_pct.toFixed(2)}%</td>
-                            <td class="py-2.5 px-3 text-right font-mono text-[#4183ca]">${fmtNum(row.ahorro_total)}</td>
-                            <td class="py-2.5 px-3 text-right font-mono col-sr-ahorro hidden text-[#4183ca]">${fmtNum(row.ahorro_indiv)}</td>
-                            <td class="py-2.5 px-3 text-right font-mono col-sr-ahorro hidden text-[#4183ca]">${fmtNum(row.ahorro_colec)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono text-[#4183ca]">${fmtNumM(row.ahorro_total)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono col-sr-ahorro hidden text-[#4183ca]">${fmtNumM(row.ahorro_indiv)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono col-sr-ahorro hidden text-[#4183ca]">${fmtNumM(row.ahorro_colec)}</td>
                             <td class="py-2.5 px-3 text-right font-mono text-slate-500">${row.ahorro_pct.toFixed(2)}%</td>
-                            <td class="py-2.5 px-3 text-right font-mono text-[#3ac792]">${fmtNum(row.rentas_total)}</td>
-                            <td class="py-2.5 px-3 text-right font-mono col-sr-rentas hidden text-[#3ac792]">${fmtNum(row.rentas_indiv)}</td>
-                            <td class="py-2.5 px-3 text-right font-mono col-sr-rentas hidden text-[#3ac792]">${fmtNum(row.rentas_colec)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono text-[#3ac792]">${fmtNumM(row.rentas_total)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono col-sr-rentas hidden text-[#3ac792]">${fmtNumM(row.rentas_indiv)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono col-sr-rentas hidden text-[#3ac792]">${fmtNumM(row.rentas_colec)}</td>
                             <td class="py-2.5 px-3 text-right font-mono text-slate-500">${row.rentas_pct.toFixed(2)}%</td>
-                            <td class="py-2.5 px-3 text-right font-mono text-[#f8cc59]">${fmtNum(row.rvp_art)}</td>
-                            <td class="py-2.5 px-3 text-right font-mono txt-muted">${fmtNum(row.otros)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono text-[#f8cc59]">${fmtNumM(row.rvp_art)}</td>
+                            <td class="py-2.5 px-3 text-right font-mono txt-muted">${fmtNumM(row.otros)}</td>
                         </tr>
                     `;
                 });
