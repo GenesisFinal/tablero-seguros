@@ -862,48 +862,162 @@
         <!-- ==================================================================== -->
         <!-- TAB 6: SEGUROS DE PERSONAS                                          -->
         <!-- ==================================================================== -->
-        <section id="tab-personas" class="tab-content hidden space-y-6">
-            <div class="main-card rounded-2xl p-6">
-                <div class="flex items-center justify-between pb-4 border-b mb-6 border-slate-200 dark:border-slate-800">
+        <section id="tab-personas" class="tab-content hidden space-y-8">
+            <div class="main-card rounded-2xl p-6 space-y-8">
+                
+                <!-- Header Banner -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792]">Ramos de Personas</span>
-                            <span class="text-xs txt-muted font-mono">Boletín SSN Marzo 2026</span>
+                            <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792] font-mono">Boletín Oficial SSN &bull; Anexo I</span>
+                            <span class="text-xs txt-muted font-mono">Marzo 2026</span>
                         </div>
-                        <h2 class="text-xl font-bold txt-primary">
-                            Mercado de Seguros de Personas
+                        <h2 class="text-2xl font-extrabold tracking-tight txt-primary flex items-center gap-2">
+                            <i class="fas fa-user-shield text-[#3ac792]"></i> Seguros de Personas y Retiro
                         </h2>
+                        <p class="text-xs txt-secondary mt-1">
+                            Indicadores de gestión técnica, rentabilidad (ROS), apertura de primas por ramo y simulador dinámico de mercado.
+                        </p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="border rounded-xl overflow-hidden border-slate-200 dark:border-slate-800">
-                        <div class="subtle-card px-4 py-3 border-b font-bold text-xs txt-primary border-slate-200 dark:border-slate-800">
-                            Primas Emitidas por Subramo de Personas
+                <!-- SECCIÓN 1: INDICADORES DE GESTIÓN &bull; SEGUROS DE PERSONAS -->
+                <div class="space-y-4">
+                    <h3 class="text-base font-bold txt-primary flex items-center gap-2">
+                        <i class="fas fa-heart-pulse text-[#3ac792]"></i> 1. Indicadores de Gestión y Rentabilidad &bull; Seguros de Personas
+                    </h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        
+                        <!-- Table: Indicadores Personas -->
+                        <div class="lg:col-span-7 subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs text-left data-table">
+                                    <thead class="uppercase text-[10px] font-mono sticky-header">
+                                        <tr>
+                                            <th class="py-2.5 px-3">Indicador Clave de Gestión</th>
+                                            <th class="py-2.5 px-3 text-right">Total Mercado</th>
+                                            <th class="py-2.5 px-3 text-right">L2 Personas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbl-sp-personas-body" class="font-mono divide-y divide-slate-200 dark:divide-slate-800">
+                                        <!-- Dynamic JS -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <table class="w-full text-left text-xs font-mono data-table">
-                            <thead class="uppercase text-[10px]">
-                                <tr>
-                                    <th class="py-2.5 px-3">Subramo</th>
-                                    <th class="py-2.5 px-3 text-right">Primas ($M)</th>
-                                    <th class="py-2.5 px-3 text-right">Part. %</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl-sp-personas-body">
-                                <!-- Populated dynamically -->
-                            </tbody>
-                        </table>
+
+                        <!-- Bar Chart: Personas Ratios -->
+                        <div class="lg:col-span-5 subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center">
+                            <h4 class="text-xs font-bold txt-muted uppercase tracking-wider mb-2">Comparativo Visual &bull; Ratios Personas (%)</h4>
+                            <div class="relative w-full h-[280px]">
+                                <canvas id="sp-chart-personas"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 2: INDICADORES DE GESTIÓN &bull; SEGUROS DE RETIRO -->
+                <div class="space-y-4 pt-6 border-t border-slate-200 dark:border-slate-800">
+                    <h3 class="text-base font-bold txt-primary flex items-center gap-2">
+                        <i class="fas fa-piggy-bank text-[#f8cc59]"></i> 2. Indicadores de Gestión &bull; Seguros de Retiro
+                    </h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        
+                        <!-- Table: Indicadores Retiro -->
+                        <div class="lg:col-span-7 subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs text-left data-table">
+                                    <thead class="uppercase text-[10px] font-mono sticky-header">
+                                        <tr>
+                                            <th class="py-2.5 px-3">Indicador de Solvencia / Rendimiento</th>
+                                            <th class="py-2.5 px-3 text-right">Exclusivas Retiro</th>
+                                            <th class="py-2.5 px-3 text-right">L2 Retiro</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbl-sp-retiro-body" class="font-mono divide-y divide-slate-200 dark:divide-slate-800">
+                                        <!-- Dynamic JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Bar Chart: Retiro Ratios -->
+                        <div class="lg:col-span-5 subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center">
+                            <h4 class="text-xs font-bold txt-muted uppercase tracking-wider mb-2">Comparativo Visual &bull; Ratios Retiro (%)</h4>
+                            <div class="relative w-full h-[280px]">
+                                <canvas id="sp-chart-retiro"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 3: PRIMAS EMITIDAS POR RAMOS EN SEGUROS DE PERSONAS -->
+                <div class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-base font-bold txt-primary flex items-center gap-2">
+                                <i class="fas fa-layer-group text-[#e20039]"></i> 3. Primas Emitidas por Ramos y Simulador de Mercado
+                            </h3>
+                            <p class="text-xs txt-secondary mt-0.5">
+                                Seleccione los ramos a incluir para recalcular el mercado y ranking en tiempo real.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="selectAllSpRamos(true)" class="px-3 py-1.5 text-xs font-bold bg-[#4183ca]/15 text-[#4183ca] border border-[#4183ca]/30 rounded-xl hover:bg-[#4183ca]/25 transition flex items-center gap-1.5">
+                                <i class="fas fa-check-square"></i> Seleccionar Todos
+                            </button>
+                            <button onclick="selectAllSpRamos(false)" class="px-3 py-1.5 text-xs font-bold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 rounded-xl hover:bg-slate-300 dark:hover:bg-slate-700 transition flex items-center gap-1.5">
+                                <i class="fas fa-square"></i> Deseleccionar Todos
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="border rounded-xl p-4 subtle-card flex flex-col justify-between border-slate-200 dark:border-slate-800">
-                        <h4 class="text-xs font-bold uppercase tracking-wider txt-muted mb-3">
-                            Composición del Ramo Personas
+                    <!-- Multi-select Ramos Chips -->
+                    <div class="subtle-card p-4 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <div id="sp-ramos-selector-container" class="flex flex-wrap gap-2.5">
+                            <!-- Dynamic Chips -->
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Primas por Ramos Recalculada -->
+                    <div class="subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+                            <h4 class="text-sm font-bold txt-primary flex items-center gap-2">
+                                <i class="fas fa-trophy text-[#f8cc59]"></i> Ranking de Aseguradoras en Ramos Seleccionados
+                            </h4>
+                            <span class="text-xs txt-muted font-mono" id="sp-primas-total-badge">Total Mercado Seleccionado: -</span>
+                        </div>
+                        <div class="overflow-x-auto max-h-[420px] overflow-y-auto">
+                            <table class="w-full text-xs text-left data-table">
+                                <thead class="uppercase text-[10px] font-mono sticky-header">
+                                    <tr>
+                                        <th class="py-2.5 px-3 text-center w-14">Ranking</th>
+                                        <th class="py-2.5 px-3">Aseguradora (Entidad)</th>
+                                        <th class="py-2.5 px-3 text-right">Primas Emitidas ($M)</th>
+                                        <th class="py-2.5 px-3 text-right">Part. %</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl-sp-primas-body" class="font-mono divide-y divide-slate-200 dark:divide-slate-800">
+                                    <!-- Dynamic JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Chart: Top 10 Ramos Seleccionados -->
+                    <div class="subtle-card p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <h4 class="text-xs font-bold txt-muted uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fas fa-chart-bar text-[#e20039]"></i> Top 10 Aseguradoras en Ramos Seleccionados
                         </h4>
-                        <div class="relative h-64 flex items-center justify-center">
-                            <canvas id="chart-personas-doughnut"></canvas>
+                        <div class="relative w-full h-[320px]">
+                            <canvas id="chart-sp-primas-ramos"></canvas>
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </section>
 
@@ -1190,7 +1304,7 @@
                 if (tabId === 'rankings' && !charts.rankingBar) renderRankingBarChart();
                 if (tabId === 'balances') renderBalancesSubtabData();
                 if (tabId === 'lasegunda') initLaSegundaTab();
-                if (tabId === 'personas' && !charts.personasDoughnut) renderPersonasChart();
+                if (tabId === 'personas') renderPersonasTab();
                 if (tabId === 'inversiones' && !charts.inversionesDoughnut) renderInversionesCharts();
                 if (tabId === 'comparador') renderComparatorDropdowns();
             }, 50);
@@ -2428,420 +2542,326 @@
                     cutout: '65%'
                 }
             });
-        }// Tab 6: Seguros de Personas
-        function renderPersonasChart() {
-            const ctx = document.getElementById('chart-personas-doughnut')?.getContext('2d');
-            if (!ctx) return;
+        }// Tab 6: Seguros de Personas (100% Dynamic Multi-Ramo Engine)
+        let spChartPersonas = null;
+        let spChartRetiro = null;
+        let chartSpPrimasRamos = null;
+        let spSelectedRamos = null;
 
+        function renderPersonasTab() {
+            const data = window.INSURANCE_DATA || {};
+            const spData = data.ssn_seg_personas || {};
+
+            if (!spData || (!spData.personas && !spData.retiro)) return;
+
+            // 1. Render Table Personas Indicators
+            const personasBody = document.getElementById('tbl-sp-personas-body');
+            if (personasBody && spData.personas) {
+                personasBody.innerHTML = spData.personas.map(row => {
+                    const isRos = row.indicador.includes('ROS') || row.indicador.includes('Resultado');
+                    const mercadoVal = typeof row.mercado === 'number' ? row.mercado.toFixed(2) + '%' : row.mercado;
+                    const l2Val = typeof row.l2 === 'number' ? row.l2.toFixed(2) + '%' : row.l2;
+                    
+                    const mercadoColor = isRos ? (row.mercado >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') : 'txt-primary';
+                    const l2Color = isRos ? (row.l2 >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') : 'text-[#f8cc59]';
+
+                    return `
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                            <td class="py-2.5 px-3 font-sans font-semibold txt-primary">${row.indicador}</td>
+                            <td class="py-2.5 px-3 text-right font-mono font-bold ${mercadoColor}">${mercadoVal}</td>
+                            <td class="py-2.5 px-3 text-right font-mono font-bold ${l2Color}">${l2Val}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // 2. Render Table Retiro Indicators
+            const retiroBody = document.getElementById('tbl-sp-retiro-body');
+            if (retiroBody && spData.retiro) {
+                retiroBody.innerHTML = spData.retiro.map(row => {
+                    const isRos = row.indicador.includes('ROS') || row.indicador.includes('Resultado');
+                    const mercadoVal = typeof row.mercado === 'number' ? row.mercado.toFixed(2) + '%' : row.mercado;
+                    const l2Val = typeof row.l2 === 'number' ? row.l2.toFixed(2) + '%' : row.l2;
+
+                    const mercadoColor = isRos ? (row.mercado >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') : 'txt-primary';
+                    const l2Color = isRos ? (row.l2 >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') : 'text-[#4183ca]';
+
+                    return `
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                            <td class="py-2.5 px-3 font-sans font-semibold txt-primary">${row.indicador}</td>
+                            <td class="py-2.5 px-3 text-right font-mono font-bold ${mercadoColor}">${mercadoVal}</td>
+                            <td class="py-2.5 px-3 text-right font-mono font-bold ${l2Color}">${l2Val}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // 3. Render Charts
+            renderSpIndicatorsCharts(spData);
+
+            // 4. Initialize Multi-Ramo Selector
+            initSpPrimasRamosView(spData);
+        }
+
+        function renderSpIndicatorsCharts(spData) {
             const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#94a3b8' : '#64748b';
+            const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
 
-            charts.personasDoughnut = new Chart(ctx, {
-                type: 'doughnut',
+            // Chart Personas
+            const ctxP = document.getElementById('sp-chart-personas')?.getContext('2d');
+            if (ctxP && spData.personas) {
+                if (spChartPersonas) spChartPersonas.destroy();
+                const labelsP = spData.personas.map(r => {
+                    let name = r.indicador.split('/')[0].trim();
+                    if (name.includes('Resultado')) return 'ROS (Resultado)';
+                    return name;
+                });
+
+                spChartPersonas = new Chart(ctxP, {
+                    type: 'bar',
+                    data: {
+                        labels: labelsP,
+                        datasets: [
+                            { label: 'Total Mercado', data: spData.personas.map(r => r.mercado), backgroundColor: '#3ac792', borderRadius: 4 },
+                            { label: 'L2 Personas', data: spData.personas.map(r => r.l2), backgroundColor: '#f8cc59', borderRadius: 4 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { labels: { color: textColor, font: { size: 10, weight: '600' } } }
+                        },
+                        scales: {
+                            x: { ticks: { color: textColor, font: { size: 9 } }, grid: { display: false } },
+                            y: { ticks: { color: textColor, font: { size: 9 }, callback: v => v + '%' }, grid: { color: gridColor } }
+                        }
+                    }
+                });
+            }
+
+            // Chart Retiro
+            const ctxR = document.getElementById('sp-chart-retiro')?.getContext('2d');
+            if (ctxR && spData.retiro) {
+                if (spChartRetiro) spChartRetiro.destroy();
+                const labelsR = spData.retiro.map(r => {
+                    let name = r.indicador.split('/')[0].trim();
+                    if (name.includes('Resultado')) return 'ROS (Resultado)';
+                    return name;
+                });
+
+                spChartRetiro = new Chart(ctxR, {
+                    type: 'bar',
+                    data: {
+                        labels: labelsR,
+                        datasets: [
+                            { label: 'Exclusivas Retiro', data: spData.retiro.map(r => r.mercado), backgroundColor: '#4183ca', borderRadius: 4 },
+                            { label: 'L2 Retiro', data: spData.retiro.map(r => r.l2), backgroundColor: '#e20039', borderRadius: 4 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { labels: { color: textColor, font: { size: 10, weight: '600' } } }
+                        },
+                        scales: {
+                            x: { ticks: { color: textColor, font: { size: 9 } }, grid: { display: false } },
+                            y: { ticks: { color: textColor, font: { size: 9 }, callback: v => v + '%' }, grid: { color: gridColor } }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initSpPrimasRamosView(spData) {
+            if (!spData) {
+                const data = window.INSURANCE_DATA || {};
+                spData = data.ssn_seg_personas || {};
+            }
+            if (!spData || !spData.boletin_personas) return;
+            const boletin = spData.boletin_personas;
+
+            const container = document.getElementById('sp-ramos-selector-container');
+            if (!container) return;
+
+            if ((!spSelectedRamos || spSelectedRamos.length === 0) && boletin.target_ramos && boletin.target_ramos.length > 0) {
+                spSelectedRamos = boletin.target_ramos.slice();
+            }
+
+            const htmlPills = [];
+            boletin.target_ramos.forEach(ramo => {
+                const isChecked = spSelectedRamos.includes(ramo);
+                const pillClass = isChecked ? 'bg-[#e20039]/15 text-[#e20039] border-[#e20039]/40 shadow-sm font-bold' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:text-slate-900';
+                htmlPills.push(`
+                    <label class="flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs cursor-pointer transition ${pillClass}">
+                        <input type="checkbox" class="chk-sp-ramo accent-[#e20039] cursor-pointer" value="${ramo}" ${isChecked ? 'checked' : ''} onchange="onSpRamoCheckboxChange(this)">
+                        <span>${ramo}</span>
+                    </label>
+                `);
+            });
+
+            container.innerHTML = htmlPills.join('');
+            renderSpPrimasTable(spData);
+        }
+
+        function onSpRamoCheckboxChange(cb) {
+            const data = window.INSURANCE_DATA || {};
+            const spData = data.ssn_seg_personas || {};
+            const boletin = spData.boletin_personas;
+
+            if (!spSelectedRamos && boletin && boletin.target_ramos) {
+                spSelectedRamos = boletin.target_ramos.slice();
+            }
+            if (!spSelectedRamos) spSelectedRamos = [];
+
+            const val = cb.value;
+            if (cb.checked) {
+                if (!spSelectedRamos.includes(val)) spSelectedRamos.push(val);
+            } else {
+                const idx = spSelectedRamos.indexOf(val);
+                if (idx !== -1) spSelectedRamos.splice(idx, 1);
+            }
+            initSpPrimasRamosView(spData);
+        }
+        window.onSpRamoCheckboxChange = onSpRamoCheckboxChange;
+
+        function selectAllSpRamos(forceState) {
+            const data = window.INSURANCE_DATA || {};
+            const spData = data.ssn_seg_personas || {};
+            if (!spData || !spData.boletin_personas) return;
+
+            if (forceState) {
+                spSelectedRamos = spData.boletin_personas.target_ramos.slice();
+            } else {
+                spSelectedRamos = [];
+            }
+            initSpPrimasRamosView(spData);
+        }
+        window.selectAllSpRamos = selectAllSpRamos;
+
+        function renderSpPrimasTable(spData) {
+            if (!spData) {
+                const data = window.INSURANCE_DATA || {};
+                spData = data.ssn_seg_personas || {};
+            }
+            if (!spData || !spData.boletin_personas) return;
+
+            const tbody = document.getElementById('tbl-sp-primas-body');
+            if (!tbody) return;
+
+            const boletin = spData.boletin_personas;
+            const companies = boletin.companies || [];
+
+            if (!spSelectedRamos || spSelectedRamos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-slate-400 italic">No hay ramos seleccionados. Seleccione al menos un ramo arriba para calcular el mercado.</td></tr>';
+                const totalBadge = document.getElementById('sp-primas-total-badge');
+                if (totalBadge) totalBadge.innerText = 'Total Mercado Seleccionado: $ 0 M';
+                if (chartSpPrimasRamos) chartSpPrimasRamos.destroy();
+                return;
+            }
+
+            // Calculate aggregated sum per company for selected ramos
+            const calculatedList = [];
+            let totalMarketSum = 0;
+
+            companies.forEach(c => {
+                let compSum = 0;
+                spSelectedRamos.forEach(ramo => {
+                    if (c.ramos && c.ramos[ramo]) {
+                        compSum += Number(c.ramos[ramo]);
+                    }
+                });
+                if (compSum > 0) {
+                    calculatedList.push({
+                        entidad: c.entidad,
+                        total: compSum
+                    });
+                    totalMarketSum += compSum;
+                }
+            });
+
+            // Sort descending
+            calculatedList.sort((a, b) => b.total - a.total);
+
+            // Update Total Badge
+            const totalBadge = document.getElementById('sp-primas-total-badge');
+            if (totalBadge) totalBadge.innerText = `Total Mercado Seleccionado: ${fmtARS(totalMarketSum / 1000000.0)} M (${calculatedList.length} entidades)`;
+
+            let htmlRows = '';
+            calculatedList.forEach((r, idx) => {
+                const isLaSegunda = r.entidad.toUpperCase().includes('SEGUNDA');
+                const rowClass = isLaSegunda ? 'bg-[#fee2e2]/40 dark:bg-[#e20039]/15 font-bold' : 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition';
+                const sharePct = totalMarketSum > 0 ? (r.total / totalMarketSum) * 100 : 0;
+                const primaM = r.total / 1000000.0;
+
+                htmlRows += `
+                    <tr class="${rowClass}">
+                        <td class="py-2.5 px-3 text-center">
+                            <span class="brand-badge ${idx < 3 ? 'bg-[#f8cc59]/25 text-[#b91f38] dark:text-[#f8cc59]' : 'bg-slate-100 dark:bg-slate-800 txt-muted'} font-mono font-bold">#${idx + 1}</span>
+                        </td>
+                        <td class="py-2.5 px-3 font-sans font-semibold txt-primary flex items-center gap-2">
+                            ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
+                            ${r.entidad}
+                        </td>
+                        <td class="py-2.5 px-3 text-right font-bold text-[#e20039] font-mono">${fmtARS(primaM)} M</td>
+                        <td class="py-2.5 px-3 text-right font-bold txt-primary font-mono">${sharePct.toFixed(2)}%</td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = htmlRows;
+
+            // Render Dynamic Top 10 Chart
+            renderSpTop10Chart(calculatedList);
+        }
+
+        function renderSpTop10Chart(calculatedList) {
+            const canvas = document.getElementById('chart-sp-primas-ramos');
+            if (!canvas || !window.Chart) return;
+            const ctx = canvas.getContext('2d');
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#94a3b8' : '#64748b';
+            const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+
+            if (chartSpPrimasRamos) chartSpPrimasRamos.destroy();
+
+            const top10 = calculatedList.slice(0, 10);
+            const labels = top10.map(r => r.entidad.replace(' SEGUROS DE PERSONAS', '').replace(' SEGUROS', '').replace(' PERSONAS', ''));
+            const dataVals = top10.map(r => Number((r.total / 1000000.0).toFixed(2)));
+
+            const bgColors = top10.map(r => r.entidad.toUpperCase().includes('SEGUNDA') ? '#e20039' : '#3ac792');
+
+            chartSpPrimasRamos = new Chart(ctx, {
+                type: 'bar',
                 data: {
-                    labels: ['Vida Colectivo', 'Vida Individual', 'Accidentes Personales', 'Salud & Sepelio'],
+                    labels: labels,
                     datasets: [{
-                        data: [58.2, 18.5, 16.3, 7.0],
-                        backgroundColor: ['#3ac792', '#4183ca', '#f8cc59', '#e20039'],
-                        borderWidth: 2,
-                        borderColor: isDark ? '#111726' : '#ffffff'
+                        label: 'Primas Emitidas ($M)',
+                        data: dataVals,
+                        backgroundColor: bgColors,
+                        borderRadius: 6
                     }]
                 },
                 options: {
+                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10, weight: 'bold' } } }
-                    }
-                }
-            });
-
-            // Populate Personas Table
-            const tbody = document.getElementById('tbl-sp-personas-body');
-            if (tbody) {
-                tbody.innerHTML = `
-                    <tr><td class="py-2.5 px-3 font-semibold txt-primary">Vida Colectivo</td><td class="py-2.5 px-3 text-right font-mono">$ 1.686.901 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">58.2%</td></tr>
-                    <tr><td class="py-2.5 px-3 font-semibold txt-primary">Vida Individual</td><td class="py-2.5 px-3 text-right font-mono">$ 536.214 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">18.5%</td></tr>
-                    <tr><td class="py-2.5 px-3 font-semibold txt-primary">Accidentes Personales</td><td class="py-2.5 px-3 text-right font-mono">$ 472.448 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">16.3%</td></tr>
-                    <tr><td class="py-2.5 px-3 font-semibold txt-primary">Salud, Sepelio y Otros</td><td class="py-2.5 px-3 text-right font-mono">$ 202.894 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">7.0%</td></tr>
-                `;
-            }
-        }
-
-        // Tab 7: Retiro
-        function initRetiroTab() {
-            const data = window.INSURANCE_DATA || {};
-            const retiroObj = data.ssn_seg_retiro || {};
-            const compList = retiroObj.compromisos_tecnicos || [];
-
-            const tbody = document.getElementById('tbl-retiro-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            compList.forEach(item => {
-                const entidad = (item.entidad || item.nombre || '').trim();
-                const isLaSegunda = entidad.toUpperCase().includes('SEGUNDA');
-                const tr = document.createElement('tr');
-                if (isLaSegunda) tr.className = 'highlight-lasegunda font-bold';
-
-                tr.innerHTML = `
-                    <td class="py-3 px-3 font-semibold txt-primary flex items-center gap-2">
-                        ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
-                        <span>${entidad}</span>
-                    </td>
-                    <td class="py-3 px-3 text-right font-mono">${fmtARS(item.compromisos_individuales || item.individual)}</td>
-                    <td class="py-3 px-3 text-right font-mono">${fmtARS(item.compromisos_colectivos || item.colectivo)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-bold text-[#b91f38] dark:text-[#f8cc59]">${fmtARS(item.total_compromisos || item.total)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-semibold">${fmtPct(item.participacion || item.share).replace('+', '')}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        // Tab 8: Inversiones SSN
-        function renderInversionesCharts() {
-            const data = window.INSURANCE_DATA || {};
-            const inv = data.ssn_inversiones_resumen || {};
-            const instList = inv.distribucion_instrumentos || [
-                { instrumento: "Títulos Públicos Nacionales", porcentaje: 54.0, monto: 8867070, color: "#e20039" },
-                { instrumento: "Fondos Comunes (FCI)", porcentaje: 21.0, monto: 3448305, color: "#ff4c60" },
-                { instrumento: "Obligaciones Negociables", porcentaje: 12.0, monto: 1970460, color: "#4183ca" },
-                { instrumento: "Plazos Fijos & Vista", porcentaje: 6.0, monto: 985230, color: "#f8cc59" },
-                { instrumento: "Acciones & CEDEARs", porcentaje: 4.0, monto: 656820, color: "#3ac792" },
-                { instrumento: "Inmuebles & Otros", porcentaje: 3.0, monto: 492615, color: "#512420" }
-            ];
-
-            const ctx1 = document.getElementById('chart-inversiones-doughnut')?.getContext('2d');
-            const isDark = document.documentElement.classList.contains('dark');
-
-            if (ctx1) {
-                charts.inversionesDoughnut = new Chart(ctx1, {
-                    type: 'doughnut',
-                    data: {
-                        labels: instList.map(i => i.instrumento),
-                        datasets: [{
-                            data: instList.map(i => i.porcentaje),
-                            backgroundColor: instList.map(i => i.color),
-                            borderWidth: 2,
-                            borderColor: isDark ? '#111726' : '#ffffff'
-                        }]
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ' $ ' + Number(ctx.parsed.x).toLocaleString('es-AR', { minimumFractionDigits: 2 }) + ' M'
+                            }
+                        }
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10, weight: 'bold' } } }
-                        }
+                    scales: {
+                        x: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } },
+                        y: { ticks: { color: textColor, font: { size: 10, weight: '600' } }, grid: { display: false } }
                     }
-                });
-            }
-
-            const ctx2 = document.getElementById('chart-moneda-doughnut')?.getContext('2d');
-            if (ctx2) {
-                charts.monedaDoughnut = new Chart(ctx2, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Pesos Tasa Fija / Badlar', 'Dólar Linked / USD', 'Ajustables por CER (Inflación)'],
-                        datasets: [{
-                            data: [48.5, 32.2, 19.3],
-                            backgroundColor: ['#e20039', '#4183ca', '#3ac792'],
-                            borderWidth: 2,
-                            borderColor: isDark ? '#111726' : '#ffffff'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10, weight: 'bold' } } }
-                        }
-                    }
-                });
-            }
-
-            // Populate Table
-            const tbody = document.getElementById('tbl-inversiones-body');
-            if (tbody) {
-                tbody.innerHTML = '';
-                instList.forEach(item => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td class="py-3 px-3 font-semibold txt-primary flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${item.color}"></span>
-                            <span>${item.instrumento}</span>
-                        </td>
-                        <td class="py-3 px-3 text-right font-mono">${fmtARS(item.monto || (item.porcentaje * 164205))}</td>
-                        <td class="py-3 px-3 text-right font-mono font-bold text-[#e20039]">${fmtPct(item.porcentaje).replace('+', '')}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
-        }
-
-        // Tab 10: Head-to-Head Comparator (100% Dynamic from SSN Datasets)
-        function getEntityProfile(name) {
-            const data = window.INSURANCE_DATA || {};
-            const rankings = data.ssn_rankings || {};
-            const tm = (rankings['2_total_mercado']?.rows || rankings['2_total_mercado'] || []);
-            const auto = (rankings['5_auto_moto']?.rows || rankings['5_auto_moto'] || []);
-            const art = (rankings['6_art']?.rows || rankings['6_art'] || []);
-            const pat = (rankings['3_patrimoniales_total']?.rows || rankings['3_patrimoniales_total'] || []);
-            const per = (rankings['4_personas_total']?.rows || rankings['4_personas_total'] || []);
-            const vida = (rankings['11_vida']?.rows || rankings['11_vida'] || []);
-            const ret = (rankings['10_retiro']?.rows || rankings['10_retiro'] || []);
-            const grupos = (rankings['1_grupos']?.rows || rankings['1_grupos'] || []);
-
-            const cleanName = (name || '').trim().toLowerCase();
-
-            // 1. Check if it is a Consolidated Group
-            const g = grupos.find(x => (x.name || x.entidad || '').toLowerCase() === cleanName);
-            if (g) {
-                return {
-                    isGroup: true,
-                    name: g.name || g.entidad,
-                    rank: g.rank || g.posicion || '-',
-                    prima: g.prima_ars_m || g.prima || 0,
-                    share: g.share || g.participacion || 0,
-                    entities: g.entities || [],
-                    autoRank: '-',
-                    autoPrima: 0,
-                    artRank: '-',
-                    artPrima: 0,
-                    patRank: '-',
-                    perRank: '-'
-                };
-            }
-
-            // 2. Individual Entity
-            const tRow = tm.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
-            const aRow = auto.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
-            const artRow = art.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
-            const patRow = pat.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
-            const perRow = per.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
-            const vidaRow = vida.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
-            const retRow = ret.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
-
-            const isLaSegunda = cleanName.includes('segunda');
-
-            return {
-                isGroup: false,
-                name: tRow?.entidad || name,
-                rank: tRow?.rank || tRow?.posicion || '-',
-                prima: tRow?.prima_ars_m || tRow?.prima || 0,
-                share: tRow?.share || tRow?.participacion || 0,
-                autoRank: aRow ? ('#' + (aRow.rank || aRow.posicion) + ' Nacional') : (isLaSegunda ? '#7 Nacional' : 'No opera'),
-                autoPrima: aRow?.prima_ars_m || (isLaSegunda ? 452844 : 0),
-                autoShare: aRow?.share || (isLaSegunda ? 5.74 : 0),
-                artRank: artRow ? ('#' + (artRow.rank || artRow.posicion) + ' Nacional') : (isLaSegunda ? '#5 Nacional (ART)' : 'No opera'),
-                artPrima: artRow?.prima_ars_m || (isLaSegunda ? 402548 : 0),
-                artShare: artRow?.share || (isLaSegunda ? 8.68 : 0),
-                patRank: patRow ? ('#' + (patRow.rank || patRow.posicion)) : (isLaSegunda ? '#7' : '-'),
-                perRank: perRow ? ('#' + (perRow.rank || perRow.posicion)) : (vidaRow ? ('#' + (vidaRow.rank || vidaRow.posicion) + ' en Vida') : (isLaSegunda ? '#14' : '-'))
-            };
-        }
-
-        function renderComparatorDropdowns() {
-            const data = window.INSURANCE_DATA || {};
-            const rankings = data.ssn_rankings || {};
-            const tm = (rankings['2_total_mercado']?.rows || rankings['2_total_mercado'] || []);
-            const grupos = (rankings['1_grupos']?.rows || rankings['1_grupos'] || []);
-
-            const sel1 = document.getElementById('select-comp-1');
-            const sel2 = document.getElementById('select-comp-2');
-            if (!sel1 || !sel2 || sel1.options.length > 0) return;
-
-            sel1.innerHTML = '';
-            sel2.innerHTML = '';
-
-            // Group 1: Grupos Aseguradores
-            const grpOpt1 = document.createElement('optgroup');
-            grpOpt1.label = "--- GRUPOS ASEGURADORES ---";
-            const grpOpt2 = document.createElement('optgroup');
-            grpOpt2.label = "--- GRUPOS ASEGURADORES ---";
-
-            grupos.forEach(g => {
-                const gName = g.name || g.entidad;
-                grpOpt1.appendChild(new Option('Grupo: ' + gName, gName));
-                grpOpt2.appendChild(new Option('Grupo: ' + gName, gName));
-            });
-
-            // Group 2: Aseguradoras Individuales
-            const indOpt1 = document.createElement('optgroup');
-            indOpt1.label = "--- COMPAÑÍAS INDIVIDUALES ---";
-            const indOpt2 = document.createElement('optgroup');
-            indOpt2.label = "--- COMPAÑÍAS INDIVIDUALES ---";
-
-            tm.forEach(e => {
-                const name = (e.entidad || e.nombre || '').trim();
-                indOpt1.appendChild(new Option(name, name));
-                indOpt2.appendChild(new Option(name, name));
-            });
-
-            sel1.appendChild(grpOpt1);
-            sel1.appendChild(indOpt1);
-
-            sel2.appendChild(grpOpt2);
-            sel2.appendChild(indOpt2);
-
-            // Default selections: SANCOR vs FED. PATRONAL
-            sel1.value = "SANCOR";
-            sel2.value = "FED. PATRONAL";
-            if (!sel1.value && sel1.options.length > 0) sel1.selectedIndex = 0;
-            if (!sel2.value && sel2.options.length > 1) sel2.selectedIndex = 1;
-
-            updateComparator();
-        }
-
-        function updateComparator() {
-            const name1 = document.getElementById('select-comp-1')?.value || 'SANCOR';
-            const name2 = document.getElementById('select-comp-2')?.value || 'FED. PATRONAL';
-
-            const p1 = getEntityProfile(name1);
-            const p2 = getEntityProfile(name2);
-
-            const container = document.getElementById('comparator-cards-container');
-            if (!container) return;
-
-            function buildCard(p, themeColor, isLeft) {
-                const isLaSegunda = p.name.toUpperCase().includes('SEGUNDA');
-                const badgeColor = isLaSegunda ? 'bg-[#e20039]/15 text-[#e20039]' : (themeColor === 'brandRed' ? 'bg-[#e20039]/15 text-[#e20039]' : 'bg-[#4183ca]/15 text-[#4183ca]');
-                const rankText = (p.rank !== '-' && p.rank !== undefined) ? ('#' + p.rank + ' Nacional') : 'Participante';
-
-                let groupEntitiesHtml = '';
-                if (p.isGroup && p.entities && p.entities.length > 0) {
-                    const pills = p.entities.map(e => `<span class="inline-block px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">${e}</span>`).join(' ');
-                    groupEntitiesHtml = `
-                        <div class="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">
-                            <span class="text-[10px] uppercase font-bold txt-muted block mb-1">Empresas Consolidadas (${p.entities.length}):</span>
-                            <div class="flex flex-wrap gap-1">${pills}</div>
-                        </div>
-                    `;
-                }
-
-                return `
-                    <div class="subtle-card rounded-2xl p-6 relative overflow-hidden border ${isLaSegunda ? 'border-[#e20039]/40' : 'border-slate-200 dark:border-slate-800'}">
-                        <!-- Card Header -->
-                        <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl ${isLaSegunda ? 'brand-gradient text-white' : (themeColor === 'brandRed' ? 'bg-[#e20039]/10 text-[#e20039]' : 'bg-[#4183ca]/10 text-[#4183ca]')} flex items-center justify-center font-bold text-lg shadow-sm">
-                                    <i class="fas ${isLaSegunda ? 'fa-shield-halved' : (p.isGroup ? 'fa-layer-group' : 'fa-building')}"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-base txt-primary leading-tight">${p.name}</h3>
-                                    <span class="text-xs txt-muted font-mono">${p.isGroup ? 'Grupo Asegurador Consolidado' : 'Entidad Aseguradora Individual SSN'}</span>
-                                </div>
-                            </div>
-                            <span class="brand-badge ${badgeColor} font-mono font-bold">${rankText}</span>
-                        </div>
-
-                        ${groupEntitiesHtml}
-
-                        <!-- Metrics Grid -->
-                        <div class="space-y-3 font-mono text-xs mt-4">
-                            <div class="flex items-center justify-between p-3 rounded-xl main-card">
-                                <span class="txt-secondary font-sans font-medium">Primas Emitidas (9M):</span>
-                                <span class="font-bold text-base text-[#e20039] font-mono">${fmtARS(p.prima)} M</span>
-                            </div>
-
-                            <div class="flex items-center justify-between p-3 rounded-xl main-card">
-                                <span class="txt-secondary font-sans font-medium">Cuota de Mercado:</span>
-                                <div class="text-right">
-                                    <span class="font-bold text-sm txt-primary font-mono">${fmtPct(p.share).replace('+', '')}</span>
-                                    <div class="w-24 bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-1 ml-auto">
-                                        <div class="${themeColor === 'brandRed' ? 'bg-[#e20039]' : 'bg-[#4183ca]'} h-1.5 rounded-full" style="width: ${Math.min(100, p.share * 7)}%"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            ${!p.isGroup ? `
-                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
-                                <span class="txt-secondary font-sans font-medium">Ramo Automotores:</span>
-                                <div class="text-right">
-                                    <span class="font-bold ${p.autoRank.includes('#') ? 'text-[#3ac792]' : 'txt-muted'} font-mono">${p.autoRank}</span>
-                                    ${p.autoPrima > 0 ? `<span class="text-[10px] txt-muted block">(${fmtARS(p.autoPrima)} M &bull; ${fmtPct(p.autoShare).replace('+', '')})</span>` : ''}
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
-                                <span class="txt-secondary font-sans font-medium">Riesgos del Trabajo (ART):</span>
-                                <div class="text-right">
-                                    <span class="font-bold ${p.artRank.includes('#') ? 'text-[#4183ca]' : 'txt-muted'} font-mono">${p.artRank}</span>
-                                    ${p.artPrima > 0 ? `<span class="text-[10px] txt-muted block">(${fmtARS(p.artPrima)} M &bull; ${fmtPct(p.artShare).replace('+', '')})</span>` : ''}
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
-                                <span class="txt-secondary font-sans font-medium">Ranking Patrimoniales:</span>
-                                <span class="font-bold txt-primary font-mono">${p.patRank !== '-' ? '#' + p.patRank + ' Nacional' : 'No reporta'}</span>
-                            </div>
-
-                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
-                                <span class="txt-secondary font-sans font-medium">Seguros de Personas:</span>
-                                <span class="font-bold text-[#3ac792] font-mono">${p.perRank !== '-' ? '#' + p.perRank + ' Nacional' : 'No reporta'}</span>
-                            </div>
-                            ` : `
-                            <div class="p-3 rounded-xl main-card text-center text-xs txt-muted font-sans leading-relaxed">
-                                <i class="fas fa-info-circle text-[#4183ca] mr-1"></i> Producción consolidada de todas las empresas que integran el grupo asegurador en ramos patrimoniales, riesgos del trabajo, personas y retiro.
-                            </div>
-                            `}
-                        </div>
-                    </div>
-                `;
-            }
-
-            container.innerHTML = buildCard(p1, 'brandRed', true) + buildCard(p2, 'brandBlue', false);
-        }
-
-        function compareWithEntity(entidadName) {
-            switchTab('comparador');
-            const sel1 = document.getElementById('select-comp-1');
-            if (sel1) {
-                sel1.value = entidadName;
-                if (!sel1.value) {
-                    for (let i = 0; i < sel1.options.length; i++) {
-                        if (sel1.options[i].text.toLowerCase().includes(entidadName.toLowerCase())) {
-                            sel1.selectedIndex = i;
-                            break;
-                        }
-                    }
-                }
-                updateComparator();
-            }
-        }
-
-        function updateAllChartsTheme(isDark) {
-            const labelColor = isDark ? '#cbd5e1' : '#0f172a';
-            const gridColor = isDark ? '#1e293b' : '#e2e8f0';
-
-            Object.values(charts).forEach(c => {
-                if (c && c.options) {
-                    if (c.options.plugins?.legend?.labels) {
-                        c.options.plugins.legend.labels.color = labelColor;
-                    }
-                    if (c.options.scales?.x?.grid) c.options.scales.x.grid.color = gridColor;
-                    if (c.options.scales?.y?.grid) c.options.scales.y.grid.color = gridColor;
-                    if (c.options.scales?.x?.ticks) c.options.scales.x.ticks.color = labelColor;
-                    if (c.options.scales?.y?.ticks) c.options.scales.y.ticks.color = labelColor;
-                    c.update();
                 }
             });
         }
 
-        // DOM Initializer
-        document.addEventListener('DOMContentLoaded', () => {
-            initTheme();
-            initPrimasTab();
-            initLaSegundaTab();
-            initRetiroTab();
-            renderRankingsTable();
-            renderBalancesSubtabData();
-
-            const data = window.INSURANCE_DATA || {};
-            if (data.update_time_human) {
-                document.getElementById('footer-update-time').innerText = data.update_time_human;
-            }
-
-            setTimeout(renderPrimasCharts, 100);
-        });
-    </script>
-</body>
-</html>
+        
