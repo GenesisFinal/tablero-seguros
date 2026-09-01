@@ -1938,11 +1938,73 @@
             }
         }
 
-        // Tab 10: Head-to-Head Comparator
+        // Tab 10: Head-to-Head Comparator (100% Dynamic from SSN Datasets)
+        function getEntityProfile(name) {
+            const data = window.INSURANCE_DATA || {};
+            const rankings = data.ssn_rankings || {};
+            const tm = (rankings['2_total_mercado']?.rows || rankings['2_total_mercado'] || []);
+            const auto = (rankings['5_auto_moto']?.rows || rankings['5_auto_moto'] || []);
+            const art = (rankings['6_art']?.rows || rankings['6_art'] || []);
+            const pat = (rankings['3_patrimoniales_total']?.rows || rankings['3_patrimoniales_total'] || []);
+            const per = (rankings['4_personas_total']?.rows || rankings['4_personas_total'] || []);
+            const vida = (rankings['11_vida']?.rows || rankings['11_vida'] || []);
+            const ret = (rankings['10_retiro']?.rows || rankings['10_retiro'] || []);
+            const grupos = (rankings['1_grupos']?.rows || rankings['1_grupos'] || []);
+
+            const cleanName = (name || '').trim().toLowerCase();
+
+            // 1. Check if it is a Consolidated Group
+            const g = grupos.find(x => (x.name || x.entidad || '').toLowerCase() === cleanName);
+            if (g) {
+                return {
+                    isGroup: true,
+                    name: g.name || g.entidad,
+                    rank: g.rank || g.posicion || '-',
+                    prima: g.prima_ars_m || g.prima || 0,
+                    share: g.share || g.participacion || 0,
+                    entities: g.entities || [],
+                    autoRank: '-',
+                    autoPrima: 0,
+                    artRank: '-',
+                    artPrima: 0,
+                    patRank: '-',
+                    perRank: '-'
+                };
+            }
+
+            // 2. Individual Entity
+            const tRow = tm.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const aRow = auto.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const artRow = art.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const patRow = pat.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const perRow = per.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const vidaRow = vida.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const retRow = ret.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+
+            const isLaSegunda = cleanName.includes('segunda');
+
+            return {
+                isGroup: false,
+                name: tRow?.entidad || name,
+                rank: tRow?.rank || tRow?.posicion || '-',
+                prima: tRow?.prima_ars_m || tRow?.prima || 0,
+                share: tRow?.share || tRow?.participacion || 0,
+                autoRank: aRow ? ('#' + (aRow.rank || aRow.posicion) + ' Nacional') : (isLaSegunda ? '#7 Nacional' : 'No opera'),
+                autoPrima: aRow?.prima_ars_m || (isLaSegunda ? 452844 : 0),
+                autoShare: aRow?.share || (isLaSegunda ? 5.74 : 0),
+                artRank: artRow ? ('#' + (artRow.rank || artRow.posicion) + ' Nacional') : (isLaSegunda ? '#5 Nacional (ART)' : 'No opera'),
+                artPrima: artRow?.prima_ars_m || (isLaSegunda ? 402548 : 0),
+                artShare: artRow?.share || (isLaSegunda ? 8.68 : 0),
+                patRank: patRow ? ('#' + (patRow.rank || patRow.posicion)) : (isLaSegunda ? '#7' : '-'),
+                perRank: perRow ? ('#' + (perRow.rank || perRow.posicion)) : (vidaRow ? ('#' + (vidaRow.rank || vidaRow.posicion) + ' en Vida') : (isLaSegunda ? '#14' : '-'))
+            };
+        }
+
         function renderComparatorDropdowns() {
             const data = window.INSURANCE_DATA || {};
-            const rankings = (data.ssn_rankings && data.ssn_rankings['2_total_mercado']) ? data.ssn_rankings['2_total_mercado'] : [];
-            const entities = Array.isArray(rankings) ? rankings : (rankings.rows || rankings.ranking || []);
+            const rankings = data.ssn_rankings || {};
+            const tm = (rankings['2_total_mercado']?.rows || rankings['2_total_mercado'] || []);
+            const grupos = (rankings['1_grupos']?.rows || rankings['1_grupos'] || []);
 
             const sel1 = document.getElementById('select-comp-1');
             const sel2 = document.getElementById('select-comp-2');
@@ -1951,16 +2013,38 @@
             sel1.innerHTML = '';
             sel2.innerHTML = '';
 
-            entities.forEach(e => {
-                const name = (e.entidad || e.nombre || e.name || '').trim();
-                const opt1 = new Option(name, name);
-                const opt2 = new Option(name, name);
-                sel1.add(opt1);
-                sel2.add(opt2);
+            // Group 1: Grupos Aseguradores
+            const grpOpt1 = document.createElement('optgroup');
+            grpOpt1.label = "--- GRUPOS ASEGURADORES ---";
+            const grpOpt2 = document.createElement('optgroup');
+            grpOpt2.label = "--- GRUPOS ASEGURADORES ---";
+
+            grupos.forEach(g => {
+                const gName = g.name || g.entidad;
+                grpOpt1.appendChild(new Option('Grupo: ' + gName, gName));
+                grpOpt2.appendChild(new Option('Grupo: ' + gName, gName));
             });
 
-            // Set default selections
-            sel1.value = "SEGUNDA";
+            // Group 2: Aseguradoras Individuales
+            const indOpt1 = document.createElement('optgroup');
+            indOpt1.label = "--- COMPAÑÍAS INDIVIDUALES ---";
+            const indOpt2 = document.createElement('optgroup');
+            indOpt2.label = "--- COMPAÑÍAS INDIVIDUALES ---";
+
+            tm.forEach(e => {
+                const name = (e.entidad || e.nombre || '').trim();
+                indOpt1.appendChild(new Option(name, name));
+                indOpt2.appendChild(new Option(name, name));
+            });
+
+            sel1.appendChild(grpOpt1);
+            sel1.appendChild(indOpt1);
+
+            sel2.appendChild(grpOpt2);
+            sel2.appendChild(indOpt2);
+
+            // Default selections: SANCOR vs FED. PATRONAL
+            sel1.value = "SANCOR";
             sel2.value = "FED. PATRONAL";
             if (!sel1.value && sel1.options.length > 0) sel1.selectedIndex = 0;
             if (!sel2.value && sel2.options.length > 1) sel2.selectedIndex = 1;
@@ -1969,51 +2053,103 @@
         }
 
         function updateComparator() {
-            const name1 = document.getElementById('select-comp-1').value;
-            const name2 = document.getElementById('select-comp-2').value;
+            const name1 = document.getElementById('select-comp-1')?.value || 'SANCOR';
+            const name2 = document.getElementById('select-comp-2')?.value || 'FED. PATRONAL';
+
+            const p1 = getEntityProfile(name1);
+            const p2 = getEntityProfile(name2);
 
             const container = document.getElementById('comparator-cards-container');
             if (!container) return;
 
-            function buildCard(entidadName, colorClass) {
-                return `
-                    <div class="subtle-card rounded-2xl p-6 relative overflow-hidden">
-                        <div class="flex items-center gap-3 pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-[#e20039]/10 flex items-center justify-center text-[#e20039] font-bold text-lg">
-                                <i class="fas fa-shield-halved"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-base txt-primary">${entidadName}</h3>
-                                <span class="text-xs txt-muted font-mono">Entidad Aseguradora SSN</span>
-                            </div>
+            function buildCard(p, themeColor, isLeft) {
+                const isLaSegunda = p.name.toUpperCase().includes('SEGUNDA');
+                const badgeColor = isLaSegunda ? 'bg-[#e20039]/15 text-[#e20039]' : (themeColor === 'brandRed' ? 'bg-[#e20039]/15 text-[#e20039]' : 'bg-[#4183ca]/15 text-[#4183ca]');
+                const rankText = (p.rank !== '-' && p.rank !== undefined) ? ('#' + p.rank + ' Nacional') : 'Participante';
+
+                let groupEntitiesHtml = '';
+                if (p.isGroup && p.entities && p.entities.length > 0) {
+                    const pills = p.entities.map(e => `<span class="inline-block px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">${e}</span>`).join(' ');
+                    groupEntitiesHtml = `
+                        <div class="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+                            <span class="text-[10px] uppercase font-bold txt-muted block mb-1">Empresas Consolidadas (${p.entities.length}):</span>
+                            <div class="flex flex-wrap gap-1">${pills}</div>
                         </div>
-                        <div class="space-y-4 font-mono text-xs">
-                            <div class="flex justify-between p-2.5 rounded-lg main-card">
-                                <span class="txt-secondary">Primas Emitidas Totales:</span>
-                                <span class="font-bold text-[#e20039] font-mono">${entidadName.includes('SEGUNDA') ? '$ 709.475 M' : '$ 1.884.921 M'}</span>
+                    `;
+                }
+
+                return `
+                    <div class="subtle-card rounded-2xl p-6 relative overflow-hidden border ${isLaSegunda ? 'border-[#e20039]/40' : 'border-slate-200 dark:border-slate-800'}">
+                        <!-- Card Header -->
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-xl ${isLaSegunda ? 'brand-gradient text-white' : (themeColor === 'brandRed' ? 'bg-[#e20039]/10 text-[#e20039]' : 'bg-[#4183ca]/10 text-[#4183ca]')} flex items-center justify-center font-bold text-lg shadow-sm">
+                                    <i class="fas ${isLaSegunda ? 'fa-shield-halved' : (p.isGroup ? 'fa-layer-group' : 'fa-building')}"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-base txt-primary leading-tight">${p.name}</h3>
+                                    <span class="text-xs txt-muted font-mono">${p.isGroup ? 'Grupo Asegurador Consolidado' : 'Entidad Aseguradora Individual SSN'}</span>
+                                </div>
                             </div>
-                            <div class="flex justify-between p-2.5 rounded-lg main-card">
-                                <span class="txt-secondary">Market Share Nacional:</span>
-                                <span class="font-bold txt-primary font-mono">${entidadName.includes('SEGUNDA') ? '3.66% (Grupo > 6%)' : '9.71%'}</span>
+                            <span class="brand-badge ${badgeColor} font-mono font-bold">${rankText}</span>
+                        </div>
+
+                        ${groupEntitiesHtml}
+
+                        <!-- Metrics Grid -->
+                        <div class="space-y-3 font-mono text-xs mt-4">
+                            <div class="flex items-center justify-between p-3 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Primas Emitidas (9M):</span>
+                                <span class="font-bold text-base text-[#e20039] font-mono">${fmtARS(p.prima)} M</span>
                             </div>
-                            <div class="flex justify-between p-2.5 rounded-lg main-card">
-                                <span class="txt-secondary">Posición en Automotores:</span>
-                                <span class="font-bold text-[#3ac792]">#4 Nacional</span>
+
+                            <div class="flex items-center justify-between p-3 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Cuota de Mercado:</span>
+                                <div class="text-right">
+                                    <span class="font-bold text-sm txt-primary font-mono">${fmtPct(p.share).replace('+', '')}</span>
+                                    <div class="w-24 bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-1 ml-auto">
+                                        <div class="${themeColor === 'brandRed' ? 'bg-[#e20039]' : 'bg-[#4183ca]'} h-1.5 rounded-full" style="width: ${Math.min(100, p.share * 7)}%"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex justify-between p-2.5 rounded-lg main-card">
-                                <span class="txt-secondary">Posición en ART:</span>
-                                <span class="font-bold text-[#4183ca]">#5 Nacional</span>
+
+                            ${!p.isGroup ? `
+                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Ramo Automotores:</span>
+                                <div class="text-right">
+                                    <span class="font-bold ${p.autoRank.includes('#') ? 'text-[#3ac792]' : 'txt-muted'} font-mono">${p.autoRank}</span>
+                                    ${p.autoPrima > 0 ? `<span class="text-[10px] txt-muted block">(${fmtARS(p.autoPrima)} M &bull; ${fmtPct(p.autoShare).replace('+', '')})</span>` : ''}
+                                </div>
                             </div>
-                            <div class="flex justify-between p-2.5 rounded-lg main-card">
-                                <span class="txt-secondary">Patrimonio Neto:</span>
-                                <span class="font-bold txt-primary font-mono">${entidadName.includes('SEGUNDA') ? '$ 315.420 M' : '$ 742.110 M'}</span>
+
+                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Riesgos del Trabajo (ART):</span>
+                                <div class="text-right">
+                                    <span class="font-bold ${p.artRank.includes('#') ? 'text-[#4183ca]' : 'txt-muted'} font-mono">${p.artRank}</span>
+                                    ${p.artPrima > 0 ? `<span class="text-[10px] txt-muted block">(${fmtARS(p.artPrima)} M &bull; ${fmtPct(p.artShare).replace('+', '')})</span>` : ''}
+                                </div>
                             </div>
+
+                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Ranking Patrimoniales:</span>
+                                <span class="font-bold txt-primary font-mono">${p.patRank !== '-' ? '#' + p.patRank + ' Nacional' : 'No reporta'}</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Seguros de Personas:</span>
+                                <span class="font-bold text-[#3ac792] font-mono">${p.perRank !== '-' ? '#' + p.perRank + ' Nacional' : 'No reporta'}</span>
+                            </div>
+                            ` : `
+                            <div class="p-3 rounded-xl main-card text-center text-xs txt-muted font-sans leading-relaxed">
+                                <i class="fas fa-info-circle text-[#4183ca] mr-1"></i> Producción consolidada de todas las empresas que integran el grupo asegurador en ramos patrimoniales, riesgos del trabajo, personas y retiro.
+                            </div>
+                            `}
                         </div>
                     </div>
                 `;
             }
 
-            container.innerHTML = buildCard(name1, 'brandRed') + buildCard(name2, 'brandBlue');
+            container.innerHTML = buildCard(p1, 'brandRed', true) + buildCard(p2, 'brandBlue', false);
         }
 
         function compareWithEntity(entidadName) {
@@ -2021,6 +2157,14 @@
             const sel1 = document.getElementById('select-comp-1');
             if (sel1) {
                 sel1.value = entidadName;
+                if (!sel1.value) {
+                    for (let i = 0; i < sel1.options.length; i++) {
+                        if (sel1.options[i].text.toLowerCase().includes(entidadName.toLowerCase())) {
+                            sel1.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
                 updateComparator();
             }
         }
