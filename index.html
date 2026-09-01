@@ -2547,6 +2547,21 @@
             // Sort descending by calculated total
             calculatedList.sort((a, b) => b.total - a.total);
 
+            // Assign true market rank
+            calculatedList.forEach((r, idx) => {
+                r.true_rank = idx + 1;
+            });
+
+            // Top 10 + La Segunda Rule (If not in Top 10, append as row 11 with true rank)
+            const top10 = calculatedList.slice(0, 10);
+            const isLsInTop10 = top10.some(r => r.entidad.toUpperCase().includes('SEGUNDA'));
+            const lsItem = calculatedList.find(r => r.entidad.toUpperCase().includes('SEGUNDA'));
+
+            const displayList = top10.slice();
+            if (!isLsInTop10 && lsItem) {
+                displayList.push(lsItem);
+            }
+
             // Update Total Badge
             const totalBadge = document.getElementById('sp-primas-total-badge');
             if (totalBadge) {
@@ -2554,20 +2569,26 @@
             }
 
             let htmlRows = '';
-            calculatedList.forEach((r, idx) => {
+            displayList.forEach((r, idx) => {
                 const isLaSegunda = r.entidad.toUpperCase().includes('SEGUNDA');
-                const rowClass = isLaSegunda ? 'bg-[#fee2e2]/40 dark:bg-[#e20039]/15 font-bold' : 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition';
+                const isExtraRow = idx >= 10;
+                const rowClass = isLaSegunda 
+                    ? (isExtraRow ? 'bg-[#fee2e2]/60 dark:bg-[#e20039]/20 border-t-2 border-[#e20039] font-bold' : 'bg-[#fee2e2]/40 dark:bg-[#e20039]/15 font-bold') 
+                    : 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition';
                 const sharePct = totalMarketSum > 0 ? (r.total / totalMarketSum) * 100 : 0;
                 const primaM = r.total / 1000000.0;
 
                 htmlRows += `
                     <tr class="${rowClass}">
                         <td class="py-2.5 px-3 text-center">
-                            <span class="brand-badge ${idx < 3 ? 'bg-[#f8cc59]/25 text-[#b91f38] dark:text-[#f8cc59]' : 'bg-slate-100 dark:bg-slate-800 txt-muted'} font-mono font-bold">#${idx + 1}</span>
+                            <span class="brand-badge ${r.true_rank <= 3 ? 'bg-[#f8cc59]/25 text-[#b91f38] dark:text-[#f8cc59]' : (isLaSegunda ? 'bg-[#e20039] text-white' : 'bg-slate-100 dark:bg-slate-800 txt-muted')} font-mono font-bold">#${r.true_rank}</span>
                         </td>
-                        <td class="py-2.5 px-3 font-sans font-semibold txt-primary flex items-center gap-2">
-                            ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : '<i class="fas fa-building text-slate-400"></i>'}
-                            ${r.entidad}
+                        <td class="py-2.5 px-3 font-sans font-semibold txt-primary flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : '<i class="fas fa-building text-slate-400"></i>'}
+                                <span>${r.entidad}</span>
+                            </div>
+                            ${isExtraRow ? '<span class="text-[10px] text-[#e20039] font-bold font-mono uppercase bg-[#e20039]/10 px-2 py-0.5 rounded">Grupo La Segunda (Posición Real)</span>' : ''}
                         </td>
                         <td class="py-2.5 px-3 text-right font-bold text-[#e20039] font-mono">${fmtARS(primaM)} M</td>
                         <td class="py-2.5 px-3 text-right font-bold txt-primary font-mono">${sharePct.toFixed(2)}%</td>
@@ -2577,13 +2598,13 @@
 
             tbody.innerHTML = htmlRows;
 
-            // Render Dynamic Top 10 Chart
+            // Render Dynamic Chart for Top 10 (+ La Segunda if applicable)
             setTimeout(() => {
-                renderSpTop10Chart(calculatedList);
+                renderSpTop10Chart(displayList);
             }, 50);
         }
 
-        function renderSpTop10Chart(calculatedList) {
+        function renderSpTop10Chart(displayList) {
             const canvas = document.getElementById('chart-sp-primas-ramos');
             if (!canvas || !window.Chart) return;
             const ctx = canvas.getContext('2d');
@@ -2596,13 +2617,15 @@
                 chartSpPrimasRamos = null;
             }
 
-            const top10 = (calculatedList || []).slice(0, 10);
-            if (top10.length === 0) return;
+            if (!displayList || displayList.length === 0) return;
 
-            const labels = top10.map(r => r.entidad.replace(' SEGUROS DE PERSONAS', '').replace(' SEGUROS', '').replace(' PERSONAS', '').replace(' CIA DE SEGUROS', ''));
-            const dataVals = top10.map(r => Number((r.total / 1000000.0).toFixed(2)));
+            const labels = displayList.map(r => {
+                let clean = r.entidad.replace(' SEGUROS DE PERSONAS', '').replace(' SEGUROS', '').replace(' PERSONAS', '').replace(' CIA DE SEGUROS', '');
+                return '#' + r.true_rank + ' ' + clean;
+            });
+            const dataVals = displayList.map(r => Number((r.total / 1000000.0).toFixed(2)));
 
-            const bgColors = top10.map(r => r.entidad.toUpperCase().includes('SEGUNDA') ? '#e20039' : '#3ac792');
+            const bgColors = displayList.map(r => r.entidad.toUpperCase().includes('SEGUNDA') ? '#e20039' : '#3ac792');
 
             chartSpPrimasRamos = new Chart(ctx, {
                 type: 'bar',
