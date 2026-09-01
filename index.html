@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,117 +17,152 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <style>
-        :root {
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --bg-card-subtle: #f1f5f9;
-            --bg-header: rgba(255, 255, 255, 0.96);
-            --border-primary: #e2e8f0;
-            --border-strong: #cbd5e1;
-            --text-primary: #090d16;
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-            --table-header-bg: #f1f5f9;
-            --table-header-text: #090d16;
-            --table-row-hover: #f8fafc;
-            --table-border: #e2e8f0;
-            --input-bg: #ffffff;
-            --input-text: #090d16;
-            --input-border: #cbd5e1;
-            --brand-red: #e20039;
-            --brand-red-dark: #b91f38;
-            --badge-bg: #fee2e2;
-            --badge-text: #b91f38;
-            --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Sora', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brandRed: '#e20039',
+                        brandRedDark: '#b91f38',
+                        brandBlue: '#4183ca',
+                        brandGreen: '#3ac792',
+                        brandGold: '#f8cc59',
+                        brandCoral: '#ff593e',
+                    }
+                }
+            }
         }
+    </script>
 
-        html.dark {
-            --bg-body: #090d16;
-            --bg-card: #111726;
-            --bg-card-subtle: #161f33;
-            --bg-header: rgba(17, 23, 38, 0.96);
-            --border-primary: #1e293b;
-            --border-strong: #334155;
-            --text-primary: #ffffff;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --table-header-bg: #0d121f;
-            --table-header-text: #94a3b8;
-            --table-row-hover: #161f33;
-            --table-border: #1e293b;
-            --input-bg: #090d16;
-            --input-text: #ffffff;
-            --input-border: #1e293b;
-            --brand-red: #e20039;
-            --brand-red-dark: #b91f38;
-            --badge-bg: rgba(226, 0, 57, 0.15);
-            --badge-text: #ff4c60;
-            --shadow-card: none;
+    <style>
+        /* BASE & LIGHT MODE (DEFAULT) */
+        * {
+            box-sizing: border-box;
+            font-family: 'Sora', sans-serif;
         }
 
         body {
-            font-family: 'Sora', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-primary);
+            background-color: #f8fafc;
+            color: #0f172a;
             transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        /* Custom Theme Utility Classes */
-        .theme-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-primary);
-            box-shadow: var(--shadow-card);
+        .main-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
         }
 
-        .theme-card-subtle {
-            background-color: var(--bg-card-subtle);
-            border: 1px solid var(--border-primary);
+        .subtle-card {
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
         }
 
-        .theme-header {
-            background-color: var(--bg-header);
-            border-bottom: 1px solid var(--border-primary);
+        .header-bar {
+            background-color: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .theme-text-primary {
-            color: var(--text-primary) !important;
-        }
+        .txt-primary { color: #0f172a !important; }
+        .txt-secondary { color: #334155 !important; }
+        .txt-muted { color: #64748b !important; }
 
-        .theme-text-secondary {
-            color: var(--text-secondary) !important;
+        .ui-input {
+            background-color: #ffffff;
+            color: #0f172a;
+            border: 1px solid #cbd5e1;
         }
-
-        .theme-text-muted {
-            color: var(--text-muted) !important;
-        }
-
-        .theme-input {
-            background-color: var(--input-bg);
-            color: var(--input-text);
-            border: 1px solid var(--input-border);
-        }
-        .theme-input:focus {
-            border-color: var(--brand-red);
+        .ui-input:focus {
+            border-color: #e20039;
             outline: none;
+            box-shadow: 0 0 0 2px rgba(226, 0, 57, 0.15);
         }
 
-        .theme-table th {
-            background-color: var(--table-header-bg) !important;
-            color: var(--table-header-text) !important;
-            border-bottom: 1px solid var(--table-border) !important;
+        .data-table th {
+            background-color: #f1f5f9 !important;
+            color: #1e293b !important;
+            border-bottom: 2px solid #e2e8f0 !important;
+            font-weight: 700 !important;
         }
 
-        .theme-table td {
-            color: var(--text-primary) !important;
-            border-bottom: 1px solid var(--table-border) !important;
+        .data-table td {
+            color: #0f172a !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            background-color: #ffffff;
         }
 
-        .theme-table tr:hover td {
-            background-color: var(--table-row-hover) !important;
+        .data-table tr:hover td {
+            background-color: #f8fafc !important;
         }
 
-        /* Brand Colors & Gradients */
+        .highlight-lasegunda td {
+            background-color: #fff1f2 !important;
+        }
+        .highlight-lasegunda td:first-child {
+            border-left: 3px solid #e20039 !important;
+        }
+
+        /* DARK MODE OVERRIDES */
+        html.dark body {
+            background-color: #090d16;
+            color: #f8fafc;
+        }
+
+        html.dark .main-card {
+            background-color: #111726;
+            border-color: #1e293b;
+            box-shadow: none;
+        }
+
+        html.dark .subtle-card {
+            background-color: #161f33;
+            border-color: #1e293b;
+        }
+
+        html.dark .header-bar {
+            background-color: rgba(17, 23, 38, 0.96);
+            border-bottom-color: #1e293b;
+        }
+
+        html.dark .txt-primary { color: #ffffff !important; }
+        html.dark .txt-secondary { color: #cbd5e1 !important; }
+        html.dark .txt-muted { color: #94a3b8 !important; }
+
+        html.dark .ui-input {
+            background-color: #090d16;
+            color: #ffffff;
+            border-color: #1e293b;
+        }
+
+        html.dark .data-table th {
+            background-color: #0d121f !important;
+            color: #cbd5e1 !important;
+            border-bottom-color: #1e293b !important;
+        }
+
+        html.dark .data-table td {
+            color: #f8fafc !important;
+            border-bottom-color: #1e293b !important;
+            background-color: #111726;
+        }
+
+        html.dark .data-table tr:hover td {
+            background-color: #161f33 !important;
+        }
+
+        html.dark .highlight-lasegunda td {
+            background-color: rgba(226, 0, 57, 0.12) !important;
+        }
+        html.dark .highlight-lasegunda td:first-child {
+            border-left: 3px solid #e20039 !important;
+        }
+
+        /* Brand Colors & Utilities */
         .brand-gradient {
             background: linear-gradient(135deg, #e20039 0%, #b91f38 100%);
         }
@@ -142,29 +177,12 @@
             font-weight: 600;
         }
 
-        .badge-red {
-            background-color: var(--badge-bg);
-            color: var(--badge-text);
-        }
-
-        .highlight-lasegunda {
-            background-color: rgba(226, 0, 57, 0.08) !important;
-            border-left: 3px solid #e20039 !important;
-        }
-
-        html:not(.dark) .highlight-lasegunda {
-            background-color: #fff1f2 !important;
-            border-left: 3px solid #e20039 !important;
-        }
-
-        /* Sticky Header */
         .sticky-header th {
             position: sticky;
             top: 0;
             z-index: 10;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -184,7 +202,7 @@
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#e20039] selection:text-white">
 
     <!-- TOP HEADER -->
-    <header class="sticky top-0 z-50 theme-header backdrop-blur">
+    <header class="sticky top-0 z-50 header-bar backdrop-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 gap-4">
                 
@@ -195,30 +213,30 @@
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <h1 class="font-bold text-lg leading-tight tracking-tight theme-text-primary">
+                            <h1 class="font-bold text-lg leading-tight tracking-tight txt-primary">
                                 Tablero de Seguros
                             </h1>
-                            <span class="brand-badge badge-red font-mono">SSN 2025/2026</span>
+                            <span class="brand-badge bg-[#fee2e2] text-[#b91f38] dark:bg-[#e20039]/20 dark:text-[#ff4c60] font-mono">SSN 2025/2026</span>
                         </div>
-                        <p class="text-xs theme-text-muted">Superintendencia de Seguros de la Nación &bull; Argentina</p>
+                        <p class="text-xs txt-muted">Superintendencia de Seguros de la Nación &bull; Argentina</p>
                     </div>
                 </div>
 
                 <!-- Controls & Actions -->
                 <div class="flex items-center gap-3">
                     <!-- Period Badge -->
-                    <div class="hidden md:flex items-center gap-2 theme-card-subtle px-3 py-1.5 rounded-lg text-xs font-mono theme-text-secondary">
+                    <div class="hidden md:flex items-center gap-2 subtle-card px-3 py-1.5 rounded-lg text-xs font-mono txt-secondary">
                         <i class="far fa-calendar-check text-[#3ac792]"></i>
                         <span id="header-period-label">31-03-2026 (9 Meses)</span>
                     </div>
 
                     <!-- Theme Switcher -->
-                    <button onclick="toggleTheme()" id="btn-theme-toggle" class="p-2 rounded-lg theme-card hover:border-[#e20039] theme-text-secondary hover:text-[#e20039] transition-all" title="Cambiar Tema (Claro / Oscuro)">
+                    <button onclick="toggleTheme()" id="btn-theme-toggle" class="p-2 rounded-lg main-card hover:border-[#e20039] txt-secondary hover:text-[#e20039] transition-all" title="Cambiar Tema (Claro / Oscuro)">
                         <i id="theme-icon" class="fas fa-moon text-base"></i>
                     </button>
 
                     <!-- Export Report -->
-                    <button onclick="window.print()" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold theme-card hover:border-[#e20039] theme-text-secondary hover:text-[#e20039] transition-all" title="Exportar / Imprimir PDF">
+                    <button onclick="window.print()" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold main-card hover:border-[#e20039] txt-secondary hover:text-[#e20039] transition-all" title="Exportar / Imprimir PDF">
                         <i class="fas fa-file-pdf text-[#e20039]"></i>
                         <span>Exportar</span>
                     </button>
@@ -226,35 +244,35 @@
             </div>
 
             <!-- TABS NAVIGATION -->
-            <nav class="flex space-x-1 overflow-x-auto py-2 scrollbar-none border-t" style="border-color: var(--border-primary);">
+            <nav class="flex space-x-1 overflow-x-auto py-2 scrollbar-none border-t border-slate-200 dark:border-slate-800">
                 <button onclick="switchTab('primas')" id="tab-btn-primas" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 bg-[#e20039] text-white shadow-sm">
                     <i class="fas fa-chart-pie"></i> Primas Mercado
                 </button>
-                <button onclick="switchTab('mensual')" id="tab-btn-mensual" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('mensual')" id="tab-btn-mensual" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-chart-line"></i> Evolución Mensual
                 </button>
-                <button onclick="switchTab('rankings')" id="tab-btn-rankings" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('rankings')" id="tab-btn-rankings" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-trophy"></i> Rankings SSN (12)
                 </button>
-                <button onclick="switchTab('balances')" id="tab-btn-balances" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('balances')" id="tab-btn-balances" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-scale-balanced"></i> Balances & Contabilidad
                 </button>
-                <button onclick="switchTab('lasegunda')" id="tab-btn-lasegunda" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('lasegunda')" id="tab-btn-lasegunda" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-building"></i> Grupo La Segunda
                 </button>
-                <button onclick="switchTab('personas')" id="tab-btn-personas" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('personas')" id="tab-btn-personas" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-user-shield"></i> Seguros Personas
                 </button>
-                <button onclick="switchTab('retiro')" id="tab-btn-retiro" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('retiro')" id="tab-btn-retiro" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-piggy-bank"></i> Seguros Retiro
                 </button>
-                <button onclick="switchTab('inversiones')" id="tab-btn-inversiones" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('inversiones')" id="tab-btn-inversiones" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-coins text-[#f8cc59]"></i> Inversiones SSN
                 </button>
-                <button onclick="switchTab('ratios')" id="tab-btn-ratios" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('ratios')" id="tab-btn-ratios" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-gauge-high text-[#3ac792]"></i> Solvencia & Ratios
                 </button>
-                <button onclick="switchTab('comparador')" id="tab-btn-comparador" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 theme-text-muted hover:text-[#e20039]">
+                <button onclick="switchTab('comparador')" id="tab-btn-comparador" class="nav-tab px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 txt-muted hover:text-[#e20039]">
                     <i class="fas fa-arrows-split-up-and-left text-[#4183ca]"></i> Comparador Cara a Cara
                 </button>
             </nav>
@@ -270,23 +288,23 @@
         <section id="tab-primas" class="tab-content space-y-6">
             
             <!-- Summary Banner -->
-            <div class="theme-card rounded-2xl p-6 relative overflow-hidden">
+            <div class="main-card rounded-2xl p-6 relative overflow-hidden">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-[#e20039] text-white uppercase">Información Oficial SSN</span>
-                            <span class="text-xs theme-text-muted font-mono" id="primas-period-desc">Ejercicio 2025/2026 &bull; Acumulado 9 Meses (al 31-03-2026)</span>
+                            <span class="text-xs txt-muted font-mono" id="primas-period-desc">Ejercicio 2025/2026 &bull; Acumulado 9 Meses (al 31-03-2026)</span>
                         </div>
-                        <h2 class="text-2xl font-extrabold tracking-tight theme-text-primary">
+                        <h2 class="text-2xl font-extrabold tracking-tight txt-primary">
                             Producción Total del Mercado Asegurador
                         </h2>
-                        <p class="text-sm theme-text-secondary max-w-2xl mt-1">
+                        <p class="text-sm txt-secondary max-w-2xl mt-1">
                             Primas emitidas directas y reaseguro activo correspondientes a entidades aseguradoras autorizadas por la Superintendencia de Seguros de la Nación.
                         </p>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <div class="theme-card-subtle px-4 py-2.5 rounded-xl text-right">
-                            <div class="text-[11px] uppercase tracking-wider theme-text-muted font-semibold">Total Primas (9M)</div>
+                        <div class="subtle-card px-4 py-2.5 rounded-xl text-right">
+                            <div class="text-[11px] uppercase tracking-wider txt-muted font-semibold">Total Primas (9M)</div>
                             <div class="text-xl font-bold font-mono text-[#e20039]" id="kpi-total-primas">$ 19.41 Billones</div>
                             <div class="text-[11px] text-[#3ac792] font-mono font-bold" id="kpi-total-var">+132.8% a/a nom.</div>
                         </div>
@@ -297,52 +315,52 @@
             <!-- KPI Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <!-- Card Total Mercado -->
-                <div class="theme-card rounded-2xl p-5 relative overflow-hidden">
+                <div class="main-card rounded-2xl p-5 relative overflow-hidden">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider theme-text-muted">Total del Mercado</span>
+                        <span class="text-xs font-bold uppercase tracking-wider txt-muted">Total del Mercado</span>
                         <div class="w-8 h-8 rounded-lg bg-[#e20039]/10 flex items-center justify-center text-[#e20039]">
                             <i class="fas fa-globe"></i>
                         </div>
                     </div>
                     <div class="mt-3">
-                        <div class="text-2xl font-bold font-mono theme-text-primary" id="kpi-card-tot-monto">$ 19.414.938 M</div>
-                        <div class="flex items-center justify-between text-xs mt-2 theme-text-secondary">
-                            <span>Cuota: <strong class="theme-text-primary font-mono font-bold">100.0%</strong></span>
+                        <div class="text-2xl font-bold font-mono txt-primary" id="kpi-card-tot-monto">$ 19.414.938 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 txt-secondary">
+                            <span>Cuota: <strong class="txt-primary font-mono font-bold">100.0%</strong></span>
                             <span class="text-[#3ac792] font-mono font-bold" id="kpi-card-tot-var">+132.8% i.a.</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card Patrimoniales & ART -->
-                <div class="theme-card rounded-2xl p-5 relative overflow-hidden">
+                <div class="main-card rounded-2xl p-5 relative overflow-hidden">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider theme-text-muted">Seguros Patrimoniales & ART</span>
+                        <span class="text-xs font-bold uppercase tracking-wider txt-muted">Seguros Patrimoniales & ART</span>
                         <div class="w-8 h-8 rounded-lg bg-[#4183ca]/10 flex items-center justify-center text-[#4183ca]">
                             <i class="fas fa-car-crash"></i>
                         </div>
                     </div>
                     <div class="mt-3">
-                        <div class="text-2xl font-bold font-mono text-[#4183ca]" id="kpi-card-pat-monto">$ 16.516.480 M</div>
-                        <div class="flex items-center justify-between text-xs mt-2 theme-text-secondary">
-                            <span>Cuota: <strong class="theme-text-primary font-mono font-bold" id="kpi-card-pat-share">85.1%</strong></span>
-                            <span class="text-[#3ac792] font-mono font-bold" id="kpi-card-pat-var">+135.2% i.a.</span>
+                        <div class="text-2xl font-bold font-mono text-[#4183ca]" id="kpi-card-pat-monto">$ 16.815.480 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 txt-secondary">
+                            <span>Cuota: <strong class="txt-primary font-mono font-bold" id="kpi-card-pat-share">86.6%</strong></span>
+                            <span class="text-[#3ac792] font-mono font-bold" id="kpi-card-pat-var">+42.9% i.a.</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card Personas -->
-                <div class="theme-card rounded-2xl p-5 relative overflow-hidden">
+                <div class="main-card rounded-2xl p-5 relative overflow-hidden">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider theme-text-muted">Seguros de Personas</span>
+                        <span class="text-xs font-bold uppercase tracking-wider txt-muted">Seguros de Personas</span>
                         <div class="w-8 h-8 rounded-lg bg-[#3ac792]/10 flex items-center justify-center text-[#3ac792]">
                             <i class="fas fa-heart-pulse"></i>
                         </div>
                     </div>
                     <div class="mt-3">
-                        <div class="text-2xl font-bold font-mono text-[#3ac792]" id="kpi-card-per-monto">$ 2.898.457 M</div>
-                        <div class="flex items-center justify-between text-xs mt-2 theme-text-secondary">
-                            <span>Cuota: <strong class="theme-text-primary font-mono font-bold" id="kpi-card-per-share">14.9%</strong></span>
-                            <span class="text-[#3ac792] font-mono font-bold" id="kpi-card-per-var">+119.8% i.a.</span>
+                        <div class="text-2xl font-bold font-mono text-[#3ac792]" id="kpi-card-per-monto">$ 2.594.120 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 txt-secondary">
+                            <span>Cuota: <strong class="txt-primary font-mono font-bold" id="kpi-card-per-share">13.4%</strong></span>
+                            <span class="text-[#3ac792] font-mono font-bold" id="kpi-card-per-var">+49.9% i.a.</span>
                         </div>
                     </div>
                 </div>
@@ -351,37 +369,37 @@
             <!-- Charts & Breakdown Table -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Doughnut Chart -->
-                <div class="theme-card rounded-2xl p-5 flex flex-col justify-between">
+                <div class="main-card rounded-2xl p-5 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-bold text-sm theme-text-primary flex items-center gap-2">
+                        <h3 class="font-bold text-sm txt-primary flex items-center gap-2">
                             <i class="fas fa-chart-pie text-[#e20039]"></i> Distribución por Segmento
                         </h3>
                     </div>
                     <div class="relative h-64 flex items-center justify-center">
                         <canvas id="chart-primas-doughnut"></canvas>
                     </div>
-                    <div class="text-center text-xs theme-text-muted mt-2 font-mono">
+                    <div class="text-center text-xs txt-muted mt-2 font-mono">
                         Base: Acumulado 9 Meses SSN
                     </div>
                 </div>
 
                 <!-- Main Primas Table -->
-                <div class="lg:col-span-2 theme-card rounded-2xl p-5 overflow-hidden flex flex-col">
+                <div class="lg:col-span-2 main-card rounded-2xl p-5 overflow-hidden flex flex-col">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-bold text-sm theme-text-primary flex items-center gap-2">
+                        <h3 class="font-bold text-sm txt-primary flex items-center gap-2">
                             <i class="fas fa-table-list text-[#e20039]"></i> Desglose Detallado por Ramos
                         </h3>
-                        <span class="text-xs theme-text-muted font-mono">Montos en Millones de $</span>
+                        <span class="text-xs txt-muted font-mono">Montos en Millones de $</span>
                     </div>
                     <div class="overflow-x-auto flex-1 max-h-[380px] overflow-y-auto">
-                        <table class="w-full text-left text-xs theme-table">
+                        <table class="w-full text-left text-xs data-table">
                             <thead class="uppercase text-[10px] sticky-header font-mono">
                                 <tr>
                                     <th class="py-2.5 px-3">Ramo / Agrupación</th>
                                     <th class="py-2.5 px-3 text-right">Marzo 2026 ($M)</th>
                                     <th class="py-2.5 px-3 text-right">Marzo 2025 ($M)</th>
                                     <th class="py-2.5 px-3 text-right">Part. %</th>
-                                    <th class="py-2.5 px-3 text-right">Var. % i.a.</th>
+                                    <th class="py-2.5 px-3 text-right">Var. % Nom.</th>
                                 </tr>
                             </thead>
                             <tbody id="tbl-primas-ramos-body" class="font-mono">
@@ -397,28 +415,28 @@
         <!-- TAB 2: EVOLUCIÓN MENSUAL                                            -->
         <!-- ==================================================================== -->
         <section id="tab-mensual" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
+            <div class="main-card rounded-2xl p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="brand-badge bg-[#4183ca]/15 text-[#4183ca]">Series Históricas Mensuales</span>
-                            <span class="text-xs theme-text-muted font-mono" id="mensual-latest-date">Julio 2026</span>
+                            <span class="text-xs txt-muted font-mono" id="mensual-latest-date">Julio 2026</span>
                         </div>
-                        <h2 class="text-xl font-bold theme-text-primary">
+                        <h2 class="text-xl font-bold txt-primary">
                             Evolución de Producción Mensual del Mercado
                         </h2>
-                        <p class="text-xs theme-text-secondary mt-1">
+                        <p class="text-xs txt-secondary mt-1">
                             Comportamiento mensual de primas emitidas a valores corrientes y constantes (ajustados por IPC).
                         </p>
                     </div>
 
                     <!-- Deflator Selector -->
                     <div class="flex flex-wrap items-center gap-2">
-                        <div class="theme-card-subtle p-1 rounded-xl flex">
+                        <div class="subtle-card p-1 rounded-xl flex">
                             <button onclick="setMensualMode('corriente')" id="btn-mensual-corriente" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm">
                                 Valores Corrientes
                             </button>
-                            <button onclick="setMensualMode('constante')" id="btn-mensual-constante" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all theme-text-muted hover:text-[#e20039]">
+                            <button onclick="setMensualMode('constante')" id="btn-mensual-constante" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]">
                                 Constantes (IPC)
                             </button>
                         </div>
@@ -431,8 +449,8 @@
                 </div>
 
                 <!-- Monthly Data Table -->
-                <div class="overflow-x-auto max-h-[320px] overflow-y-auto border rounded-xl" style="border-color: var(--border-primary);">
-                    <table class="w-full text-left text-xs font-mono theme-table">
+                <div class="overflow-x-auto max-h-[320px] overflow-y-auto border rounded-xl border-slate-200 dark:border-slate-800">
+                    <table class="w-full text-left text-xs font-mono data-table">
                         <thead class="uppercase text-[10px] sticky-header">
                             <tr>
                                 <th class="py-2.5 px-3">Mes / Periodo</th>
@@ -455,16 +473,16 @@
         <!-- TAB 3: RANKINGS DE MERCADO SSN (12 CATEGORÍAS)                      -->
         <!-- ==================================================================== -->
         <section id="tab-rankings" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
+            <div class="main-card rounded-2xl p-6">
                 
                 <!-- Controls -->
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b" style="border-color: var(--border-primary);">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="brand-badge bg-[#f8cc59]/20 text-[#b91f38] dark:text-[#f8cc59] font-bold">Rankings Oficiales SSN</span>
-                            <span class="text-xs theme-text-muted font-mono">12 Segmentos y Ramos</span>
+                            <span class="text-xs txt-muted font-mono">12 Segmentos y Ramos</span>
                         </div>
-                        <h2 class="text-xl font-bold theme-text-primary" id="ranking-title-display">
+                        <h2 class="text-xl font-bold txt-primary" id="ranking-title-display">
                             Ranking: Total del Mercado
                         </h2>
                     </div>
@@ -472,8 +490,8 @@
                     <div class="flex flex-wrap items-center gap-3">
                         <!-- Category Select -->
                         <div class="flex items-center gap-2">
-                            <label class="text-xs theme-text-secondary font-medium">Ramo:</label>
-                            <select id="select-ranking-category" onchange="onRankingCategoryChange()" class="theme-input text-xs rounded-xl px-3 py-2 font-medium">
+                            <label class="text-xs txt-secondary font-medium">Ramo:</label>
+                            <select id="select-ranking-category" onchange="onRankingCategoryChange()" class="ui-input text-xs rounded-xl px-3 py-2 font-medium">
                                 <option value="1_grupos">1. Grupos Aseguradores</option>
                                 <option value="2_total_mercado" selected>2. Total Mercado</option>
                                 <option value="3_patrimoniales_total">3. Seguros Patrimoniales Total</option>
@@ -491,12 +509,12 @@
 
                         <!-- Search Input -->
                         <div class="relative">
-                            <i class="fas fa-search absolute left-3 top-2.5 text-xs theme-text-muted"></i>
-                            <input type="text" id="input-ranking-search" oninput="filterRankingTable()" placeholder="Buscar aseguradora..." class="theme-input text-xs rounded-xl pl-8 pr-3 py-2 w-48 sm:w-64 font-medium">
+                            <i class="fas fa-search absolute left-3 top-2.5 text-xs txt-muted"></i>
+                            <input type="text" id="input-ranking-search" oninput="filterRankingTable()" placeholder="Buscar aseguradora..." class="ui-input text-xs rounded-xl pl-8 pr-3 py-2 w-48 sm:w-64 font-medium">
                         </div>
 
                         <!-- Export Button -->
-                        <button onclick="exportCurrentRankingCSV()" class="px-3 py-2 rounded-xl theme-card-subtle hover:border-[#e20039] text-xs theme-text-secondary hover:text-[#e20039] transition-all flex items-center gap-1.5 font-semibold" title="Exportar a CSV">
+                        <button onclick="exportCurrentRankingCSV()" class="px-3 py-2 rounded-xl subtle-card hover:border-[#e20039] text-xs txt-secondary hover:text-[#e20039] transition-all flex items-center gap-1.5 font-semibold" title="Exportar a CSV">
                             <i class="fas fa-download text-[#3ac792]"></i>
                             <span>CSV</span>
                         </button>
@@ -505,8 +523,8 @@
 
                 <!-- Top 10 Chart & Concentration Stats -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-6">
-                    <div class="lg:col-span-2 theme-card-subtle rounded-xl p-4">
-                        <h4 class="text-xs font-bold uppercase tracking-wider theme-text-muted mb-3 flex items-center gap-2">
+                    <div class="lg:col-span-2 subtle-card rounded-xl p-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider txt-muted mb-3 flex items-center gap-2">
                             <i class="fas fa-chart-column text-[#e20039]"></i> Top 10 Entidades &bull; Cuota de Mercado (%)
                         </h4>
                         <div class="relative h-60">
@@ -515,16 +533,16 @@
                     </div>
 
                     <!-- Concentration Metrics -->
-                    <div class="theme-card-subtle rounded-xl p-5 flex flex-col justify-between">
+                    <div class="subtle-card rounded-xl p-5 flex flex-col justify-between">
                         <div>
-                            <h4 class="text-xs font-bold uppercase tracking-wider theme-text-muted mb-4">
+                            <h4 class="text-xs font-bold uppercase tracking-wider txt-muted mb-4">
                                 Métricas de Concentración
                             </h4>
                             <div class="space-y-4">
                                 <div>
                                     <div class="flex justify-between text-xs mb-1">
-                                        <span class="theme-text-secondary font-medium">Top 5 Entidades:</span>
-                                        <span class="font-bold font-mono theme-text-primary" id="metric-top5-share">32.1%</span>
+                                        <span class="txt-secondary font-medium">Top 5 Entidades:</span>
+                                        <span class="font-bold font-mono txt-primary" id="metric-top5-share">32.1%</span>
                                     </div>
                                     <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
                                         <div id="bar-top5-share" class="bg-[#e20039] h-2 rounded-full" style="width: 32.1%"></div>
@@ -532,8 +550,8 @@
                                 </div>
                                 <div>
                                     <div class="flex justify-between text-xs mb-1">
-                                        <span class="theme-text-secondary font-medium">Top 10 Entidades:</span>
-                                        <span class="font-bold font-mono theme-text-primary" id="metric-top10-share">52.8%</span>
+                                        <span class="txt-secondary font-medium">Top 10 Entidades:</span>
+                                        <span class="font-bold font-mono txt-primary" id="metric-top10-share">52.8%</span>
                                     </div>
                                     <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
                                         <div id="bar-top10-share" class="bg-[#4183ca] h-2 rounded-full" style="width: 52.8%"></div>
@@ -541,26 +559,26 @@
                                 </div>
                                 <div>
                                     <div class="flex justify-between text-xs mb-1">
-                                        <span class="theme-text-secondary font-medium">Posición Grupo La Segunda:</span>
+                                        <span class="txt-secondary font-medium">Posición Grupo La Segunda:</span>
                                         <span class="font-bold font-mono text-[#e20039]" id="metric-lasegunda-pos">Top 3</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-[11px] theme-text-muted border-t pt-3 font-mono" style="border-color: var(--border-primary);">
+                        <div class="text-[11px] txt-muted border-t border-slate-200 dark:border-slate-800 pt-3 font-mono">
                             Destacadas en rojo las compañías del Grupo La Segunda.
                         </div>
                     </div>
                 </div>
 
                 <!-- Rankings Table -->
-                <div class="overflow-x-auto max-h-[480px] overflow-y-auto border rounded-xl" style="border-color: var(--border-primary);">
-                    <table class="w-full text-left text-xs font-mono theme-table" id="tbl-rankings-main">
+                <div class="overflow-x-auto max-h-[480px] overflow-y-auto border rounded-xl border-slate-200 dark:border-slate-800">
+                    <table class="w-full text-left text-xs font-mono data-table" id="tbl-rankings-main">
                         <thead class="uppercase text-[10px] sticky-header">
                             <tr>
                                 <th class="py-3 px-3 text-center w-14">Pos.</th>
                                 <th class="py-3 px-3">Entidad / Grupo Asegurador</th>
-                                <th class="py-3 px-3 text-right">Primas ($)</th>
+                                <th class="py-3 px-3 text-right">Primas ($M)</th>
                                 <th class="py-3 px-3 text-right">Participación</th>
                                 <th class="py-3 px-3 text-center">Acciones</th>
                             </tr>
@@ -577,27 +595,27 @@
         <!-- TAB 4: ESTADOS CONTABLES Y BALANCES SSN                              -->
         <!-- ==================================================================== -->
         <section id="tab-balances" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b" style="border-color: var(--border-primary);">
+            <div class="main-card rounded-2xl p-6">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792]">Estados Contables SSN</span>
-                            <span class="text-xs theme-text-muted font-mono">Marzo 2026 vs Marzo 2025</span>
+                            <span class="text-xs txt-muted font-mono">Marzo 2026 vs Marzo 2025</span>
                         </div>
-                        <h2 class="text-xl font-bold theme-text-primary">
+                        <h2 class="text-xl font-bold txt-primary">
                             Balances Generales y Rubros Contables
                         </h2>
                     </div>
 
                     <!-- Selectors -->
                     <div class="flex flex-wrap items-center gap-3">
-                        <select id="select-balances-view" onchange="renderBalancesTable()" class="theme-input text-xs rounded-xl px-3 py-2 font-medium">
+                        <select id="select-balances-view" onchange="renderBalancesTable()" class="ui-input text-xs rounded-xl px-3 py-2 font-medium">
                             <option value="patrimonial">Seguros Patrimoniales & ART</option>
                             <option value="personas">Seguros de Personas</option>
                             <option value="retiro">Seguros de Retiro</option>
                         </select>
 
-                        <select id="select-balances-rubro" onchange="renderBalancesTable()" class="theme-input text-xs rounded-xl px-3 py-2 font-medium">
+                        <select id="select-balances-rubro" onchange="renderBalancesTable()" class="ui-input text-xs rounded-xl px-3 py-2 font-medium">
                             <option value="all">Todos los Rubros (Completo)</option>
                             <option value="Activos">Total Activos</option>
                             <option value="Inversiones">Inversiones</option>
@@ -607,13 +625,13 @@
                             <option value="Resultado del Ejercicio">Resultado del Ejercicio</option>
                         </select>
 
-                        <input type="text" id="input-balances-search" oninput="renderBalancesTable()" placeholder="Filtrar entidad..." class="theme-input text-xs rounded-xl px-3 py-2 w-44 font-medium">
+                        <input type="text" id="input-balances-search" oninput="renderBalancesTable()" placeholder="Filtrar entidad..." class="ui-input text-xs rounded-xl px-3 py-2 w-44 font-medium">
                     </div>
                 </div>
 
                 <!-- Balances Table -->
-                <div class="overflow-x-auto max-h-[500px] overflow-y-auto border rounded-xl mt-6" style="border-color: var(--border-primary);">
-                    <table class="w-full text-left text-xs font-mono theme-table">
+                <div class="overflow-x-auto max-h-[500px] overflow-y-auto border rounded-xl mt-6 border-slate-200 dark:border-slate-800">
+                    <table class="w-full text-left text-xs font-mono data-table">
                         <thead class="uppercase text-[10px] sticky-header">
                             <tr id="tbl-balances-thead-row">
                                 <th class="py-3 px-3">Entidad Aseguradora</th>
@@ -636,10 +654,10 @@
         <!-- TAB 5: GRUPO ASEGURADOR LA SEGUNDA                                  -->
         <!-- ==================================================================== -->
         <section id="tab-lasegunda" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
+            <div class="main-card rounded-2xl p-6">
                 
                 <!-- Group Header -->
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b" style="border-color: var(--border-primary);">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-2xl brand-gradient flex items-center justify-center text-white shadow-lg shadow-[#e20039]/20">
                             <i class="fas fa-shield-halved text-2xl"></i>
@@ -647,82 +665,82 @@
                         <div>
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-[#e20039] text-white">GRUPO ASEGURADOR</span>
-                                <span class="text-xs theme-text-muted font-mono">Marzo 2026</span>
+                                <span class="text-xs txt-muted font-mono">Marzo 2026</span>
                             </div>
-                            <h2 class="text-2xl font-extrabold tracking-tight theme-text-primary">
+                            <h2 class="text-2xl font-extrabold tracking-tight txt-primary">
                                 La Segunda Seguros
                             </h2>
-                            <p class="text-xs theme-text-secondary mt-0.5">
+                            <p class="text-xs txt-secondary mt-0.5">
                                 Desempeño consolidado e individual de las 4 empresas integrantes del Grupo.
                             </p>
                         </div>
                     </div>
 
                     <!-- Consolidated Totals -->
-                    <div class="theme-card-subtle rounded-xl p-3 px-5 text-right font-mono">
-                        <div class="text-[10px] uppercase theme-text-muted font-bold">Total Primas Grupo La Segunda</div>
+                    <div class="subtle-card rounded-xl p-3 px-5 text-right font-mono">
+                        <div class="text-[10px] uppercase txt-muted font-bold">Total Primas Grupo La Segunda</div>
                         <div class="text-2xl font-bold text-[#e20039]" id="ls-kpi-total-grupo">$ 1.171.921 M</div>
-                        <div class="text-xs theme-text-secondary font-medium">Posición de Liderazgo Nacional</div>
+                        <div class="text-xs txt-secondary font-medium">Posición de Liderazgo Nacional</div>
                     </div>
                 </div>
 
                 <!-- 4 Companies Cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
-                    <div class="theme-card-subtle rounded-xl p-4 flex flex-col justify-between">
+                    <div class="subtle-card rounded-xl p-4 flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
                                 <span class="text-[10px] uppercase font-bold text-[#e20039] font-mono">Patrimoniales</span>
                                 <i class="fas fa-building text-slate-400"></i>
                             </div>
-                            <h4 class="font-bold text-sm theme-text-primary">La Segunda Seguros Generales</h4>
+                            <h4 class="font-bold text-sm txt-primary">La Segunda Seguros Generales</h4>
                             <div class="text-lg font-bold font-mono text-[#e20039] mt-3" id="ls-card-gen-monto">$ 709.475 M</div>
                         </div>
-                        <div class="mt-4 pt-3 border-t text-[11px] theme-text-secondary flex justify-between font-mono" style="border-color: var(--border-primary);">
+                        <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] txt-secondary flex justify-between font-mono">
                             <span>Share: <strong>4.3%</strong></span>
                             <span class="text-[#3ac792] font-bold">#7 Nacional</span>
                         </div>
                     </div>
 
-                    <div class="theme-card-subtle rounded-xl p-4 flex flex-col justify-between">
+                    <div class="subtle-card rounded-xl p-4 flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
                                 <span class="text-[10px] uppercase font-bold text-[#4183ca] font-mono">Riesgos del Trabajo</span>
                                 <i class="fas fa-user-shield text-slate-400"></i>
                             </div>
-                            <h4 class="font-bold text-sm theme-text-primary">La Segunda ART S.A.</h4>
+                            <h4 class="font-bold text-sm txt-primary">La Segunda ART S.A.</h4>
                             <div class="text-lg font-bold font-mono text-[#4183ca] mt-3" id="ls-card-art-monto">$ 402.548 M</div>
                         </div>
-                        <div class="mt-4 pt-3 border-t text-[11px] theme-text-secondary flex justify-between font-mono" style="border-color: var(--border-primary);">
+                        <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] txt-secondary flex justify-between font-mono">
                             <span>Share: <strong>8.8%</strong></span>
                             <span class="text-[#3ac792] font-bold">#5 Nacional</span>
                         </div>
                     </div>
 
-                    <div class="theme-card-subtle rounded-xl p-4 flex flex-col justify-between">
+                    <div class="subtle-card rounded-xl p-4 flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
                                 <span class="text-[10px] uppercase font-bold text-[#3ac792] font-mono">Vida & Personas</span>
                                 <i class="fas fa-heart-pulse text-slate-400"></i>
                             </div>
-                            <h4 class="font-bold text-sm theme-text-primary">La Segunda Personas S.A.</h4>
+                            <h4 class="font-bold text-sm txt-primary">La Segunda Personas S.A.</h4>
                             <div class="text-lg font-bold font-mono text-[#3ac792] mt-3" id="ls-card-per-monto">$ 46.788 M</div>
                         </div>
-                        <div class="mt-4 pt-3 border-t text-[11px] theme-text-secondary flex justify-between font-mono" style="border-color: var(--border-primary);">
+                        <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] txt-secondary flex justify-between font-mono">
                             <span>Share: <strong>2.1%</strong></span>
                             <span class="text-[#3ac792] font-bold">#14 Nacional</span>
                         </div>
                     </div>
 
-                    <div class="theme-card-subtle rounded-xl p-4 flex flex-col justify-between">
+                    <div class="subtle-card rounded-xl p-4 flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
                                 <span class="text-[10px] uppercase font-bold text-[#f8cc59] font-mono">Retiro & Ahorro</span>
                                 <i class="fas fa-piggy-bank text-slate-400"></i>
                             </div>
-                            <h4 class="font-bold text-sm theme-text-primary">La Segunda Retiro S.A.</h4>
+                            <h4 class="font-bold text-sm txt-primary">La Segunda Retiro S.A.</h4>
                             <div class="text-lg font-bold font-mono text-[#f8cc59] mt-3" id="ls-card-ret-monto">$ 13.110 M</div>
                         </div>
-                        <div class="mt-4 pt-3 border-t text-[11px] theme-text-secondary flex justify-between font-mono" style="border-color: var(--border-primary);">
+                        <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] txt-secondary flex justify-between font-mono">
                             <span>Share: <strong>2.0%</strong></span>
                             <span class="text-[#3ac792] font-bold">#8 Nacional</span>
                         </div>
@@ -730,14 +748,14 @@
                 </div>
 
                 <!-- Ramos Table -->
-                <div class="border rounded-xl overflow-hidden mt-6" style="border-color: var(--border-primary);">
-                    <div class="theme-card-subtle px-4 py-3 border-b flex items-center justify-between" style="border-color: var(--border-primary);">
-                        <h4 class="text-xs font-bold uppercase tracking-wider theme-text-primary">
+                <div class="border rounded-xl overflow-hidden mt-6 border-slate-200 dark:border-slate-800">
+                    <div class="subtle-card px-4 py-3 border-b flex items-center justify-between border-slate-200 dark:border-slate-800">
+                        <h4 class="text-xs font-bold uppercase tracking-wider txt-primary">
                             Producción por Ramos &bull; La Segunda Seguros
                         </h4>
-                        <span class="text-[11px] theme-text-muted font-mono">Cifras en Millones de Pesos</span>
+                        <span class="text-[11px] txt-muted font-mono">Cifras en Millones de Pesos</span>
                     </div>
-                    <table class="w-full text-left text-xs font-mono theme-table">
+                    <table class="w-full text-left text-xs font-mono data-table">
                         <thead class="uppercase text-[10px]">
                             <tr>
                                 <th class="py-2.5 px-3">Ramo Asegurado</th>
@@ -759,25 +777,25 @@
         <!-- TAB 6: SEGUROS DE PERSONAS                                          -->
         <!-- ==================================================================== -->
         <section id="tab-personas" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
-                <div class="flex items-center justify-between pb-4 border-b mb-6" style="border-color: var(--border-primary);">
+            <div class="main-card rounded-2xl p-6">
+                <div class="flex items-center justify-between pb-4 border-b mb-6 border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792]">Ramos de Personas</span>
-                            <span class="text-xs theme-text-muted font-mono">Boletín SSN Marzo 2026</span>
+                            <span class="text-xs txt-muted font-mono">Boletín SSN Marzo 2026</span>
                         </div>
-                        <h2 class="text-xl font-bold theme-text-primary">
+                        <h2 class="text-xl font-bold txt-primary">
                             Mercado de Seguros de Personas
                         </h2>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="border rounded-xl overflow-hidden" style="border-color: var(--border-primary);">
-                        <div class="theme-card-subtle px-4 py-3 border-b font-bold text-xs theme-text-primary" style="border-color: var(--border-primary);">
+                    <div class="border rounded-xl overflow-hidden border-slate-200 dark:border-slate-800">
+                        <div class="subtle-card px-4 py-3 border-b font-bold text-xs txt-primary border-slate-200 dark:border-slate-800">
                             Primas Emitidas por Subramo de Personas
                         </div>
-                        <table class="w-full text-left text-xs font-mono theme-table">
+                        <table class="w-full text-left text-xs font-mono data-table">
                             <thead class="uppercase text-[10px]">
                                 <tr>
                                     <th class="py-2.5 px-3">Subramo</th>
@@ -791,8 +809,8 @@
                         </table>
                     </div>
 
-                    <div class="border rounded-xl p-4 theme-card-subtle flex flex-col justify-between" style="border-color: var(--border-primary);">
-                        <h4 class="text-xs font-bold uppercase tracking-wider theme-text-muted mb-3">
+                    <div class="border rounded-xl p-4 subtle-card flex flex-col justify-between border-slate-200 dark:border-slate-800">
+                        <h4 class="text-xs font-bold uppercase tracking-wider txt-muted mb-3">
                             Composición del Ramo Personas
                         </h4>
                         <div class="relative h-64 flex items-center justify-center">
@@ -807,21 +825,21 @@
         <!-- TAB 7: SEGUROS DE RETIRO                                            -->
         <!-- ==================================================================== -->
         <section id="tab-retiro" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b mb-6" style="border-color: var(--border-primary);">
+            <div class="main-card rounded-2xl p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b mb-6 border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="brand-badge bg-[#f8cc59]/20 text-[#b91f38] dark:text-[#f8cc59] font-bold">Mercado de Seguros de Retiro</span>
-                            <span class="text-xs theme-text-muted font-mono">Marzo 2026</span>
+                            <span class="text-xs txt-muted font-mono">Marzo 2026</span>
                         </div>
-                        <h2 class="text-xl font-bold theme-text-primary">
+                        <h2 class="text-xl font-bold txt-primary">
                             Compromisos Técnicos, Asegurados & Primas de Retiro
                         </h2>
                     </div>
                 </div>
 
-                <div class="overflow-x-auto max-h-[480px] overflow-y-auto border rounded-xl" style="border-color: var(--border-primary);">
-                    <table class="w-full text-left text-xs font-mono theme-table">
+                <div class="overflow-x-auto max-h-[480px] overflow-y-auto border rounded-xl border-slate-200 dark:border-slate-800">
+                    <table class="w-full text-left text-xs font-mono data-table">
                         <thead class="uppercase text-[10px] sticky-header">
                             <tr>
                                 <th class="py-3 px-3">Compañía de Retiro</th>
@@ -843,25 +861,25 @@
         <!-- TAB 8: INVERSIONES Y PORTAFOLIO SSN                                 -->
         <!-- ==================================================================== -->
         <section id="tab-inversiones" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
-                <div class="flex items-center justify-between pb-4 border-b mb-6" style="border-color: var(--border-primary);">
+            <div class="main-card rounded-2xl p-6">
+                <div class="flex items-center justify-between pb-4 border-b mb-6 border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="brand-badge bg-[#f8cc59]/20 text-[#b91f38] dark:text-[#f8cc59] font-bold">Carteras de Inversión SSN</span>
-                            <span class="text-xs theme-text-muted font-mono">Estimación Mercado Total</span>
+                            <span class="text-xs txt-muted font-mono">Estimación Mercado Total</span>
                         </div>
-                        <h2 class="text-xl font-bold theme-text-primary">
+                        <h2 class="text-xl font-bold txt-primary">
                             Estructura de Portafolios e Inversiones Computables
                         </h2>
-                        <p class="text-xs theme-text-secondary mt-1">
+                        <p class="text-xs txt-secondary mt-1">
                             Distribución de los más de $16.4 Billones administrados por el mercado asegurador argentino según instrumentos regulados (Art. 35).
                         </p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="border rounded-xl p-5 theme-card-subtle" style="border-color: var(--border-primary);">
-                        <h4 class="text-xs font-bold uppercase tracking-wider theme-text-muted mb-4 flex items-center gap-2">
+                    <div class="border rounded-xl p-5 subtle-card border-slate-200 dark:border-slate-800">
+                        <h4 class="text-xs font-bold uppercase tracking-wider txt-muted mb-4 flex items-center gap-2">
                             <i class="fas fa-chart-pie text-[#e20039]"></i> Distribución por Tipo de Instrumento
                         </h4>
                         <div class="relative h-64 flex items-center justify-center">
@@ -869,8 +887,8 @@
                         </div>
                     </div>
 
-                    <div class="border rounded-xl p-5 theme-card-subtle" style="border-color: var(--border-primary);">
-                        <h4 class="text-xs font-bold uppercase tracking-wider theme-text-muted mb-4 flex items-center gap-2">
+                    <div class="border rounded-xl p-5 subtle-card border-slate-200 dark:border-slate-800">
+                        <h4 class="text-xs font-bold uppercase tracking-wider txt-muted mb-4 flex items-center gap-2">
                             <i class="fas fa-coins text-[#4183ca]"></i> Distribución por Moneda y Ajuste
                         </h4>
                         <div class="relative h-64 flex items-center justify-center">
@@ -879,8 +897,8 @@
                     </div>
                 </div>
 
-                <div class="border rounded-xl overflow-hidden mt-6" style="border-color: var(--border-primary);">
-                    <table class="w-full text-left text-xs font-mono theme-table">
+                <div class="border rounded-xl overflow-hidden mt-6 border-slate-200 dark:border-slate-800">
+                    <table class="w-full text-left text-xs font-mono data-table">
                         <thead class="uppercase text-[10px]">
                             <tr>
                                 <th class="py-3 px-3">Instrumento Financiero</th>
@@ -900,66 +918,66 @@
         <!-- TAB 9: SOLVENCIA & RATIOS TÉCNICOS                                  -->
         <!-- ==================================================================== -->
         <section id="tab-ratios" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
-                <div class="flex items-center justify-between pb-4 border-b mb-6" style="border-color: var(--border-primary);">
+            <div class="main-card rounded-2xl p-6">
+                <div class="flex items-center justify-between pb-4 border-b mb-6 border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="brand-badge bg-[#3ac792]/15 text-[#3ac792]">Indicadores Clave</span>
-                            <span class="text-xs theme-text-muted font-mono">KPIs Técnicos y Financieros</span>
+                            <span class="text-xs txt-muted font-mono">KPIs Técnicos y Financieros</span>
                         </div>
-                        <h2 class="text-xl font-bold theme-text-primary">
+                        <h2 class="text-xl font-bold txt-primary">
                             Métricas de Solvencia, Siniestralidad y Eficiencia
                         </h2>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="theme-card-subtle rounded-xl p-4">
-                        <span class="text-[11px] uppercase font-bold theme-text-muted">Ratio Combinado Estimado</span>
+                    <div class="subtle-card rounded-xl p-4">
+                        <span class="text-[11px] uppercase font-bold txt-muted">Ratio Combinado Estimado</span>
                         <div class="text-2xl font-bold font-mono text-[#e20039] mt-2">104.2%</div>
-                        <p class="text-[10px] theme-text-muted mt-1">Siniestros + Gastos / Primas</p>
+                        <p class="text-[10px] txt-muted mt-1">Siniestros + Gastos / Primas</p>
                     </div>
 
-                    <div class="theme-card-subtle rounded-xl p-4">
-                        <span class="text-[11px] uppercase font-bold theme-text-muted">Siniestralidad Neta</span>
+                    <div class="subtle-card rounded-xl p-4">
+                        <span class="text-[11px] uppercase font-bold txt-muted">Siniestralidad Neta</span>
                         <div class="text-2xl font-bold font-mono text-[#ff593e] mt-2">64.8%</div>
-                        <p class="text-[10px] theme-text-muted mt-1">Siniestros Devengados / Primas</p>
+                        <p class="text-[10px] txt-muted mt-1">Siniestros Devengados / Primas</p>
                     </div>
 
-                    <div class="theme-card-subtle rounded-xl p-4">
-                        <span class="text-[11px] uppercase font-bold theme-text-muted">Cobertura Compromisos (Art 35)</span>
+                    <div class="subtle-card rounded-xl p-4">
+                        <span class="text-[11px] uppercase font-bold txt-muted">Cobertura Compromisos (Art 35)</span>
                         <div class="text-2xl font-bold font-mono text-[#3ac792] mt-2">142.5%</div>
-                        <p class="text-[10px] theme-text-muted mt-1">Inversiones / Pasivos Técnicos</p>
+                        <p class="text-[10px] txt-muted mt-1">Inversiones / Pasivos Técnicos</p>
                     </div>
 
-                    <div class="theme-card-subtle rounded-xl p-4">
-                        <span class="text-[11px] uppercase font-bold theme-text-muted">Apalancamiento Patrimonial</span>
+                    <div class="subtle-card rounded-xl p-4">
+                        <span class="text-[11px] uppercase font-bold txt-muted">Apalancamiento Patrimonial</span>
                         <div class="text-2xl font-bold font-mono text-[#4183ca] mt-2">2.45x</div>
-                        <p class="text-[10px] theme-text-muted mt-1">Total Pasivos / Patrimonio Neto</p>
+                        <p class="text-[10px] txt-muted mt-1">Total Pasivos / Patrimonio Neto</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div class="theme-card-subtle rounded-xl p-5">
-                        <h4 class="font-bold text-xs uppercase theme-text-primary mb-3">Composición de Gastos Operativos</h4>
+                    <div class="subtle-card rounded-xl p-5">
+                        <h4 class="font-bold text-xs uppercase txt-primary mb-3">Composición de Gastos Operativos</h4>
                         <div class="space-y-3 font-mono text-xs">
                             <div class="flex justify-between">
-                                <span class="theme-text-secondary">Gastos de Producción / Adquisición:</span>
-                                <span class="font-bold theme-text-primary">24.1%</span>
+                                <span class="txt-secondary">Gastos de Producción / Adquisición:</span>
+                                <span class="font-bold txt-primary">24.1%</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="theme-text-secondary">Gastos de Explotación / Administración:</span>
-                                <span class="font-bold theme-text-primary">15.3%</span>
+                                <span class="txt-secondary">Gastos de Explotación / Administración:</span>
+                                <span class="font-bold txt-primary">15.3%</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="theme-text-secondary">Resultado Financiero / Primas:</span>
+                                <span class="txt-secondary">Resultado Financiero / Primas:</span>
                                 <span class="font-bold text-[#3ac792]">+12.8%</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="theme-card-subtle rounded-xl p-5 text-xs theme-text-secondary leading-relaxed">
-                        <h4 class="font-bold text-xs uppercase theme-text-primary mb-2">Interpretación Técnica</h4>
+                    <div class="subtle-card rounded-xl p-5 text-xs txt-secondary leading-relaxed">
+                        <h4 class="font-bold text-xs uppercase txt-primary mb-2">Interpretación Técnica</h4>
                         <p>
                             El mercado asegurador argentino compensa técnicamente el resultado operativo (con un Ratio Combinado superior al 100%) mediante los rendimientos financieros de sus inversiones en bonos soberanos, LECAPs e instrumentos ajustados por CER y Tipo de Cambio.
                         </p>
@@ -972,24 +990,24 @@
         <!-- TAB 10: COMPARADOR CARA A CARA                                      -->
         <!-- ==================================================================== -->
         <section id="tab-comparador" class="tab-content hidden space-y-6">
-            <div class="theme-card rounded-2xl p-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b" style="border-color: var(--border-primary);">
+            <div class="main-card rounded-2xl p-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
                             <span class="brand-badge bg-[#4183ca]/15 text-[#4183ca]">Análisis Comparativo</span>
-                            <span class="text-xs theme-text-muted font-mono">Head-to-Head</span>
+                            <span class="text-xs txt-muted font-mono">Head-to-Head</span>
                         </div>
-                        <h2 class="text-xl font-bold theme-text-primary">
+                        <h2 class="text-xl font-bold txt-primary">
                             Comparador Cara a Cara de Aseguradoras
                         </h2>
                     </div>
 
                     <div class="flex flex-wrap items-center gap-3">
-                        <select id="select-comp-1" onchange="updateComparator()" class="theme-input text-xs rounded-xl px-3 py-2 font-medium">
+                        <select id="select-comp-1" onchange="updateComparator()" class="ui-input text-xs rounded-xl px-3 py-2 font-medium">
                             <!-- Populated dynamically -->
                         </select>
-                        <span class="theme-text-muted font-bold text-xs">VS</span>
-                        <select id="select-comp-2" onchange="updateComparator()" class="theme-input text-xs rounded-xl px-3 py-2 font-medium">
+                        <span class="txt-muted font-bold text-xs">VS</span>
+                        <select id="select-comp-2" onchange="updateComparator()" class="ui-input text-xs rounded-xl px-3 py-2 font-medium">
                             <!-- Populated dynamically -->
                         </select>
                     </div>
@@ -1004,14 +1022,14 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="theme-card border-t py-6 mt-12 text-center text-xs theme-text-muted font-mono" style="border-color: var(--border-primary);">
+    <footer class="main-card border-t py-6 mt-12 text-center text-xs txt-muted font-mono border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div class="flex items-center gap-2">
                 <div class="w-3 h-3 rounded-full bg-[#e20039]"></div>
                 <span>Tablero de Seguros &bull; Basado en SSN y Brandbook La Segunda</span>
             </div>
             <div>
-                <span>Última actualización: <strong class="theme-text-secondary" id="footer-update-time">Septiembre 2026</strong></span>
+                <span>Última actualización: <strong class="txt-secondary" id="footer-update-time">Septiembre 2026</strong></span>
             </div>
         </div>
     </footer>
@@ -1030,7 +1048,9 @@
         // Utility: Number Formatters
         function fmtARS(num) {
             if (num === undefined || num === null || isNaN(num)) return '-';
-            return '$ ' + Number(num).toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            // If number is huge (> 100M), show in Millions
+            const valInM = (num > 100000000) ? (num / 1000000) : num;
+            return '$ ' + Number(valInM).toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
         }
 
         function fmtPct(num) {
@@ -1048,12 +1068,13 @@
 
         function initTheme() {
             const saved = localStorage.getItem('tablero_theme');
-            if (saved === 'light') {
-                document.documentElement.classList.remove('dark');
-                document.getElementById('theme-icon').className = 'fas fa-sun text-base text-[#f8cc59]';
-            } else {
+            // Default to Light Mode unless explicitly set to 'dark'
+            if (saved === 'dark') {
                 document.documentElement.classList.add('dark');
                 document.getElementById('theme-icon').className = 'fas fa-moon text-base';
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-icon').className = 'fas fa-sun text-base text-[#f8cc59]';
             }
         }
 
@@ -1066,13 +1087,13 @@
 
             document.querySelectorAll('.nav-tab').forEach(btn => {
                 btn.classList.remove('bg-[#e20039]', 'text-white', 'shadow-sm');
-                btn.classList.add('theme-text-muted');
+                btn.classList.add('txt-muted');
             });
 
             const activeBtn = document.getElementById('tab-btn-' + tabId);
             if (activeBtn) {
                 activeBtn.classList.add('bg-[#e20039]', 'text-white', 'shadow-sm');
-                activeBtn.classList.remove('theme-text-muted');
+                activeBtn.classList.remove('txt-muted');
             }
 
             // Trigger chart rendering for tab if needed
@@ -1105,8 +1126,9 @@
 
             branches.forEach(b => {
                 const tr = document.createElement('tr');
-                const isTotal = b.is_total || (b.name && b.name.toLowerCase().includes('total'));
-                if (isTotal) tr.className = 'font-bold bg-slate-100 dark:bg-slate-900/60 theme-text-primary';
+                const name = b.name || b.label || b.ramo || 'Ramo';
+                const isTotal = b.is_total || (name.toLowerCase().includes('total'));
+                if (isTotal) tr.className = 'font-bold bg-slate-100 dark:bg-slate-900/60 txt-primary';
 
                 const varVal = b.var_nominal || b.nom_var || 0;
                 const varColor = varVal >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]';
@@ -1115,17 +1137,17 @@
                 const shareVal = b.share || b.participacion || 0;
 
                 tr.innerHTML = `
-                    <td class="py-2.5 px-3 ${isTotal ? 'text-[#e20039] font-bold' : 'theme-text-secondary font-medium'}">${b.name || b.label || b.ramo}</td>
+                    <td class="py-2.5 px-3 ${isTotal ? 'text-[#e20039] font-bold' : 'txt-secondary font-medium'}">${name}</td>
                     <td class="py-2.5 px-3 text-right font-mono">${fmtARS(montoAct)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono theme-text-muted">${fmtARS(montoPrev)}</td>
+                    <td class="py-2.5 px-3 text-right font-mono txt-muted">${fmtARS(montoPrev)}</td>
                     <td class="py-2.5 px-3 text-right font-mono font-bold">${fmtPct(shareVal)}</td>
                     <td class="py-2.5 px-3 text-right font-mono font-bold ${varColor}">${varVal > 0 ? '+' : ''}${fmtPct(varVal)}</td>
                 `;
                 tbody.appendChild(tr);
 
-                if (b.key === 'total_mercado' || (b.name && b.name.toLowerCase().includes('total mercado'))) totMonto = montoAct;
-                if (b.key === 'patrimoniales_total' || (b.name && b.name.toLowerCase().includes('patrimoniales'))) patMonto = montoAct;
-                if (b.key === 'personas_total' || (b.name && b.name.toLowerCase().includes('personas'))) perMonto = montoAct;
+                if (b.key === 'total_mercado' || name.toLowerCase().includes('total del mercado') || name.toLowerCase().includes('total mercado')) totMonto = montoAct;
+                if (b.key === 'patrimoniales_total' || name.toLowerCase().includes('total seguros patrimoniales')) patMonto = montoAct;
+                if (b.key === 'personas_total' || name.toLowerCase().includes('total seguros de personas')) perMonto = montoAct;
             });
 
             if (totMonto > 0) {
@@ -1152,7 +1174,7 @@
                 data: {
                     labels: ['Patrimoniales & ART', 'Seguros de Personas'],
                     datasets: [{
-                        data: [85.1, 14.9],
+                        data: [86.6, 13.4],
                         backgroundColor: ['#e20039', '#3ac792'],
                         borderWidth: 2,
                         borderColor: isDark ? '#111726' : '#ffffff'
@@ -1164,7 +1186,7 @@
                     plugins: {
                         legend: {
                             position: 'bottom',
-                            labels: { color: isDark ? '#cbd5e1' : '#090d16', font: { family: 'Sora', size: 11, weight: 'bold' } }
+                            labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 11, weight: 'bold' } }
                         }
                     }
                 }
@@ -1176,10 +1198,10 @@
             mensualMode = mode;
             document.getElementById('btn-mensual-corriente').className = mode === 'corriente' ? 
                 'px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm' : 
-                'px-3 py-1.5 rounded-lg text-xs font-bold transition-all theme-text-muted hover:text-[#e20039]';
+                'px-3 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]';
             document.getElementById('btn-mensual-constante').className = mode === 'constante' ? 
                 'px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm' : 
-                'px-3 py-1.5 rounded-lg text-xs font-bold transition-all theme-text-muted hover:text-[#e20039]';
+                'px-3 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]';
 
             renderMensualChart();
             renderMensualTable();
@@ -1240,18 +1262,18 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            labels: { color: isDark ? '#cbd5e1' : '#090d16', font: { family: 'Sora', size: 11, weight: 'bold' } }
+                            labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 11, weight: 'bold' } }
                         }
                     },
                     scales: {
                         x: { 
                             grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
-                            ticks: { color: isDark ? '#cbd5e1' : '#090d16', font: { family: 'Sora' } } 
+                            ticks: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora' } } 
                         },
                         y: { 
                             grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
                             ticks: { 
-                                color: isDark ? '#cbd5e1' : '#090d16',
+                                color: isDark ? '#cbd5e1' : '#0f172a',
                                 font: { family: 'JetBrains Mono' },
                                 callback: val => '$ ' + (val/1000).toFixed(0) + 'k M'
                             } 
@@ -1275,7 +1297,7 @@
                 const tr = document.createElement('tr');
                 const tot = h.total_mercado || 0;
                 tr.innerHTML = `
-                    <td class="py-2.5 px-3 font-semibold theme-text-primary">${h.date || `${h.month}/${h.year}`}</td>
+                    <td class="py-2.5 px-3 font-semibold txt-primary">${h.date || `${h.month}/${h.year}`}</td>
                     <td class="py-2.5 px-3 text-right font-mono font-bold text-[#e20039]">${fmtARS(tot)}</td>
                     <td class="py-2.5 px-3 text-right font-mono">${fmtARS(h.total_patrimoniales || tot * 0.85)}</td>
                     <td class="py-2.5 px-3 text-right font-mono">${fmtARS(h.total_personas || tot * 0.15)}</td>
@@ -1321,7 +1343,7 @@
             let lsPos = '-';
 
             items.forEach((item, idx) => {
-                const entidad = (item.entidad || item.nombre || item.grupo || '').trim();
+                const entidad = (item.entidad || item.nombre || item.name || item.grupo || '').trim();
                 const prima = item.prima_ars_m || item.prima || item.monto || 0;
                 const part = item.share || item.participacion || 0;
                 const pos = item.rank || item.posicion || (idx + 1);
@@ -1340,15 +1362,15 @@
                 if (isLaSegunda) tr.className = 'highlight-lasegunda font-bold';
 
                 tr.innerHTML = `
-                    <td class="py-3 px-3 text-center font-bold font-mono ${pos <= 3 ? 'text-[#e20039]' : 'theme-text-muted'}">${pos}</td>
-                    <td class="py-3 px-3 font-semibold theme-text-primary flex items-center gap-2">
+                    <td class="py-3 px-3 text-center font-bold font-mono ${pos <= 3 ? 'text-[#e20039]' : 'txt-muted'}">${pos}</td>
+                    <td class="py-3 px-3 font-semibold txt-primary flex items-center gap-2">
                         ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
                         <span>${entidad}</span>
                     </td>
                     <td class="py-3 px-3 text-right font-mono">${fmtARS(prima)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'theme-text-secondary'}">${fmtPct(part)}</td>
+                    <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'txt-secondary'}">${fmtPct(part)}</td>
                     <td class="py-3 px-3 text-center">
-                        <button onclick="compareWithEntity('${entidad.replace(/'/g, "\'")}')" class="px-2 py-1 rounded theme-card-subtle hover:border-[#e20039] theme-text-secondary hover:text-[#e20039] text-[10px] font-mono transition-all font-semibold" title="Comparar en Cara a Cara">
+                        <button onclick="compareWithEntity('${entidad.replace(/'/g, "\'")}')" class="px-2 py-1 rounded subtle-card hover:border-[#e20039] txt-secondary hover:text-[#e20039] text-[10px] font-mono transition-all font-semibold" title="Comparar en Cara a Cara">
                             <i class="fas fa-arrows-split-up-and-left"></i> Comparar
                         </button>
                     </td>
@@ -1375,9 +1397,9 @@
             if (!ctx) return;
 
             const isDark = document.documentElement.classList.contains('dark');
-            const labels = items.map(i => (i.entidad || i.nombre || '').substring(0, 16));
+            const labels = items.map(i => (i.entidad || i.nombre || i.name || '').substring(0, 16));
             const shares = items.map(i => i.share || i.participacion || 0);
-            const colors = items.map(i => (i.entidad || '').toUpperCase().includes('SEGUNDA') ? '#e20039' : '#4183ca');
+            const colors = items.map(i => (i.entidad || i.nombre || i.name || '').toUpperCase().includes('SEGUNDA') ? '#e20039' : '#4183ca');
 
             if (charts.rankingBar) charts.rankingBar.destroy();
 
@@ -1401,12 +1423,12 @@
                     scales: {
                         x: { 
                             grid: { display: false }, 
-                            ticks: { color: isDark ? '#cbd5e1' : '#090d16', font: { family: 'Sora', size: 10, weight: '600' } } 
+                            ticks: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10, weight: '600' } } 
                         },
                         y: { 
                             grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
                             ticks: { 
-                                color: isDark ? '#cbd5e1' : '#090d16',
+                                color: isDark ? '#cbd5e1' : '#0f172a',
                                 font: { family: 'JetBrains Mono' },
                                 callback: val => val + '%' 
                             } 
@@ -1421,7 +1443,7 @@
             if (!items.length) return;
             let csv = "Posicion,Entidad,Primas_ARS_M,Participacion_Pct\n";
             items.forEach((item, idx) => {
-                const entidad = (item.entidad || item.nombre || '').replace(/,/g, '');
+                const entidad = (item.entidad || item.nombre || item.name || '').replace(/,/g, '');
                 const prima = item.prima_ars_m || item.prima || 0;
                 const part = item.share || item.participacion || 0;
                 csv += `${item.rank || item.posicion || (idx+1)},"${entidad}",${prima},${part}\n`;
@@ -1449,7 +1471,7 @@
             tbody.innerHTML = '';
 
             if (!d26 || typeof d26 !== 'object' || Object.keys(d26).length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center theme-text-muted">No hay balances registrados para este segmento.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center txt-muted">No hay balances registrados para este segmento.</td></tr>';
                 return;
             }
 
@@ -1463,14 +1485,14 @@
                 if (isLaSegunda) tr.className = 'highlight-lasegunda font-bold';
 
                 tr.innerHTML = `
-                    <td class="py-3 px-3 font-semibold theme-text-primary flex items-center gap-2">
+                    <td class="py-3 px-3 font-semibold txt-primary flex items-center gap-2">
                         ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
                         <span>${entidad}</span>
                     </td>
                     <td class="py-3 px-3 text-right font-mono">${fmtARS(row.Inversiones || row.inversiones)}</td>
                     <td class="py-3 px-3 text-right font-mono">${fmtARS(row.Activos || row.activos)}</td>
                     <td class="py-3 px-3 text-right font-mono">${fmtARS(row['Compromisos Técnicos'] || row.compromisos_tecnicos)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'theme-text-primary'}">${fmtARS(row['Patrimonio Neto'] || row.patrimonio_neto)}</td>
+                    <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'txt-primary'}">${fmtARS(row['Patrimonio Neto'] || row.patrimonio_neto)}</td>
                     <td class="py-3 px-3 text-right font-mono ${(row['Resultado del Ejercicio'] || 0) >= 0 ? 'text-[#3ac792] font-bold' : 'text-[#e20039] font-bold'}">${fmtARS(row['Resultado del Ejercicio'] || row.resultado)}</td>
                 `;
                 tbody.appendChild(tr);
@@ -1502,8 +1524,8 @@
             ramos.forEach(r => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td class="py-3 px-3 font-semibold theme-text-primary">${r.ramo}</td>
-                    <td class="py-3 px-3 theme-text-secondary">${r.empresa}</td>
+                    <td class="py-3 px-3 font-semibold txt-primary">${r.ramo}</td>
+                    <td class="py-3 px-3 txt-secondary">${r.empresa}</td>
                     <td class="py-3 px-3 text-right font-mono font-bold text-[#e20039]">${fmtARS(r.monto)}</td>
                     <td class="py-3 px-3 text-right font-mono font-semibold">${fmtPct(r.share_grupo)}</td>
                     <td class="py-3 px-3 text-center"><span class="brand-badge bg-[#3ac792]/15 text-[#3ac792]">${r.pos}</span></td>
@@ -1534,7 +1556,7 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#090d16', font: { family: 'Sora', size: 10, weight: 'bold' } } }
+                        legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10, weight: 'bold' } } }
                     }
                 }
             });
@@ -1543,10 +1565,10 @@
             const tbody = document.getElementById('tbl-sp-personas-body');
             if (tbody) {
                 tbody.innerHTML = `
-                    <tr><td class="py-2.5 px-3 font-semibold theme-text-primary">Vida Colectivo</td><td class="py-2.5 px-3 text-right font-mono">$ 1.686.901 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">58.2%</td></tr>
-                    <tr><td class="py-2.5 px-3 font-semibold theme-text-primary">Vida Individual</td><td class="py-2.5 px-3 text-right font-mono">$ 536.214 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">18.5%</td></tr>
-                    <tr><td class="py-2.5 px-3 font-semibold theme-text-primary">Accidentes Personales</td><td class="py-2.5 px-3 text-right font-mono">$ 472.448 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">16.3%</td></tr>
-                    <tr><td class="py-2.5 px-3 font-semibold theme-text-primary">Salud, Sepelio y Otros</td><td class="py-2.5 px-3 text-right font-mono">$ 202.894 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">7.0%</td></tr>
+                    <tr><td class="py-2.5 px-3 font-semibold txt-primary">Vida Colectivo</td><td class="py-2.5 px-3 text-right font-mono">$ 1.686.901 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">58.2%</td></tr>
+                    <tr><td class="py-2.5 px-3 font-semibold txt-primary">Vida Individual</td><td class="py-2.5 px-3 text-right font-mono">$ 536.214 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">18.5%</td></tr>
+                    <tr><td class="py-2.5 px-3 font-semibold txt-primary">Accidentes Personales</td><td class="py-2.5 px-3 text-right font-mono">$ 472.448 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">16.3%</td></tr>
+                    <tr><td class="py-2.5 px-3 font-semibold txt-primary">Salud, Sepelio y Otros</td><td class="py-2.5 px-3 text-right font-mono">$ 202.894 M</td><td class="py-2.5 px-3 text-right font-mono font-bold">7.0%</td></tr>
                 `;
             }
         }
@@ -1568,7 +1590,7 @@
                 if (isLaSegunda) tr.className = 'highlight-lasegunda font-bold';
 
                 tr.innerHTML = `
-                    <td class="py-3 px-3 font-semibold theme-text-primary flex items-center gap-2">
+                    <td class="py-3 px-3 font-semibold txt-primary flex items-center gap-2">
                         ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
                         <span>${entidad}</span>
                     </td>
@@ -1613,7 +1635,7 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#090d16', font: { family: 'Sora', size: 10, weight: 'bold' } } }
+                            legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10, weight: 'bold' } } }
                         }
                     }
                 });
@@ -1636,7 +1658,7 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#090d16', font: { family: 'Sora', size: 10, weight: 'bold' } } }
+                            legend: { position: 'bottom', labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10, weight: 'bold' } } }
                         }
                     }
                 });
@@ -1649,7 +1671,7 @@
                 instList.forEach(item => {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td class="py-3 px-3 font-semibold theme-text-primary flex items-center gap-2">
+                        <td class="py-3 px-3 font-semibold txt-primary flex items-center gap-2">
                             <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${item.color}"></span>
                             <span>${item.instrumento}</span>
                         </td>
@@ -1675,7 +1697,7 @@
             sel2.innerHTML = '';
 
             entities.forEach(e => {
-                const name = (e.entidad || e.nombre || '').trim();
+                const name = (e.entidad || e.nombre || e.name || '').trim();
                 const opt1 = new Option(name, name);
                 const opt2 = new Option(name, name);
                 sel1.add(opt1);
@@ -1700,36 +1722,36 @@
 
             function buildCard(entidadName, colorClass) {
                 return `
-                    <div class="theme-card-subtle rounded-2xl p-6 relative overflow-hidden">
-                        <div class="flex items-center gap-3 pb-4 border-b mb-4" style="border-color: var(--border-primary);">
+                    <div class="subtle-card rounded-2xl p-6 relative overflow-hidden">
+                        <div class="flex items-center gap-3 pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-[#e20039]/10 flex items-center justify-center text-[#e20039] font-bold text-lg">
                                 <i class="fas fa-shield-halved"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-base theme-text-primary">${entidadName}</h3>
-                                <span class="text-xs theme-text-muted font-mono">Entidad Aseguradora SSN</span>
+                                <h3 class="font-bold text-base txt-primary">${entidadName}</h3>
+                                <span class="text-xs txt-muted font-mono">Entidad Aseguradora SSN</span>
                             </div>
                         </div>
                         <div class="space-y-4 font-mono text-xs">
-                            <div class="flex justify-between p-2.5 rounded-lg theme-card">
-                                <span class="theme-text-secondary">Primas Emitidas Totales:</span>
+                            <div class="flex justify-between p-2.5 rounded-lg main-card">
+                                <span class="txt-secondary">Primas Emitidas Totales:</span>
                                 <span class="font-bold text-[#e20039] font-mono">${entidadName.includes('SEGUNDA') ? '$ 709.475 M' : '$ 1.884.921 M'}</span>
                             </div>
-                            <div class="flex justify-between p-2.5 rounded-lg theme-card">
-                                <span class="theme-text-secondary">Market Share Nacional:</span>
-                                <span class="font-bold theme-text-primary font-mono">${entidadName.includes('SEGUNDA') ? '3.66% (Grupo > 6%)' : '9.71%'}</span>
+                            <div class="flex justify-between p-2.5 rounded-lg main-card">
+                                <span class="txt-secondary">Market Share Nacional:</span>
+                                <span class="font-bold txt-primary font-mono">${entidadName.includes('SEGUNDA') ? '3.66% (Grupo > 6%)' : '9.71%'}</span>
                             </div>
-                            <div class="flex justify-between p-2.5 rounded-lg theme-card">
-                                <span class="theme-text-secondary">Posición en Automotores:</span>
+                            <div class="flex justify-between p-2.5 rounded-lg main-card">
+                                <span class="txt-secondary">Posición en Automotores:</span>
                                 <span class="font-bold text-[#3ac792]">#4 Nacional</span>
                             </div>
-                            <div class="flex justify-between p-2.5 rounded-lg theme-card">
-                                <span class="theme-text-secondary">Posición en ART:</span>
+                            <div class="flex justify-between p-2.5 rounded-lg main-card">
+                                <span class="txt-secondary">Posición en ART:</span>
                                 <span class="font-bold text-[#4183ca]">#5 Nacional</span>
                             </div>
-                            <div class="flex justify-between p-2.5 rounded-lg theme-card">
-                                <span class="theme-text-secondary">Patrimonio Neto:</span>
-                                <span class="font-bold theme-text-primary font-mono">${entidadName.includes('SEGUNDA') ? '$ 315.420 M' : '$ 742.110 M'}</span>
+                            <div class="flex justify-between p-2.5 rounded-lg main-card">
+                                <span class="txt-secondary">Patrimonio Neto:</span>
+                                <span class="font-bold txt-primary font-mono">${entidadName.includes('SEGUNDA') ? '$ 315.420 M' : '$ 742.110 M'}</span>
                             </div>
                         </div>
                     </div>
@@ -1749,7 +1771,7 @@
         }
 
         function updateAllChartsTheme(isDark) {
-            const labelColor = isDark ? '#cbd5e1' : '#090d16';
+            const labelColor = isDark ? '#cbd5e1' : '#0f172a';
             const gridColor = isDark ? '#1e293b' : '#e2e8f0';
 
             Object.values(charts).forEach(c => {
