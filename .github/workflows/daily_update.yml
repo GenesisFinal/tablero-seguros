@@ -1,0 +1,58 @@
+name: Actualización y Verificación Diaria del Tablero de Seguros
+
+on:
+  schedule:
+    # Corre todos los días a las 09:00 UTC (06:00 AM hora de Argentina)
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  validate-update-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas openpyxl urllib3
+
+      - name: Ejecutar Actualizador Maestro y Auditoría Diaria de Valores
+        env:
+          TZ: 'America/Argentina/Buenos_Aires'
+        run: |
+          python actualizar_tablero.py
+
+      - name: Commit y Push de Actualizaciones Automáticas
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update y verificación diaria SSN [skip ci]" && git push)
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir Artefactos de GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
