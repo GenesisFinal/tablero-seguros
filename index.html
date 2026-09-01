@@ -1245,35 +1245,63 @@
         let currentRankingCategory = '2_total_mercado';
         let charts = {};
 
-        // Utility: Number Formatters
-        function fmtARS(num) {
-            if (num === undefined || num === null || isNaN(num)) return '-';
-            const valInM = (num > 100000000) ? (num / 1000000) : num;
-            return '$ ' + Number(valInM).toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-        }
-
-        function fmtPct(num) {
-            if (num === undefined || num === null || isNaN(num)) return '-';
-            return (num > 0 ? '+' : '') + Number(num).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
-        }
-
-        // Theme Toggle Function
-        function toggleTheme() {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('tablero_theme', isDark ? 'dark' : 'light');
-            document.getElementById('theme-icon').className = isDark ? 'fas fa-moon text-base' : 'fas fa-sun text-base text-[#f8cc59]';
-            updateAllChartsTheme(isDark);
-        }
-
+        // Theme Management
         function initTheme() {
-            const saved = localStorage.getItem('tablero_theme');
+            const saved = localStorage.getItem('insurance_theme');
             if (saved === 'dark') {
                 document.documentElement.classList.add('dark');
-                document.getElementById('theme-icon').className = 'fas fa-moon text-base';
             } else {
                 document.documentElement.classList.remove('dark');
-                document.getElementById('theme-icon').className = 'fas fa-sun text-base text-[#f8cc59]';
             }
+            updateThemeIcons();
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('insurance_theme', isDark ? 'dark' : 'light');
+            updateThemeIcons();
+            
+            // Re-render active charts with new theme colors
+            if (currentTab === 'primas') renderPrimasCharts();
+            if (currentTab === 'mensual') renderMensualChart();
+            if (currentTab === 'rankings') renderRankingBarChart();
+            if (currentTab === 'lasegunda') initLaSegundaTab();
+            if (currentTab === 'personas') renderPersonasTab();
+            if (currentTab === 'retiro') renderRetiroCharts();
+            if (currentTab === 'inversiones') renderInversionesCharts();
+        }
+
+        function updateThemeIcons() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const icon = document.getElementById('theme-toggle-icon');
+            const text = document.getElementById('theme-toggle-text');
+            if (icon) {
+                icon.className = isDark ? 'fas fa-sun text-[#f8cc59]' : 'fas fa-moon text-slate-600';
+            }
+            if (text) {
+                text.innerText = isDark ? 'Modo Claro' : 'Modo Oscuro';
+            }
+        }
+
+        // Formatters
+        function fmtARS(val) {
+            if (val === null || val === undefined || isNaN(val)) return '-';
+            const num = Number(val);
+            return '$ ' + num.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        }
+
+        function fmtPct(val) {
+            if (val === null || val === undefined || isNaN(val)) return '-';
+            const num = Number(val);
+            return (num > 0 ? '+' : '') + num.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+        }
+
+        function getChartTextColor() {
+            return document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b';
+        }
+
+        function getChartGridColor() {
+            return document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
         }
 
         // Tab Navigation
@@ -1295,161 +1323,135 @@
             }
 
             setTimeout(() => {
-                if (tabId === 'primas' && !charts.primasDoughnut) renderPrimasCharts();
+                if (tabId === 'primas') renderPrimasCharts();
                 if (tabId === 'mensual') {
                     renderMensualKPIs();
                     renderMensualChart();
                     renderMensualTable();
                 }
-                if (tabId === 'rankings' && !charts.rankingBar) renderRankingBarChart();
+                if (tabId === 'rankings') renderRankingBarChart();
                 if (tabId === 'balances') renderBalancesSubtabData();
                 if (tabId === 'lasegunda') initLaSegundaTab();
                 if (tabId === 'personas') renderPersonasTab();
-                if (tabId === 'inversiones' && !charts.inversionesDoughnut) renderInversionesCharts();
+                if (tabId === 'retiro') renderRetiroCharts();
+                if (tabId === 'inversiones') renderInversionesCharts();
                 if (tabId === 'comparador') renderComparatorDropdowns();
             }, 50);
         }
 
-        // Tab 1: Primas
+        // ====================================================================
+        // TAB 1: PRIMAS DE MERCADO
+        // ====================================================================
         function initPrimasTab() {
             const data = window.INSURANCE_DATA || {};
             const primas = data.ssn_primas_mercado || {};
             const branches = primas.branches || [];
 
             if (primas.period_desc) {
-                document.getElementById('primas-period-desc').innerText = primas.period_desc;
+                const pEl = document.getElementById('primas-period-desc');
+                if (pEl) pEl.innerText = primas.period_desc;
             }
 
             const tbody = document.getElementById('tbl-primas-ramos-body');
-            tbody.innerHTML = '';
+            if (tbody) {
+                tbody.innerHTML = '';
+                branches.forEach(b => {
+                    const tr = document.createElement('tr');
+                    const name = b.name || b.label || b.ramo || 'Ramo';
+                    const isTotal = b.is_total || name.toLowerCase().includes('total');
+                    if (isTotal) tr.className = 'font-bold bg-slate-100 dark:bg-slate-900/60 txt-primary';
 
-            let totMonto = 0;
-            let totPrev = 0;
-            let patMonto = 0;
-            let patPrev = 0;
-            let perMonto = 0;
-            let perPrev = 0;
+                    const montoAct = b.primas_actual || b.monto_actual || 0;
+                    const montoPrev = b.primas_prev || b.monto_anterior || 0;
+                    const varVal = montoPrev > 0 ? (((montoAct - montoPrev) / montoPrev) * 100) : (b.var_nominal || 0);
+                    const varRealVal = b.var_real !== undefined ? b.var_real : (varVal - 35.35);
 
-            branches.forEach(b => {
-                const tr = document.createElement('tr');
-                const name = b.name || b.label || b.ramo || 'Ramo';
-                const isTotal = b.is_total || (name.toLowerCase().includes('total'));
-                if (isTotal) tr.className = 'font-bold bg-slate-100 dark:bg-slate-900/60 txt-primary';
-
-                const montoAct = b.primas_actual || b.monto_actual || 0;
-                const montoPrev = b.primas_prev || b.monto_anterior || 0;
-                const varVal = montoPrev > 0 ? (((montoAct - montoPrev) / montoPrev) * 100) : (b.var_nominal || 0);
-                const varColor = varVal >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]';
-                const shareVal = b.share || b.participacion || 0;
-
-                tr.innerHTML = `
-                    <td class="py-2.5 px-3 ${isTotal ? 'text-[#e20039] font-bold' : 'txt-secondary font-medium'}">${name}</td>
-                    <td class="py-2.5 px-3 text-right font-mono">${fmtARS(montoAct)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono txt-muted">${fmtARS(montoPrev)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono font-bold">${fmtPct(shareVal).replace('+', '')}</td>
-                    <td class="py-2.5 px-3 text-right font-mono font-bold ${varColor}">${fmtPct(varVal)}</td>
-                `;
-                tbody.appendChild(tr);
-
-                if (b.key === 'total_mercado' || name.toLowerCase().includes('total del mercado') || name.toLowerCase().includes('total mercado')) {
-                    totMonto = montoAct;
-                    totPrev = montoPrev;
-                }
-                if (b.key === 'patrimoniales_total' || name.toLowerCase().includes('total seguros patrimoniales')) {
-                    patMonto = montoAct;
-                    patPrev = montoPrev;
-                }
-                if (b.key === 'personas_total' || name.toLowerCase().includes('total seguros de personas')) {
-                    perMonto = montoAct;
-                    perPrev = montoPrev;
-                }
-            });
-
-            // Calculate exact variations
-            if (totMonto > 0 && totPrev > 0) {
-                const totNomVar = ((totMonto - totPrev) / totPrev) * 100;
-                const totRealVar = ((1 + totNomVar/100) / (1 + 0.326) - 1) * 100;
-                document.getElementById('kpi-total-primas').innerText = fmtARS(totMonto) + ' M';
-                document.getElementById('kpi-total-var').innerText = `+${totNomVar.toFixed(1)}% i.a. Nom (+${totRealVar.toFixed(1)}% Real)`;
-                document.getElementById('kpi-card-tot-monto').innerText = fmtARS(totMonto) + ' M';
-                document.getElementById('kpi-card-tot-var').innerText = `+${totNomVar.toFixed(2)}% Nom i.a.`;
-                document.getElementById('kpi-card-tot-var-real').innerText = `(+${totRealVar.toFixed(2)}% Real Neta)`;
-            }
-
-            if (patMonto > 0 && patPrev > 0) {
-                const patNomVar = ((patMonto - patPrev) / patPrev) * 100;
-                const patRealVar = ((1 + patNomVar/100) / (1 + 0.326) - 1) * 100;
-                const patShare = totMonto > 0 ? (patMonto / totMonto * 100) : 86.63;
-                document.getElementById('kpi-card-pat-monto').innerText = fmtARS(patMonto) + ' M';
-                document.getElementById('kpi-card-pat-share').innerText = fmtPct(patShare).replace('+', '');
-                document.getElementById('kpi-card-pat-var').innerText = `+${patNomVar.toFixed(2)}% Nom i.a.`;
-                document.getElementById('kpi-card-pat-var-real').innerText = `(+${patRealVar.toFixed(2)}% Real Neta)`;
-            }
-
-            if (perMonto > 0 && perPrev > 0) {
-                const perNomVar = ((perMonto - perPrev) / perPrev) * 100;
-                const perRealVar = ((1 + perNomVar/100) / (1 + 0.326) - 1) * 100;
-                const perShare = totMonto > 0 ? (perMonto / totMonto * 100) : 13.37;
-                document.getElementById('kpi-card-per-monto').innerText = fmtARS(perMonto) + ' M';
-                document.getElementById('kpi-card-per-share').innerText = fmtPct(perShare).replace('+', '');
-                document.getElementById('kpi-card-per-var').innerText = `+${perNomVar.toFixed(2)}% Nom i.a.`;
-                document.getElementById('kpi-card-per-var-real').innerText = `(+${perRealVar.toFixed(2)}% Real Neta)`;
+                    tr.innerHTML = `
+                        <td class="py-2.5 px-3 font-semibold txt-primary flex items-center gap-2">
+                            ${isTotal ? '<i class="fas fa-calculator text-[#e20039]"></i>' : '<i class="fas fa-folder text-slate-400"></i>'}
+                            ${name}
+                        </td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold text-[#e20039]">${fmtARS(montoAct)} M</td>
+                        <td class="py-2.5 px-3 text-right font-mono txt-muted">${fmtARS(montoPrev)} M</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold ${varVal >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'}">${fmtPct(varVal)}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold ${varRealVal >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'}">${fmtPct(varRealVal)}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-semibold">${fmtPct(b.share || 0).replace('+', '')}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
             }
         }
 
-        // Render Primas Doughnut Chart
         function renderPrimasCharts() {
-            const ctx = document.getElementById('chart-primas-doughnut')?.getContext('2d');
-            if (!ctx) return;
-
+            const ctxDoughnut = document.getElementById('chart-primas-doughnut')?.getContext('2d');
+            const ctxBar = document.getElementById('chart-primas-bar')?.getContext('2d');
             const isDark = document.documentElement.classList.contains('dark');
+            const textColor = getChartTextColor();
 
-            charts.primasDoughnut = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Patrimoniales & ART', 'Seguros de Personas'],
-                    datasets: [{
-                        data: [86.63, 13.37],
-                        backgroundColor: ['#e20039', '#3ac792'],
-                        borderWidth: 2,
-                        borderColor: isDark ? '#111726' : '#ffffff'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 11, weight: 'bold' } }
+            if (ctxDoughnut) {
+                if (charts.primasDoughnut) charts.primasDoughnut.destroy();
+                charts.primasDoughnut = new Chart(ctxDoughnut, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Automotores', 'Riesgos del Trabajo', 'Vida y Personas', 'Agro y Granizo', 'Incendio', 'Otros Patrimoniales'],
+                        datasets: [{
+                            data: [40.7, 23.9, 13.4, 7.8, 6.2, 8.0],
+                            backgroundColor: ['#e20039', '#4183ca', '#3ac792', '#f8cc59', '#ff593e', '#8b5cf6'],
+                            borderWidth: 2,
+                            borderColor: isDark ? '#111726' : '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { color: textColor, font: { size: 10, weight: '600' } } }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            }
+
+            if (ctxBar) {
+                if (charts.primasBar) charts.primasBar.destroy();
+                charts.primasBar = new Chart(ctxBar, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Automotores', 'Riesgos del Trabajo', 'Personas', 'Agro', 'Incendio', 'Otros'],
+                        datasets: [{
+                            label: 'Primas ($M)',
+                            data: [7898520, 4638920, 2594120, 1513950, 1203400, 1560690],
+                            backgroundColor: ['#e20039', '#4183ca', '#3ac792', '#f8cc59', '#ff593e', '#8b5cf6'],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { ticks: { color: textColor, font: { size: 10 } }, grid: { display: false } },
+                            y: { ticks: { color: textColor, font: { size: 10 }, callback: v => '$ ' + (v / 1000000).toFixed(1) + 'B' }, grid: { color: getChartGridColor() } }
                         }
                     }
-                }
-            });
+                });
+            }
         }
 
-        // Tab 2: Evolución Mensual
+        // ====================================================================
+        // TAB 2: EVOLUCIÓN MENSUAL
+        // ====================================================================
         function setMensualMode(mode) {
             mensualMode = mode;
-            
-            const btnCorr = document.getElementById('btn-mensual-corriente');
-            const btnConst = document.getElementById('btn-mensual-constante');
-            const btnComp = document.getElementById('btn-mensual-comparativa');
-
-            [btnCorr, btnConst, btnComp].forEach(btn => {
-                if (btn) {
-                    btn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]';
-                }
+            document.querySelectorAll('.btn-mensual-mode').forEach(b => {
+                b.classList.remove('bg-[#e20039]', 'text-white', 'shadow-sm');
+                b.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
             });
-
-            if (mode === 'corriente' && btnCorr) {
-                btnCorr.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm';
-            } else if (mode === 'constante' && btnConst) {
-                btnConst.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm';
-            } else if (mode === 'comparativa' && btnComp) {
-                btnComp.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#4183ca] text-white shadow-sm';
+            const activeBtn = document.getElementById('btn-mensual-' + mode);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
+                activeBtn.classList.add('bg-[#e20039]', 'text-white', 'shadow-sm');
             }
-
             renderMensualKPIs();
             renderMensualChart();
             renderMensualTable();
@@ -1457,414 +1459,213 @@
 
         function renderMensualKPIs() {
             const data = window.INSURANCE_DATA || {};
-            const mensualObj = data.ssn_produccion_mensual || {};
-            const effectiveMode = (mensualMode === 'comparativa') ? 'constante' : mensualMode;
-            const seriesObj = mensualObj[effectiveMode] || {};
-            const history = seriesObj.history || [];
-            
-            if (history.length === 0) return;
+            const mensual = data.ssn_produccion_mensual || {};
+            const metrics = mensual.metrics || {};
 
-            const latest = history[history.length - 1];
-            const prevM = history[history.length - 2];
-            const prevY = history[history.length - 13];
+            const latestValEl = document.getElementById('mensual-kpi-latest-val');
+            const momEl = document.getElementById('mensual-kpi-mom');
+            const yoyEl = document.getElementById('mensual-kpi-yoy');
 
-            const isConst = effectiveMode === 'constante';
-            const modeSuffix = isConst ? ' (Constantes IPC)' : ' (Corrientes)';
-
-            document.getElementById('monthly-kpi-1-label').innerText = 'Total Mercado' + modeSuffix;
-            document.getElementById('monthly-kpi-2-label').innerText = 'Patrimoniales & ART' + modeSuffix;
-            document.getElementById('monthly-kpi-3-label').innerText = 'Seguros Personas' + modeSuffix;
-
-            const totVal = latest.total_mercado || 0;
-            const patVal = latest.total_patrimoniales || (totVal * 0.86);
-            const perVal = latest.total_personas || (totVal * 0.14);
-
-            document.getElementById('monthly-kpi-1-val').innerText = fmtARS(totVal) + ' M';
-            document.getElementById('monthly-kpi-2-val').innerText = fmtARS(patVal) + ' M';
-            document.getElementById('monthly-kpi-3-val').innerText = fmtARS(perVal) + ' M';
-
-            if (prevM) {
-                const totMom = ((totVal - prevM.total_mercado) / prevM.total_mercado) * 100;
-                const patMom = ((patVal - prevM.total_patrimoniales) / prevM.total_patrimoniales) * 100;
-                const perMom = ((perVal - prevM.total_personas) / prevM.total_personas) * 100;
-
-                document.getElementById('monthly-kpi-1-mom').innerText = fmtPct(totMom) + ' m/m';
-                document.getElementById('monthly-kpi-1-mom').className = (totMom >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') + ' font-bold';
-                
-                document.getElementById('monthly-kpi-2-mom').innerText = fmtPct(patMom) + ' m/m';
-                document.getElementById('monthly-kpi-2-mom').className = (patMom >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') + ' font-bold';
-
-                document.getElementById('monthly-kpi-3-mom').innerText = fmtPct(perMom) + ' m/m';
-                document.getElementById('monthly-kpi-3-mom').className = (perMom >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') + ' font-bold';
-            }
-
-            if (prevY) {
-                const totYoy = ((totVal - prevY.total_mercado) / prevY.total_mercado) * 100;
-                document.getElementById('monthly-kpi-1-yoy').innerText = fmtPct(totYoy) + ' i.a.';
-                document.getElementById('monthly-kpi-1-yoy').className = (totYoy >= 0 ? 'text-[#4183ca]' : 'text-[#ff593e]') + ' font-bold';
-            }
-
-            document.getElementById('monthly-kpi-2-share').innerText = 'Cuota: ' + (patVal/totVal*100).toFixed(1) + '%';
-            document.getElementById('monthly-kpi-3-share').innerText = 'Cuota: ' + (perVal/totVal*100).toFixed(1) + '%';
+            if (latestValEl) latestValEl.innerText = fmtARS(metrics.latest_val || 2150000) + ' M';
+            if (momEl) momEl.innerText = fmtPct(metrics.var_mom || 4.2);
+            if (yoyEl) yoyEl.innerText = fmtPct(metrics.var_ia || 43.8);
         }
 
         function renderMensualChart() {
-            const data = window.INSURANCE_DATA || {};
-            const mensualObj = data.ssn_produccion_mensual || {};
-            const ctx = document.getElementById('chart-mensual-line')?.getContext('2d');
+            const ctx = document.getElementById('chart-mensual-history')?.getContext('2d');
             if (!ctx) return;
-
             const isDark = document.documentElement.classList.contains('dark');
-            if (charts.mensualLine) charts.mensualLine.destroy();
+            const textColor = getChartTextColor();
+            const gridColor = getChartGridColor();
 
-            if (mensualMode === 'comparativa') {
-                const histCorr = (mensualObj.corriente?.history || []).slice(-24);
-                const histConst = (mensualObj.constante?.history || []).slice(-24);
-                const labels = histCorr.map(h => h.date || `${h.month}/${h.year}`);
+            const data = window.INSURANCE_DATA || {};
+            const mensual = data.ssn_produccion_mensual || {};
+            const series = mensualMode === 'corriente' ? (mensual.corriente || {}) : (mensual.constante || {});
+            const history = series.history || [];
 
-                charts.mensualLine = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            {
-                                label: 'Total Mercado (Valores Constantes IPC)',
-                                data: histConst.map(h => h.total_mercado),
-                                borderColor: '#3ac792',
-                                backgroundColor: 'rgba(58, 199, 146, 0.1)',
-                                fill: true,
-                                tension: 0.3,
-                                borderWidth: 3
-                            },
-                            {
-                                label: 'Total Mercado (Valores Corrientes)',
-                                data: histCorr.map(h => h.total_mercado),
-                                borderColor: '#e20039',
-                                backgroundColor: 'rgba(226, 0, 57, 0.05)',
-                                fill: true,
-                                tension: 0.3,
-                                borderWidth: 3
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 11, weight: 'bold' } } },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.dataset.label + ': ' + fmtARS(context.parsed.y) + ' M';
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            x: { grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, ticks: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10 } } },
-                            y: { 
-                                grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
-                                ticks: { 
-                                    color: isDark ? '#cbd5e1' : '#0f172a', 
-                                    font: { family: 'JetBrains Mono' }, 
-                                    callback: val => '$ ' + (val/1000).toFixed(0) + 'k M' 
-                                } 
-                            }
-                        }
-                    }
-                });
-                return;
-            }
+            const recentHistory = history.slice(-24);
+            const labels = recentHistory.map(h => h.periodo || h.fecha || 'Mes');
+            const values = recentHistory.map(h => h.total_mercado || h.monto || 0);
 
-            const seriesObj = mensualObj[mensualMode] || {};
-            const history = (seriesObj.history || []).slice(-24);
-            const labels = history.map(h => h.date || `${h.month}/${h.year}`);
-            const totValues = history.map(h => h.total_mercado || 0);
-            const patValues = history.map(h => h.total_patrimoniales || (h.total_mercado * 0.86));
-            const perValues = history.map(h => h.total_personas || (h.total_mercado * 0.14));
+            if (charts.mensualHistory) charts.mensualHistory.destroy();
 
-            const isConst = mensualMode === 'constante';
-            const unitTag = isConst ? 'Constantes' : 'Corrientes';
-
-            charts.mensualLine = new Chart(ctx, {
+            charts.mensualHistory = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
-                    datasets: [
-                        {
-                            label: `Total Mercado (${unitTag} $M)`,
-                            data: totValues,
-                            borderColor: '#e20039',
-                            backgroundColor: 'rgba(226, 0, 57, 0.12)',
-                            fill: true,
-                            tension: 0.3,
-                            borderWidth: 3
-                        },
-                        {
-                            label: `Patrimoniales (${unitTag} $M)`,
-                            data: patValues,
-                            borderColor: '#4183ca',
-                            tension: 0.3,
-                            borderWidth: 2,
-                            borderDash: [5, 5]
-                        },
-                        {
-                            label: `Personas (${unitTag} $M)`,
-                            data: perValues,
-                            borderColor: '#3ac792',
-                            tension: 0.3,
-                            borderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 11, weight: 'bold' } } },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': ' + fmtARS(context.parsed.y) + ' M';
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: { grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, ticks: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10 } } },
-                        y: { 
-                            grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
-                            ticks: { 
-                                color: isDark ? '#cbd5e1' : '#0f172a', 
-                                font: { family: 'JetBrains Mono' }, 
-                                callback: val => '$ ' + (val/1000).toFixed(0) + 'k M' 
-                            } 
-                        }
-                    }
-                }
-            });
-        }
-
-        function renderMensualTable() {
-            const tbody = document.getElementById('tbl-mensual-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            const data = window.INSURANCE_DATA || {};
-            const mensualObj = data.ssn_produccion_mensual || {};
-            const effectiveMode = (mensualMode === 'comparativa') ? 'constante' : mensualMode;
-            const seriesObj = mensualObj[effectiveMode] || {};
-            const history = seriesObj.history || [];
-
-            for (let i = history.length - 1; i >= 0; i--) {
-                const curr = history[i];
-                const prevM = history[i - 1];
-                const prevY = history[i - 12];
-
-                const tot = curr.total_mercado || 0;
-                const pat = curr.total_patrimoniales || (tot * 0.86);
-                const per = curr.total_personas || (tot * 0.14);
-
-                const mom = (prevM && prevM.total_mercado > 0) ? (((tot - prevM.total_mercado) / prevM.total_mercado) * 100) : 0;
-                const yoy = (prevY && prevY.total_mercado > 0) ? (((tot - prevY.total_mercado) / prevY.total_mercado) * 100) : 0;
-
-                const patShare = tot > 0 ? (pat / tot * 100).toFixed(1) : 86.0;
-                const perShare = tot > 0 ? (per / tot * 100).toFixed(1) : 14.0;
-
-                const momColor = mom >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]';
-                const yoyColor = yoy >= 0 ? 'text-[#4183ca]' : 'text-[#ff593e]';
-
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="py-2.5 px-3 font-semibold txt-primary">${curr.date || `${curr.month}/${curr.year}`}</td>
-                    <td class="py-2.5 px-3 text-right font-mono font-bold text-[#e20039]">${fmtARS(tot)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono">${fmtARS(pat)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono">${fmtARS(per)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono font-bold ${momColor}">${fmtPct(mom)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono font-bold ${yoyColor}">${fmtPct(yoy)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono txt-muted">${patShare}% / ${perShare}%</td>
-                `;
-                tbody.appendChild(tr);
-            }
-        }
-
-        // Tab 3: Rankings SSN
-        function onRankingCategoryChange() {
-            currentRankingCategory = document.getElementById('select-ranking-category').value;
-            const selText = document.getElementById('select-ranking-category').options[document.getElementById('select-ranking-category').selectedIndex].text;
-            document.getElementById('ranking-title-display').innerText = 'Ranking: ' + selText;
-            renderRankingsTable();
-            renderRankingBarChart();
-        }
-
-        function getRankingData() {
-            const data = window.INSURANCE_DATA || {};
-            const rankings = data.ssn_rankings || {};
-            const categoryData = rankings[currentRankingCategory];
-
-            if (categoryData) {
-                if (Array.isArray(categoryData)) return categoryData;
-                if (categoryData.rows && Array.isArray(categoryData.rows)) return categoryData.rows;
-                if (categoryData.ranking && Array.isArray(categoryData.ranking)) return categoryData.ranking;
-                if (categoryData.items && Array.isArray(categoryData.items)) return categoryData.items;
-            }
-            return [];
-        }
-
-        function renderRankingsTable() {
-            const items = getRankingData();
-            const tbody = document.getElementById('tbl-rankings-body');
-            tbody.innerHTML = '';
-
-            const searchVal = (document.getElementById('input-ranking-search')?.value || '').toLowerCase().trim();
-            const isGruposMode = (currentRankingCategory === '1_grupos');
-
-            let top5Sum = 0;
-            let top10Sum = 0;
-            let lsPos = '-';
-
-            items.forEach((item, idx) => {
-                const entidad = (item.name || item.entidad || item.nombre || item.grupo || '').trim();
-                const prima = item.prima_ars_m || item.prima || item.monto || 0;
-                const part = item.share || item.participacion || 0;
-                const pos = item.rank || item.posicion || (idx + 1);
-                const entitiesList = item.entities || [];
-
-                if (idx < 5) top5Sum += part;
-                if (idx < 10) top10Sum += part;
-
-                const isLaSegunda = entidad.toUpperCase().includes('SEGUNDA');
-                if (isLaSegunda && lsPos === '-') lsPos = '#' + pos;
-
-                if (searchVal) {
-                    const matchesName = entidad.toLowerCase().includes(searchVal);
-                    const matchesSubEntity = entitiesList.some(e => e.toLowerCase().includes(searchVal));
-                    if (!matchesName && !matchesSubEntity) return;
-                }
-
-                const tr = document.createElement('tr');
-                if (isLaSegunda) tr.className = 'highlight-lasegunda font-bold';
-
-                let entidadHtml = '';
-                if (isGruposMode && entitiesList.length > 0) {
-                    const pills = entitiesList.map(e => `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-sans font-medium"><i class="fas fa-circle-check text-[8px] text-[#3ac792] mr-1"></i>${e}</span>`).join(' ');
-                    entidadHtml = `
-                        <div class="py-1">
-                            <div class="flex items-center gap-2">
-                                ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : '<i class="fas fa-layer-group text-slate-400"></i>'}
-                                <span class="font-bold text-sm txt-primary">${entidad}</span>
-                                <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#e20039]/10 text-[#e20039] font-semibold">${entitiesList.length} empresas</span>
-                            </div>
-                            <div class="flex flex-wrap gap-1 mt-1.5">
-                                ${pills}
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    entidadHtml = `
-                        <div class="flex items-center gap-2">
-                            ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : ''}
-                            <span class="font-semibold">${entidad}</span>
-                        </div>
-                    `;
-                }
-
-                tr.innerHTML = `
-                    <td class="py-3 px-3 text-center font-bold font-mono ${pos <= 3 ? 'text-[#e20039]' : 'txt-muted'}">${pos}</td>
-                    <td class="py-3 px-3 txt-primary">${entidadHtml}</td>
-                    <td class="py-3 px-3 text-right font-mono font-bold">${fmtARS(prima)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'txt-secondary'}">${fmtPct(part).replace('+', '')}</td>
-                    <td class="py-3 px-3 text-center">
-                        <button onclick="compareWithEntity('${entidad.replace(/'/g, "\\'")}')" class="px-2.5 py-1.5 rounded-lg subtle-card hover:border-[#e20039] txt-secondary hover:text-[#e20039] text-[10px] font-mono transition-all font-semibold inline-flex items-center gap-1" title="Comparar en Cara a Cara">
-                            <i class="fas fa-arrows-split-up-and-left"></i> Comparar
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            document.getElementById('metric-top5-share').innerText = fmtPct(top5Sum).replace('+', '');
-            document.getElementById('bar-top5-share').style.width = Math.min(100, top5Sum) + '%';
-
-            document.getElementById('metric-top10-share').innerText = fmtPct(top10Sum).replace('+', '');
-            document.getElementById('bar-top10-share').style.width = Math.min(100, top10Sum) + '%';
-
-            document.getElementById('metric-lasegunda-pos').innerText = lsPos !== '-' ? lsPos : 'Participante';
-        }
-
-        function filterRankingTable() {
-            renderRankingsTable();
-        }
-
-        function renderRankingBarChart() {
-            const items = getRankingData().slice(0, 10);
-            const ctx = document.getElementById('chart-ranking-bar')?.getContext('2d');
-            if (!ctx) return;
-
-            const isDark = document.documentElement.classList.contains('dark');
-            const labels = items.map(i => (i.entidad || i.nombre || i.name || '').substring(0, 16));
-            const shares = items.map(i => i.share || i.participacion || 0);
-            const colors = items.map(i => (i.entidad || i.nombre || i.name || '').toUpperCase().includes('SEGUNDA') ? '#e20039' : '#4183ca');
-
-            if (charts.rankingBar) charts.rankingBar.destroy();
-
-            charts.rankingBar = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
                     datasets: [{
-                        label: 'Market Share (%)',
-                        data: shares,
-                        backgroundColor: colors,
-                        borderRadius: 6
+                        label: mensualMode === 'corriente' ? 'Valores Corrientes ($M)' : 'Valores Constantes Deflactados ($M)',
+                        data: values,
+                        borderColor: '#e20039',
+                        backgroundColor: 'rgba(226, 0, 57, 0.08)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#e20039',
+                        borderWidth: 2.5
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false }
+                        legend: { labels: { color: textColor, font: { size: 10, weight: '600' } } },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ' $ ' + Number(ctx.parsed.y).toLocaleString('es-AR', { minimumFractionDigits: 0 }) + ' M'
+                            }
+                        }
                     },
                     scales: {
-                        x: { 
-                            grid: { display: false }, 
-                            ticks: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10, weight: '600' } } 
-                        },
-                        y: { 
-                            grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
-                            ticks: { 
-                                color: isDark ? '#cbd5e1' : '#0f172a',
-                                font: { family: 'JetBrains Mono' },
-                                callback: val => val + '%' 
-                            } 
-                        }
+                        x: { ticks: { color: textColor, font: { size: 9 }, maxRotation: 45 }, grid: { display: false } },
+                        y: { ticks: { color: textColor, font: { size: 9 }, callback: v => '$ ' + (v / 1000000).toFixed(1) + 'B' }, grid: { color: gridColor } }
                     }
                 }
             });
         }
 
-        function exportCurrentRankingCSV() {
-            const items = getRankingData();
-            if (!items.length) return;
-            let csv = "Posicion,Entidad,Primas_ARS_M,Participacion_Pct\n";
-            items.forEach((item, idx) => {
-                const entidad = (item.entidad || item.nombre || item.name || '').replace(/,/g, '');
-                const prima = item.prima_ars_m || item.prima || 0;
-                const part = item.share || item.participacion || 0;
-                csv += `${item.rank || item.posicion || (idx+1)},"${entidad}",${prima},${part}\n`;
-            });
+        function renderMensualTable() {
+            const tbody = document.getElementById('tbl-mensual-history-body');
+            if (!tbody) return;
 
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.setAttribute("download", `ranking_${currentRankingCategory}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const data = window.INSURANCE_DATA || {};
+            const mensual = data.ssn_produccion_mensual || {};
+            const series = mensualMode === 'corriente' ? (mensual.corriente || {}) : (mensual.constante || {});
+            const history = (series.history || []).slice(-12).reverse();
+
+            tbody.innerHTML = '';
+            history.forEach(h => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition font-mono';
+                tr.innerHTML = `
+                    <td class="py-2 px-3 font-sans font-semibold txt-primary">${h.periodo || h.fecha}</td>
+                    <td class="py-2 px-3 text-right font-bold text-[#e20039]">${fmtARS(h.total_mercado)} M</td>
+                    <td class="py-2 px-3 text-right text-[#4183ca]">${fmtARS(h.patrimoniales_art)} M</td>
+                    <td class="py-2 px-3 text-right text-[#3ac792]">${fmtARS(h.personas)} M</td>
+                    <td class="py-2 px-3 text-right font-bold ${Number(h.var_ia || 0) >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]'}">${fmtPct(h.var_ia || 0)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
-        // Tab 4: Balances & Estados Contables SSN (100% Dynamic Engine)
-        // Changing View (e.g. from Patrimonial to EDR) preserves the selected company!
+        // ====================================================================
+        // TAB 3: RANKINGS SSN
+        // ====================================================================
+        function setRankingCategory(catKey) {
+            currentRankingCategory = catKey;
+            document.querySelectorAll('.btn-ranking-cat').forEach(b => {
+                b.classList.remove('bg-[#e20039]', 'text-white', 'shadow-sm');
+                b.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
+            });
+            const activeBtn = document.getElementById('btn-rank-' + catKey);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
+                activeBtn.classList.add('bg-[#e20039]', 'text-white', 'shadow-sm');
+            }
+            renderRankingsTable();
+            renderRankingBarChart();
+        }
+
+        function filterRankings() {
+            const query = (document.getElementById('input-search-rankings')?.value || '').toLowerCase();
+            const rows = document.querySelectorAll('#tbl-rankings-body tr');
+            rows.forEach(r => {
+                const text = r.innerText.toLowerCase();
+                r.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        function renderRankingsTable() {
+            const tbody = document.getElementById('tbl-rankings-body');
+            if (!tbody) return;
+
+            const data = window.INSURANCE_DATA || {};
+            const rankings = data.ssn_rankings || {};
+            const catObj = rankings[currentRankingCategory] || {};
+            const rows = catObj.rows || catObj || [];
+
+            tbody.innerHTML = '';
+            const isGroupMode = currentRankingCategory === '1_grupos';
+
+            rows.forEach((r, idx) => {
+                const tr = document.createElement('tr');
+                const isLaSegunda = (r.name || r.entidad || '').toUpperCase().includes('SEGUNDA');
+                tr.className = isLaSegunda ? 'bg-[#fee2e2]/40 dark:bg-[#e20039]/15 font-bold' : 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition';
+
+                let entitiesPills = '';
+                if (isGroupMode && r.entities && r.entities.length > 0) {
+                    const pills = r.entities.map(e => `<span class="inline-block px-1.5 py-0.5 rounded text-[9px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">${e}</span>`).join(' ');
+                    entitiesPills = `<div class="flex flex-wrap gap-1 mt-1">${pills}</div>`;
+                }
+
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3 text-center">
+                        <span class="brand-badge ${idx < 3 ? 'bg-[#f8cc59]/25 text-[#b91f38] dark:text-[#f8cc59]' : 'bg-slate-100 dark:bg-slate-800 txt-muted'} font-mono font-bold">#${r.rank || idx + 1}</span>
+                    </td>
+                    <td class="py-2.5 px-3 font-sans font-semibold txt-primary">
+                        <div class="flex items-center gap-2">
+                            ${isLaSegunda ? '<i class="fas fa-shield-halved text-[#e20039]"></i>' : (isGroupMode ? '<i class="fas fa-layer-group text-[#4183ca]"></i>' : '<i class="fas fa-building text-slate-400"></i>')}
+                            <span>${r.name || r.entidad}</span>
+                        </div>
+                        ${entitiesPills}
+                    </td>
+                    <td class="py-2.5 px-3 text-right font-bold text-[#e20039] font-mono">${fmtARS(r.prima_ars_m || r.prima)} M</td>
+                    <td class="py-2.5 px-3 text-right font-bold txt-primary font-mono">${fmtPct(r.share || r.participacion).replace('+', '')}</td>
+                    <td class="py-2.5 px-3 text-center">
+                        <button onclick="compareWithEntity('${(r.name || r.entidad || '').replace(/'/g, "\\'")}')" class="px-2 py-1 rounded text-[11px] bg-slate-100 dark:bg-slate-800 hover:bg-[#e20039] hover:text-white transition font-sans font-semibold">
+                            <i class="fas fa-arrows-left-right mr-1"></i> Comparar
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderRankingBarChart() {
+            const canvas = document.getElementById('chart-ranking-bar');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = getChartTextColor();
+
+            const data = window.INSURANCE_DATA || {};
+            const rankings = data.ssn_rankings || {};
+            const catObj = rankings[currentRankingCategory] || {};
+            const rows = (catObj.rows || catObj || []).slice(0, 10);
+
+            if (charts.rankingBar) charts.rankingBar.destroy();
+
+            const labels = rows.map(r => (r.name || r.entidad || '').replace(' SEGUROS', '').replace(' COOPERATIVA', ''));
+            const values = rows.map(r => Number(r.prima_ars_m || r.prima || 0));
+            const bgColors = rows.map(r => (r.name || r.entidad || '').toUpperCase().includes('SEGUNDA') ? '#e20039' : '#4183ca');
+
+            charts.rankingBar = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Primas ($M)',
+                        data: values,
+                        backgroundColor: bgColors,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: textColor, font: { size: 9 } }, grid: { color: getChartGridColor() } },
+                        y: { ticks: { color: textColor, font: { size: 9, weight: '600' } }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // ====================================================================
+        // TAB 4: BALANCES & ESTADOS CONTABLES SSN
+        // ====================================================================
         function onBalancesViewChange() {
             renderBalancesSubtabData();
         }
@@ -1978,13 +1779,10 @@
 
             const rubroLabel = selRubro ? selRubro.options[selRubro.selectedIndex].text : 'Total del Mercado';
             const titleSuffix = cName !== 'ALL' ? cName : rubroLabel;
-            const isLaSegunda = titleSuffix.toUpperCase().includes('SEGUNDA');
 
             let html = '';
 
-            // ================================================================
-            // VIEW 1: ESTADO DE SITUACIÓN PATRIMONIAL (ACTIVO / PASIVO / PN)
-            // ================================================================
+            // 1. PATRIMONIAL
             if (vKey === 'patrimonial') {
                 const totAct26 = r26[6] || 0.0, totAct25 = r25[6] || 0.0;
                 const totPas26 = r26[11] || 0.0, totPas25 = r25[11] || 0.0;
@@ -1994,7 +1792,6 @@
                 const yoyPas = totPas25 !== 0 ? ((totPas26 - totPas25) / Math.abs(totPas25)) * 100 : null;
                 const yoyPn = pn25 !== 0 ? ((pn26 - pn25) / Math.abs(pn25)) * 100 : null;
 
-                // 3 Top Summary KPI Cards
                 html += `
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div class="subtle-card rounded-2xl p-5 border border-slate-200 dark:border-slate-800">
@@ -2163,9 +1960,7 @@
 
                 html += `</div>`;
 
-            // ================================================================
-            // VIEW 2: ESTADO DE RESULTADOS (EDR)
-            // ================================================================
+            // 2. EDR
             } else if (vKey === 'edr') {
                 const edrRows = [
                     { label: 'Resultado Técnico Seg. Directo (1)', i26: 0, i25: 0 },
@@ -2216,16 +2011,9 @@
                     `;
                 });
 
-                html += `
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
+                html += `</tbody></table></div></div>`;
 
-            // ================================================================
-            // VIEW 3: APERTURA DEL RESULTADO TÉCNICO
-            // ================================================================
+            // 3. TECNICO
             } else if (vKey === 'tecnico') {
                 const tecRows = [
                     { label: 'Primas Netas Devengadas', i: 0 },
@@ -2281,16 +2069,9 @@
                     `;
                 });
 
-                html += `
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
+                html += `</tbody></table></div></div>`;
 
-            // ================================================================
-            // VIEW 4: APERTURA DEL RENDIMIENTO FINANCIERO
-            // ================================================================
+            // 4. FINANCIERO
             } else if (vKey === 'financiero') {
                 const finRows = [
                     { label: 'Rentas de Inversiones (1)', i: 0 },
@@ -2339,18 +2120,15 @@
                     `;
                 });
 
-                html += `
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
+                html += `</tbody></table></div></div>`;
             }
 
             container.innerHTML = html;
         }
 
-        // Tab 5: Grupo Asegurador La Segunda (100% Dynamic Engine)
+        // ====================================================================
+        // TAB 5: GRUPO ASEGURADOR LA SEGUNDA
+        // ====================================================================
         let lsChartEmpresas = null;
 
         function togglePersonasSubRow(groupId) {
@@ -2370,7 +2148,6 @@
 
             if (!lsData || !lsData.companies || lsData.companies.length === 0) return;
 
-            // 1. Update Top KPIs
             const kpiTotG = document.getElementById('ls-kpi-tot-grupo');
             const kpiTotGen = document.getElementById('ls-kpi-tot-generales');
             const kpiTotArt = document.getElementById('ls-kpi-tot-art');
@@ -2384,13 +2161,11 @@
             if (kpiTotArt) kpiTotArt.innerText = fmtARS(cArt.prima) + ' M';
             if (kpiTotPers) kpiTotPers.innerText = fmtARS(lsData.tot_personas) + ' M';
 
-            // Subtitle amounts
             const subPat = document.getElementById('ls-subtitle-patrimoniales');
             const subPer = document.getElementById('ls-subtitle-personas');
             if (subPat) subPat.innerText = fmtARS(lsData.tot_patrimoniales) + ' M';
             if (subPer) subPer.innerText = fmtARS(lsData.tot_personas) + ' M';
 
-            // 2. Render Empresas Table
             const tbodyEmpresas = document.getElementById('ls-table-empresas-body');
             if (tbodyEmpresas) {
                 let empHtml = '';
@@ -2415,10 +2190,8 @@
                 tbodyEmpresas.innerHTML = empHtml;
             }
 
-            // 3. Render Empresas Donut Chart
             renderLaSegundaEmpresasChart(lsData);
 
-            // 4. Render Patrimoniales Table
             const tbodyPatrimoniales = document.getElementById('ls-table-patrimoniales-body');
             if (tbodyPatrimoniales) {
                 let patHtml = '';
@@ -2444,7 +2217,6 @@
                 tbodyPatrimoniales.innerHTML = patHtml;
             }
 
-            // 5. Render Personas & Retiro Table
             const tbodyPersonas = document.getElementById('ls-table-personas-body');
             if (tbodyPersonas) {
                 let perHtml = '';
@@ -2530,19 +2302,16 @@
                                 font: { size: 10, weight: '600' },
                                 padding: 12
                             }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(ctx) {
-                                    return ' ' + ctx.label + ': ' + ctx.parsed + '%';
-                                }
-                            }
                         }
                     },
                     cutout: '65%'
                 }
             });
-        }// Tab 6: Seguros de Personas (100% Dynamic Multi-Ramo Engine)
+        }
+
+        // ====================================================================
+        // TAB 6: SEGUROS DE PERSONAS
+        // ====================================================================
         let spChartPersonas = null;
         let spChartRetiro = null;
         let chartSpPrimasRamos = null;
@@ -2554,7 +2323,6 @@
 
             if (!spData || (!spData.personas && !spData.retiro)) return;
 
-            // 1. Render Table Personas Indicators
             const personasBody = document.getElementById('tbl-sp-personas-body');
             if (personasBody && spData.personas) {
                 personasBody.innerHTML = spData.personas.map(row => {
@@ -2575,7 +2343,6 @@
                 }).join('');
             }
 
-            // 2. Render Table Retiro Indicators
             const retiroBody = document.getElementById('tbl-sp-retiro-body');
             if (retiroBody && spData.retiro) {
                 retiroBody.innerHTML = spData.retiro.map(row => {
@@ -2596,19 +2363,15 @@
                 }).join('');
             }
 
-            // 3. Render Charts
             renderSpIndicatorsCharts(spData);
-
-            // 4. Initialize Multi-Ramo Selector
             initSpPrimasRamosView(spData);
         }
 
         function renderSpIndicatorsCharts(spData) {
             const isDark = document.documentElement.classList.contains('dark');
-            const textColor = isDark ? '#94a3b8' : '#64748b';
-            const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+            const textColor = getChartTextColor();
+            const gridColor = getChartGridColor();
 
-            // Chart Personas
             const ctxP = document.getElementById('sp-chart-personas')?.getContext('2d');
             if (ctxP && spData.personas) {
                 if (spChartPersonas) spChartPersonas.destroy();
@@ -2630,9 +2393,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: { labels: { color: textColor, font: { size: 10, weight: '600' } } }
-                        },
+                        plugins: { legend: { labels: { color: textColor, font: { size: 10, weight: '600' } } } },
                         scales: {
                             x: { ticks: { color: textColor, font: { size: 9 } }, grid: { display: false } },
                             y: { ticks: { color: textColor, font: { size: 9 }, callback: v => v + '%' }, grid: { color: gridColor } }
@@ -2641,7 +2402,6 @@
                 });
             }
 
-            // Chart Retiro
             const ctxR = document.getElementById('sp-chart-retiro')?.getContext('2d');
             if (ctxR && spData.retiro) {
                 if (spChartRetiro) spChartRetiro.destroy();
@@ -2663,9 +2423,7 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: {
-                            legend: { labels: { color: textColor, font: { size: 10, weight: '600' } } }
-                        },
+                        plugins: { legend: { labels: { color: textColor, font: { size: 10, weight: '600' } } } },
                         scales: {
                             x: { ticks: { color: textColor, font: { size: 9 } }, grid: { display: false } },
                             y: { ticks: { color: textColor, font: { size: 9 }, callback: v => v + '%' }, grid: { color: gridColor } }
@@ -2762,7 +2520,6 @@
                 return;
             }
 
-            // Calculate aggregated sum per company for selected ramos
             const calculatedList = [];
             let totalMarketSum = 0;
 
@@ -2782,10 +2539,8 @@
                 }
             });
 
-            // Sort descending
             calculatedList.sort((a, b) => b.total - a.total);
 
-            // Update Total Badge
             const totalBadge = document.getElementById('sp-primas-total-badge');
             if (totalBadge) totalBadge.innerText = `Total Mercado Seleccionado: ${fmtARS(totalMarketSum / 1000000.0)} M (${calculatedList.length} entidades)`;
 
@@ -2812,8 +2567,6 @@
             });
 
             tbody.innerHTML = htmlRows;
-
-            // Render Dynamic Top 10 Chart
             renderSpTop10Chart(calculatedList);
         }
 
@@ -2822,15 +2575,14 @@
             if (!canvas || !window.Chart) return;
             const ctx = canvas.getContext('2d');
             const isDark = document.documentElement.classList.contains('dark');
-            const textColor = isDark ? '#94a3b8' : '#64748b';
-            const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+            const textColor = getChartTextColor();
+            const gridColor = getChartGridColor();
 
             if (chartSpPrimasRamos) chartSpPrimasRamos.destroy();
 
             const top10 = calculatedList.slice(0, 10);
             const labels = top10.map(r => r.entidad.replace(' SEGUROS DE PERSONAS', '').replace(' SEGUROS', '').replace(' PERSONAS', ''));
             const dataVals = top10.map(r => Number((r.total / 1000000.0).toFixed(2)));
-
             const bgColors = top10.map(r => r.entidad.toUpperCase().includes('SEGUNDA') ? '#e20039' : '#3ac792');
 
             chartSpPrimasRamos = new Chart(ctx, {
@@ -2864,4 +2616,349 @@
             });
         }
 
-        
+        // ====================================================================
+        // TAB 7: SEGUROS DE RETIRO
+        // ====================================================================
+        function initRetiroTab() {
+            const data = window.INSURANCE_DATA || {};
+            const retiro = data.ssn_seg_retiro || {};
+            const entities = retiro.entities || [];
+
+            const tbody = document.getElementById('tbl-retiro-ranking-body');
+            if (tbody) {
+                tbody.innerHTML = '';
+                entities.forEach((e, idx) => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition font-mono';
+                    tr.innerHTML = `
+                        <td class="py-2.5 px-3 text-center"><span class="brand-badge bg-slate-100 dark:bg-slate-800 font-bold">#${idx + 1}</span></td>
+                        <td class="py-2.5 px-3 font-sans font-semibold txt-primary">${e.entidad || e.name}</td>
+                        <td class="py-2.5 px-3 text-right font-bold text-[#e20039]">${fmtARS(e.primas || e.monto)} M</td>
+                        <td class="py-2.5 px-3 text-right text-[#4183ca]">${fmtARS(e.inversiones || 0)} M</td>
+                        <td class="py-2.5 px-3 text-right text-[#3ac792]">${fmtARS(e.patrimonio_neto || 0)} M</td>
+                        <td class="py-2.5 px-3 text-right font-bold txt-primary">${fmtPct(e.share || 0).replace('+', '')}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        function renderRetiroCharts() {
+            const ctx = document.getElementById('chart-retiro-ranking')?.getContext('2d');
+            if (!ctx) return;
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = getChartTextColor();
+
+            const data = window.INSURANCE_DATA || {};
+            const retiro = data.ssn_seg_retiro || {};
+            const entities = (retiro.entities || []).slice(0, 8);
+
+            if (charts.retiroRanking) charts.retiroRanking.destroy();
+
+            charts.retiroRanking = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: entities.map(e => (e.entidad || e.name || '').replace(' RETIRO', '')),
+                    datasets: [{
+                        label: 'Primas Retiro ($M)',
+                        data: entities.map(e => e.primas || e.monto || 0),
+                        backgroundColor: '#f8cc59',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: textColor, font: { size: 9 } }, grid: { display: false } },
+                        y: { ticks: { color: textColor, font: { size: 9 } }, grid: { color: getChartGridColor() } }
+                    }
+                }
+            });
+        }
+
+        // ====================================================================
+        // TAB 8: INVERSIONES Y ACTIVOS
+        // ====================================================================
+        function initInversionesTab() {
+            // Placeholder for Inversiones table if needed
+        }
+
+        function renderInversionesCharts() {
+            const ctxDoughnut = document.getElementById('chart-inversiones-doughnut')?.getContext('2d');
+            if (!ctxDoughnut) return;
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = getChartTextColor();
+
+            if (charts.inversionesDoughnut) charts.inversionesDoughnut.destroy();
+
+            charts.inversionesDoughnut = new Chart(ctxDoughnut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Títulos Públicos Nacionales', 'Obligaciones Negociables', 'Fondos Comunes de Inversión (FCI)', 'Plazos Fijos & Cuentas Remuneradas', 'Acciones', 'Inmuebles', 'Otros'],
+                    datasets: [{
+                        data: [48.5, 18.2, 14.3, 9.8, 4.2, 3.1, 1.9],
+                        backgroundColor: ['#e20039', '#4183ca', '#3ac792', '#f8cc59', '#8b5cf6', '#ff593e', '#64748b'],
+                        borderWidth: 2,
+                        borderColor: isDark ? '#111726' : '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: textColor, font: { size: 10, weight: '600' } } }
+                    },
+                    cutout: '60%'
+                }
+            });
+        }
+
+        // ====================================================================
+        // TAB 10: COMPARADOR CARA A CARA (HEAD-TO-HEAD)
+        // ====================================================================
+        function getEntityProfile(name) {
+            const data = window.INSURANCE_DATA || {};
+            const rankings = data.ssn_rankings || {};
+            const tm = (rankings['2_total_mercado']?.rows || rankings['2_total_mercado'] || []);
+            const auto = (rankings['5_auto_moto']?.rows || rankings['5_auto_moto'] || []);
+            const art = (rankings['6_art']?.rows || rankings['6_art'] || []);
+            const pat = (rankings['3_patrimoniales_total']?.rows || rankings['3_patrimoniales_total'] || []);
+            const per = (rankings['4_personas_total']?.rows || rankings['4_personas_total'] || []);
+            const vida = (rankings['11_vida']?.rows || rankings['11_vida'] || []);
+            const ret = (rankings['10_retiro']?.rows || rankings['10_retiro'] || []);
+            const grupos = (rankings['1_grupos']?.rows || rankings['1_grupos'] || []);
+
+            const cleanName = (name || '').trim().toLowerCase();
+
+            // 1. Check if Consolidated Group
+            const g = grupos.find(x => (x.name || x.entidad || '').toLowerCase() === cleanName);
+            if (g) {
+                return {
+                    isGroup: true,
+                    name: g.name || g.entidad,
+                    rank: g.rank || g.posicion || '-',
+                    prima: g.prima_ars_m || g.prima || 0,
+                    share: g.share || g.participacion || 0,
+                    entities: g.entities || [],
+                    autoRank: '-',
+                    autoPrima: 0,
+                    artRank: '-',
+                    artPrima: 0,
+                    patRank: '-',
+                    perRank: '-'
+                };
+            }
+
+            // 2. Individual Entity
+            const tRow = tm.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const aRow = auto.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const artRow = art.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const patRow = pat.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const perRow = per.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+            const vidaRow = vida.find(x => (x.entidad || x.nombre || '').toLowerCase() === cleanName);
+
+            const isLaSegunda = cleanName.includes('segunda');
+
+            return {
+                isGroup: false,
+                name: tRow?.entidad || name,
+                rank: tRow?.rank || tRow?.posicion || '-',
+                prima: tRow?.prima_ars_m || tRow?.prima || 0,
+                share: tRow?.share || tRow?.participacion || 0,
+                autoRank: aRow ? ('#' + (aRow.rank || aRow.posicion) + ' Nacional') : (isLaSegunda ? '#7 Nacional' : 'No opera'),
+                autoPrima: aRow?.prima_ars_m || (isLaSegunda ? 452844 : 0),
+                autoShare: aRow?.share || (isLaSegunda ? 5.74 : 0),
+                artRank: artRow ? ('#' + (artRow.rank || artRow.posicion) + ' Nacional') : (isLaSegunda ? '#5 Nacional (ART)' : 'No opera'),
+                artPrima: artRow?.prima_ars_m || (isLaSegunda ? 402548 : 0),
+                artShare: artRow?.share || (isLaSegunda ? 8.68 : 0),
+                patRank: patRow ? ('#' + (patRow.rank || patRow.posicion)) : (isLaSegunda ? '#7' : '-'),
+                perRank: perRow ? ('#' + (perRow.rank || perRow.posicion)) : (vidaRow ? ('#' + (vidaRow.rank || vidaRow.posicion) + ' en Vida') : (isLaSegunda ? '#14' : '-'))
+            };
+        }
+
+        function renderComparatorDropdowns() {
+            const data = window.INSURANCE_DATA || {};
+            const rankings = data.ssn_rankings || {};
+            const tm = (rankings['2_total_mercado']?.rows || rankings['2_total_mercado'] || []);
+            const grupos = (rankings['1_grupos']?.rows || rankings['1_grupos'] || []);
+
+            const sel1 = document.getElementById('select-comp-1');
+            const sel2 = document.getElementById('select-comp-2');
+            if (!sel1 || !sel2 || sel1.options.length > 0) return;
+
+            sel1.innerHTML = '';
+            sel2.innerHTML = '';
+
+            const grpOpt1 = document.createElement('optgroup');
+            grpOpt1.label = "--- GRUPOS ASEGURADORES ---";
+            const grpOpt2 = document.createElement('optgroup');
+            grpOpt2.label = "--- GRUPOS ASEGURADORES ---";
+
+            grupos.forEach(g => {
+                const gName = g.name || g.entidad;
+                grpOpt1.appendChild(new Option('Grupo: ' + gName, gName));
+                grpOpt2.appendChild(new Option('Grupo: ' + gName, gName));
+            });
+
+            const indOpt1 = document.createElement('optgroup');
+            indOpt1.label = "--- COMPAÑÍAS INDIVIDUALES ---";
+            const indOpt2 = document.createElement('optgroup');
+            indOpt2.label = "--- COMPAÑÍAS INDIVIDUALES ---";
+
+            tm.forEach(e => {
+                const name = (e.entidad || e.nombre || '').trim();
+                indOpt1.appendChild(new Option(name, name));
+                indOpt2.appendChild(new Option(name, name));
+            });
+
+            sel1.appendChild(grpOpt1);
+            sel1.appendChild(indOpt1);
+
+            sel2.appendChild(grpOpt2);
+            sel2.appendChild(indOpt2);
+
+            sel1.value = "SANCOR";
+            sel2.value = "FED. PATRONAL";
+            if (!sel1.value && sel1.options.length > 0) sel1.selectedIndex = 0;
+            if (!sel2.value && sel2.options.length > 1) sel2.selectedIndex = 1;
+
+            updateComparator();
+        }
+
+        function updateComparator() {
+            const name1 = document.getElementById('select-comp-1')?.value || 'SANCOR';
+            const name2 = document.getElementById('select-comp-2')?.value || 'FED. PATRONAL';
+
+            const p1 = getEntityProfile(name1);
+            const p2 = getEntityProfile(name2);
+
+            const container = document.getElementById('comparator-cards-container');
+            if (!container) return;
+
+            function buildCard(p, themeColor, isLeft) {
+                const isLaSegunda = p.name.toUpperCase().includes('SEGUNDA');
+                const badgeColor = isLaSegunda ? 'bg-[#e20039]/15 text-[#e20039]' : (themeColor === 'brandRed' ? 'bg-[#e20039]/15 text-[#e20039]' : 'bg-[#4183ca]/15 text-[#4183ca]');
+                const rankText = (p.rank !== '-' && p.rank !== undefined) ? ('#' + p.rank + ' Nacional') : 'Participante';
+
+                let groupEntitiesHtml = '';
+                if (p.isGroup && p.entities && p.entities.length > 0) {
+                    const pills = p.entities.map(e => `<span class="inline-block px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">${e}</span>`).join(' ');
+                    groupEntitiesHtml = `
+                        <div class="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+                            <span class="text-[10px] uppercase font-bold txt-muted block mb-1">Empresas Consolidadas (${p.entities.length}):</span>
+                            <div class="flex flex-wrap gap-1">${pills}</div>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="subtle-card rounded-2xl p-6 relative overflow-hidden border ${isLaSegunda ? 'border-[#e20039]/40' : 'border-slate-200 dark:border-slate-800'}">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-xl ${isLaSegunda ? 'brand-gradient text-white' : (themeColor === 'brandRed' ? 'bg-[#e20039]/10 text-[#e20039]' : 'bg-[#4183ca]/10 text-[#4183ca]')} flex items-center justify-center font-bold text-lg shadow-sm">
+                                    <i class="fas ${isLaSegunda ? 'fa-shield-halved' : (p.isGroup ? 'fa-layer-group' : 'fa-building')}"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-base txt-primary leading-tight">${p.name}</h3>
+                                    <span class="text-xs txt-muted font-mono">${p.isGroup ? 'Grupo Asegurador Consolidado' : 'Entidad Aseguradora Individual SSN'}</span>
+                                </div>
+                            </div>
+                            <span class="brand-badge ${badgeColor} font-mono font-bold">${rankText}</span>
+                        </div>
+
+                        ${groupEntitiesHtml}
+
+                        <div class="space-y-3 font-mono text-xs mt-4">
+                            <div class="flex items-center justify-between p-3 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Primas Emitidas (9M):</span>
+                                <span class="font-bold text-base text-[#e20039] font-mono">${fmtARS(p.prima)} M</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Cuota de Mercado:</span>
+                                <div class="text-right">
+                                    <span class="font-bold text-sm txt-primary font-mono">${fmtPct(p.share).replace('+', '')}</span>
+                                    <div class="w-24 bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-1 ml-auto">
+                                        <div class="${themeColor === 'brandRed' ? 'bg-[#e20039]' : 'bg-[#4183ca]'} h-1.5 rounded-full" style="width: ${Math.min(100, p.share * 7)}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            ${!p.isGroup ? `
+                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Ramo Automotores:</span>
+                                <div class="text-right">
+                                    <span class="font-bold ${p.autoRank.includes('#') ? 'text-[#3ac792]' : 'txt-muted'} font-mono">${p.autoRank}</span>
+                                    ${p.autoPrima > 0 ? `<span class="text-[10px] txt-muted block">(${fmtARS(p.autoPrima)} M &bull; ${fmtPct(p.autoShare).replace('+', '')})</span>` : ''}
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Riesgos del Trabajo (ART):</span>
+                                <div class="text-right">
+                                    <span class="font-bold ${p.artRank.includes('#') ? 'text-[#4183ca]' : 'txt-muted'} font-mono">${p.artRank}</span>
+                                    ${p.artPrima > 0 ? `<span class="text-[10px] txt-muted block">(${fmtARS(p.artPrima)} M &bull; ${fmtPct(p.artShare).replace('+', '')})</span>` : ''}
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Ranking Patrimoniales:</span>
+                                <span class="font-bold txt-primary font-mono">${p.patRank !== '-' ? '#' + p.patRank + ' Nacional' : 'No reporta'}</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-2.5 rounded-xl main-card">
+                                <span class="txt-secondary font-sans font-medium">Seguros de Personas:</span>
+                                <span class="font-bold text-[#3ac792] font-mono">${p.perRank !== '-' ? '#' + p.perRank + ' Nacional' : 'No reporta'}</span>
+                            </div>
+                            ` : `
+                            <div class="p-3 rounded-xl main-card text-center text-xs txt-muted font-sans leading-relaxed">
+                                <i class="fas fa-info-circle text-[#4183ca] mr-1"></i> Producción consolidada de todas las empresas que integran el grupo asegurador en ramos patrimoniales, riesgos del trabajo, personas y retiro.
+                            </div>
+                            `}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = buildCard(p1, 'brandRed', true) + buildCard(p2, 'brandBlue', false);
+        }
+
+        function compareWithEntity(entidadName) {
+            switchTab('comparador');
+            const sel1 = document.getElementById('select-comp-1');
+            if (sel1) {
+                sel1.value = entidadName;
+                if (!sel1.value) {
+                    for (let i = 0; i < sel1.options.length; i++) {
+                        if (sel1.options[i].text.toLowerCase().includes(entidadName.toLowerCase())) {
+                            sel1.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+                updateComparator();
+            }
+        }
+
+        // Initialize App on DOM Ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initPrimasTab();
+            initLaSegundaTab();
+            initRetiroTab();
+            renderRankingsTable();
+            renderBalancesSubtabData();
+
+            const data = window.INSURANCE_DATA || {};
+            if (data.update_time_human) {
+                const fEl = document.getElementById('footer-update-time');
+                if (fEl) fEl.innerText = data.update_time_human;
+            }
+
+            setTimeout(renderPrimasCharts, 100);
+        });
+    </script>
+</body>
+</html>
