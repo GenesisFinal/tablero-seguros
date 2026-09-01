@@ -1732,8 +1732,9 @@
         }
 
         // Tab 4: Balances & Estados Contables SSN (100% Dynamic Engine)
+        // Changing View (e.g. from Patrimonial to EDR) preserves the selected company!
         function onBalancesViewChange() {
-            onBalancesRubroChange();
+            renderBalancesSubtabData();
         }
 
         function onBalancesRubroChange() {
@@ -1747,6 +1748,7 @@
 
             if (!selRubro || !selComp) return;
 
+            const prevSelectedCompany = selComp.value || 'ALL';
             const vKey = selView ? selView.value : 'patrimonial';
             const rubroKey = selRubro.value;
 
@@ -1762,7 +1764,8 @@
                 const comps = catData.companies || [];
 
                 const addedNames = {};
-                let optHtml = '<option value="ALL" selected>Todas (Totales del Segmento)</option>';
+                let optHtml = '<option value="ALL">Todas (Totales del Segmento)</option>';
+                let foundPrev = false;
 
                 comps.forEach(c => {
                     const name = (c && c.name) ? c.name.trim() : '';
@@ -1770,11 +1773,16 @@
 
                     if (name && !nameUpper.includes('NAN') && !nameUpper.includes('NULL') && !addedNames[nameUpper]) {
                         addedNames[nameUpper] = true;
-                        optHtml += `<option value="${name}">${name}</option>`;
+                        const isSelected = (name === prevSelectedCompany);
+                        if (isSelected) foundPrev = true;
+                        optHtml += `<option value="${name}" ${isSelected ? 'selected' : ''}>${name}</option>`;
                     }
                 });
 
                 selComp.innerHTML = optHtml;
+                if (!foundPrev && prevSelectedCompany !== 'ALL') {
+                    selComp.value = 'ALL';
+                }
             }
 
             renderBalancesSubtabData();
