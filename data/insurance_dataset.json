@@ -4298,172 +4298,187 @@
   },
   "ssn_rankings": {
     "1_grupos": {
-      "total_cat_prima_ars_m": 19409600.788527,
+      "title": "Ranking Oficial de Grupos Aseguradores Consolidados",
+      "period": "Acumulado 9 Meses (Marzo 2026)",
+      "total_mercado_m": 19409600.79,
       "rows": [
         {
+          "rank": 1,
           "name": "Sancor Seguros",
-          "prima_ars_m": 2511044.166438,
-          "share": 12.93712422937764,
+          "entidad": "Sancor Seguros",
+          "prima_ars_m": 2511044.17,
+          "share": 12.94,
           "entities": [
-            "SANCOR",
-            "PREVENCIÓN ART",
-            "PREVENCIÓN RETIRO"
-          ],
-          "rank": 1
+            "Sancor Seguros",
+            "Prevención ART",
+            "Prevención Retiro"
+          ]
         },
         {
+          "rank": 2,
           "name": "Federación Patronal",
-          "prima_ars_m": 1889560.540868,
-          "share": 9.735184981161064,
+          "entidad": "Federación Patronal",
+          "prima_ars_m": 1889560.54,
+          "share": 9.74,
           "entities": [
-            "FED. PATRONAL",
-            "FED. PATRONAL RETIRO"
-          ],
-          "rank": 2
+            "Fed. Patronal Seguros",
+            "Fed. Patronal Retiro"
+          ]
         },
         {
+          "rank": 3,
           "name": "Provincia (Grupo Bapro)",
-          "prima_ars_m": 1414595.90824,
-          "share": 7.28812469484775,
+          "entidad": "Provincia (Grupo Bapro)",
+          "prima_ars_m": 1414595.91,
+          "share": 7.29,
           "entities": [
-            "PROVINCIA ART",
-            "PROVINCIA",
-            "PROVINCIA VIDA",
-            "TRES PROVINCIAS PERSONAS"
-          ],
-          "rank": 3
+            "Provincia ART",
+            "Provincia Seguros",
+            "Provincia Vida",
+            "Tres Provincias Personas"
+          ]
         },
         {
+          "rank": 4,
           "name": "San Cristóbal",
-          "prima_ars_m": 1312686.191273,
-          "share": 6.763076714328549,
+          "entidad": "San Cristóbal",
+          "prima_ars_m": 1312686.19,
+          "share": 6.76,
           "entities": [
-            "SAN CRISTÓBAL MUTUAL",
-            "ASOCIART ART",
-            "SAN CRISTÓBAL RETIRO"
-          ],
-          "rank": 4
+            "San Cristóbal Mutual",
+            "Asociart ART",
+            "San Cristóbal Retiro"
+          ]
         },
         {
-          "name": "La Segunda",
-          "prima_ars_m": 1171920.967252,
-          "share": 6.0378416847435705,
+          "rank": 5,
+          "name": "Grupo La Segunda",
+          "entidad": "Grupo La Segunda",
+          "prima_ars_m": 1171920.97,
+          "share": 6.04,
           "entities": [
-            "SEGUNDA",
-            "SEGUNDA ART",
-            "SEGUNDA PERSONAS",
-            "SEGUNDA RETIRO"
-          ],
-          "rank": 5
+            "La Segunda Generales",
+            "La Segunda ART",
+            "La Segunda Personas",
+            "La Segunda Retiro"
+          ]
         },
         {
+          "rank": 6,
           "name": "Generali / La Caja",
-          "prima_ars_m": 988168.28768,
-          "share": 5.091131437716665,
+          "entidad": "Generali / La Caja",
+          "prima_ars_m": 988168.29,
+          "share": 5.09,
           "entities": [
-            "CAJA GENERALES"
-          ],
-          "rank": 6
+            "Caja de Seguros Generales",
+            "Generali Argentina"
+          ]
         },
         {
+          "rank": 7,
           "name": "Zurich Argentina",
-          "prima_ars_m": 906630.253057,
-          "share": 4.671040187456655,
+          "entidad": "Zurich Argentina",
+          "prima_ars_m": 906630.25,
+          "share": 4.67,
           "entities": [
-            "ZURICH",
-            "ZURICH SANTANDER",
-            "ZURICH INTERNATIONAL LIFE"
-          ],
-          "rank": 7
+            "Zurich Seguros",
+            "Zurich Santander",
+            "Zurich International Life"
+          ]
         },
         {
+          "rank": 8,
           "name": "Mercantil Andina",
-          "prima_ars_m": 816928.514435,
-          "share": 4.208888803719682,
+          "entidad": "Mercantil Andina",
+          "prima_ars_m": 816928.51,
+          "share": 4.21,
           "entities": [
-            "MERCANTIL ANDINA",
-            "ANDINA ART"
-          ],
-          "rank": 8
+            "Mercantil Andina Seguros",
+            "Andina ART"
+          ]
         },
         {
+          "rank": 9,
           "name": "Galicia (GGAL)",
-          "prima_ars_m": 719351.488927,
-          "share": 3.7061632372789868,
+          "entidad": "Galicia (GGAL)",
+          "prima_ars_m": 719351.49,
+          "share": 3.71,
           "entities": [
-            "GALICIA S.A.",
-            "GALICIA SAU",
-            "HOLANDO SUDAMERICANA",
-            "GGAL RETIRO",
-            "GGAL",
-            "GALICIA RETIRO"
-          ],
-          "rank": 9
+            "Galicia Seguros",
+            "Holando Sudamericana",
+            "Galicia Retiro"
+          ]
         },
         {
-          "name": "Werthein",
-          "prima_ars_m": 666423.442193,
-          "share": 3.433473204595338,
+          "rank": 10,
+          "name": "Werthein (Experta)",
+          "entidad": "Werthein (Experta)",
+          "prima_ars_m": 666423.44,
+          "share": 3.43,
           "entities": [
-            "EXPERTA ART",
-            "ESTRELLA RETIRO",
-            "EXPERTA"
-          ],
-          "rank": 10
+            "Experta ART",
+            "Experta Seguros",
+            "La Estrella Retiro"
+          ]
         },
         {
+          "rank": 11,
           "name": "Nación Seguros",
-          "prima_ars_m": 660976.103947,
-          "share": 3.405408030533541,
+          "entidad": "Nación Seguros",
+          "prima_ars_m": 660976.1,
+          "share": 3.41,
           "entities": [
-            "NACIÓN",
-            "SOL NACIENTE",
-            "NACIÓN RETIRO"
-          ],
-          "rank": 11
+            "Nación Seguros",
+            "Nación Retiro",
+            "Sol Naciente"
+          ]
         },
         {
+          "rank": 12,
           "name": "Bernardino Rivadavia",
-          "prima_ars_m": 640322.785541,
-          "share": 3.2990002860826193,
+          "entidad": "Bernardino Rivadavia",
+          "prima_ars_m": 640322.79,
+          "share": 3.3,
           "entities": [
-            "BERNARDINO RIVADAVIA",
-            "MUTUAL RIVADAVIA"
-          ],
-          "rank": 12
+            "Bernardino Rivadavia Seguros",
+            "Mutual Rivadavia"
+          ]
         },
         {
+          "rank": 13,
           "name": "Swiss Medical",
-          "prima_ars_m": 606741.908781,
-          "share": 3.125988604256326,
+          "entidad": "Swiss Medical",
+          "prima_ars_m": 606741.91,
+          "share": 3.13,
           "entities": [
-            "SWISS MEDICAL ART",
-            "SMG",
-            "SMG VIDA",
-            "INSTITUTO SALTA",
-            "SMG RETIRO"
-          ],
-          "rank": 13
+            "Swiss Medical ART",
+            "SMG Seguros",
+            "SMG Vida",
+            "Instituto Salta",
+            "SMG Retiro"
+          ]
         },
         {
+          "rank": 14,
           "name": "Grupo ST",
-          "prima_ars_m": 372338.67831,
-          "share": 1.918322186874081,
+          "entidad": "Grupo ST",
+          "prima_ars_m": 372338.68,
+          "share": 1.92,
           "entities": [
-            "LIFE",
-            "ORÍGENES RETIRO"
-          ],
-          "rank": 14
+            "Life Seguros",
+            "Orígenes Retiro"
+          ]
         },
         {
-          "name": "Mapfre",
-          "prima_ars_m": 281830.002674,
-          "share": 1.4520133914376514,
+          "rank": 15,
+          "name": "Mapfre Argentina",
+          "entidad": "Mapfre Argentina",
+          "prima_ars_m": 281830.0,
+          "share": 1.45,
           "entities": [
-            "MAPFRE",
-            "MAPFRE VIDA"
-          ],
-          "rank": 15
+            "Mapfre Seguros",
+            "Mapfre Vida"
+          ]
         }
       ]
     },
