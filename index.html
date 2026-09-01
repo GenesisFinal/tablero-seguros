@@ -425,29 +425,71 @@
         <!-- ==================================================================== -->
         <section id="tab-mensual" class="tab-content hidden space-y-6">
             <div class="main-card rounded-2xl p-6">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                     <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="brand-badge bg-[#4183ca]/15 text-[#4183ca]">Series Históricas Mensuales</span>
-                            <span class="text-xs txt-muted font-mono" id="mensual-latest-date">Julio 2026</span>
+                            <span class="brand-badge bg-[#4183ca]/15 text-[#4183ca]">Series Históricas Mensuales SSN</span>
+                            <span class="text-xs txt-muted font-mono" id="mensual-badge-date">Último Dato: Julio 2026</span>
                         </div>
                         <h2 class="text-xl font-bold txt-primary">
                             Evolución de Producción Mensual del Mercado
                         </h2>
                         <p class="text-xs txt-secondary mt-1">
-                            Comportamiento mensual de primas emitidas a valores corrientes y constantes (ajustados por IPC).
+                            Valores mensuales de primas emitidas. Alterná entre valores nominales corrientes y valores constantes deflactados por IPC.
                         </p>
                     </div>
 
-                    <!-- Deflator Selector -->
+                    <!-- Deflator Selector Controls -->
                     <div class="flex flex-wrap items-center gap-2">
-                        <div class="subtle-card p-1 rounded-xl flex">
-                            <button onclick="setMensualMode('corriente')" id="btn-mensual-corriente" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm">
-                                Valores Corrientes
+                        <div class="subtle-card p-1 rounded-xl flex items-center gap-1">
+                            <button onclick="setMensualMode('corriente')" id="btn-mensual-corriente" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm">
+                                <i class="fas fa-money-bill-wave mr-1"></i> Valores Corrientes
                             </button>
-                            <button onclick="setMensualMode('constante')" id="btn-mensual-constante" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]">
-                                Constantes (IPC)
+                            <button onclick="setMensualMode('constante')" id="btn-mensual-constante" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]">
+                                <i class="fas fa-chart-simple mr-1"></i> Constantes (IPC)
                             </button>
+                            <button onclick="setMensualMode('comparativa')" id="btn-mensual-comparativa" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]">
+                                <i class="fas fa-code-compare mr-1"></i> Comparativa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly KPI Cards (Synchronized with selected currency mode) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                    <div class="subtle-card rounded-xl p-4">
+                        <div class="flex items-center justify-between text-xs txt-muted font-semibold uppercase">
+                            <span id="monthly-kpi-1-label">Total Mercado Mensual</span>
+                            <i class="fas fa-globe text-[#e20039]"></i>
+                        </div>
+                        <div class="text-xl font-bold font-mono text-[#e20039] mt-2" id="monthly-kpi-1-val">$ 2.557.478 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                            <span id="monthly-kpi-1-mom" class="text-[#3ac792] font-bold">+17.6% m/m</span>
+                            <span id="monthly-kpi-1-yoy" class="text-[#4183ca] font-bold">+26.2% i.a.</span>
+                        </div>
+                    </div>
+
+                    <div class="subtle-card rounded-xl p-4">
+                        <div class="flex items-center justify-between text-xs txt-muted font-semibold uppercase">
+                            <span id="monthly-kpi-2-label">Patrimoniales & ART</span>
+                            <i class="fas fa-car-crash text-[#4183ca]"></i>
+                        </div>
+                        <div class="text-xl font-bold font-mono text-[#4183ca] mt-2" id="monthly-kpi-2-val">$ 2.229.871 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                            <span id="monthly-kpi-2-mom" class="text-[#3ac792] font-bold">+20.4% m/m</span>
+                            <span id="monthly-kpi-2-share" class="txt-secondary font-bold">Cuota: 87.2%</span>
+                        </div>
+                    </div>
+
+                    <div class="subtle-card rounded-xl p-4">
+                        <div class="flex items-center justify-between text-xs txt-muted font-semibold uppercase">
+                            <span id="monthly-kpi-3-label">Seguros de Personas</span>
+                            <i class="fas fa-heart-pulse text-[#3ac792]"></i>
+                        </div>
+                        <div class="text-xl font-bold font-mono text-[#3ac792] mt-2" id="monthly-kpi-3-val">$ 327.606 M</div>
+                        <div class="flex items-center justify-between text-xs mt-2 font-mono">
+                            <span id="monthly-kpi-3-mom" class="text-[#3ac792] font-bold">+1.3% m/m</span>
+                            <span id="monthly-kpi-3-share" class="txt-secondary font-bold">Cuota: 12.8%</span>
                         </div>
                     </div>
                 </div>
@@ -458,7 +500,7 @@
                 </div>
 
                 <!-- Monthly Data Table -->
-                <div class="overflow-x-auto max-h-[320px] overflow-y-auto border rounded-xl border-slate-200 dark:border-slate-800">
+                <div class="overflow-x-auto max-h-[380px] overflow-y-auto border rounded-xl border-slate-200 dark:border-slate-800">
                     <table class="w-full text-left text-xs font-mono data-table">
                         <thead class="uppercase text-[10px] sticky-header">
                             <tr>
@@ -466,8 +508,9 @@
                                 <th class="py-2.5 px-3 text-right">Total Mercado ($M)</th>
                                 <th class="py-2.5 px-3 text-right">Patrimoniales ($M)</th>
                                 <th class="py-2.5 px-3 text-right">Personas ($M)</th>
-                                <th class="py-2.5 px-3 text-right">Var % Mensual</th>
-                                <th class="py-2.5 px-3 text-right">Var % Interanual</th>
+                                <th class="py-2.5 px-3 text-right">Var % Mensual (m/m)</th>
+                                <th class="py-2.5 px-3 text-right">Var % Interanual (i.a.)</th>
+                                <th class="py-2.5 px-3 text-right">Cuota Pat. / Per.</th>
                             </tr>
                         </thead>
                         <tbody id="tbl-mensual-body">
@@ -1063,7 +1106,7 @@
 
         function fmtPct(num) {
             if (num === undefined || num === null || isNaN(num)) return '-';
-            return Number(num).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+            return (num > 0 ? '+' : '') + Number(num).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
         }
 
         // Theme Toggle Function
@@ -1105,7 +1148,11 @@
 
             setTimeout(() => {
                 if (tabId === 'primas' && !charts.primasDoughnut) renderPrimasCharts();
-                if (tabId === 'mensual' && !charts.mensualLine) renderMensualChart();
+                if (tabId === 'mensual') {
+                    renderMensualKPIs();
+                    renderMensualChart();
+                    renderMensualTable();
+                }
                 if (tabId === 'rankings' && !charts.rankingBar) renderRankingBarChart();
                 if (tabId === 'personas' && !charts.personasDoughnut) renderPersonasChart();
                 if (tabId === 'inversiones' && !charts.inversionesDoughnut) renderInversionesCharts();
@@ -1149,8 +1196,8 @@
                     <td class="py-2.5 px-3 ${isTotal ? 'text-[#e20039] font-bold' : 'txt-secondary font-medium'}">${name}</td>
                     <td class="py-2.5 px-3 text-right font-mono">${fmtARS(montoAct)}</td>
                     <td class="py-2.5 px-3 text-right font-mono txt-muted">${fmtARS(montoPrev)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono font-bold">${fmtPct(shareVal)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono font-bold ${varColor}">${varVal > 0 ? '+' : ''}${fmtPct(varVal)}</td>
+                    <td class="py-2.5 px-3 text-right font-mono font-bold">${fmtPct(shareVal).replace('+', '')}</td>
+                    <td class="py-2.5 px-3 text-right font-mono font-bold ${varColor}">${fmtPct(varVal)}</td>
                 `;
                 tbody.appendChild(tr);
 
@@ -1184,7 +1231,7 @@
                 const patRealVar = ((1 + patNomVar/100) / (1 + 0.326) - 1) * 100;
                 const patShare = totMonto > 0 ? (patMonto / totMonto * 100) : 86.63;
                 document.getElementById('kpi-card-pat-monto').innerText = fmtARS(patMonto) + ' M';
-                document.getElementById('kpi-card-pat-share').innerText = fmtPct(patShare);
+                document.getElementById('kpi-card-pat-share').innerText = fmtPct(patShare).replace('+', '');
                 document.getElementById('kpi-card-pat-var').innerText = `+${patNomVar.toFixed(2)}% Nom i.a.`;
                 document.getElementById('kpi-card-pat-var-real').innerText = `(+${patRealVar.toFixed(2)}% Real Neta)`;
             }
@@ -1194,7 +1241,7 @@
                 const perRealVar = ((1 + perNomVar/100) / (1 + 0.326) - 1) * 100;
                 const perShare = totMonto > 0 ? (perMonto / totMonto * 100) : 13.37;
                 document.getElementById('kpi-card-per-monto').innerText = fmtARS(perMonto) + ' M';
-                document.getElementById('kpi-card-per-share').innerText = fmtPct(perShare);
+                document.getElementById('kpi-card-per-share').innerText = fmtPct(perShare).replace('+', '');
                 document.getElementById('kpi-card-per-var').innerText = `+${perNomVar.toFixed(2)}% Nom i.a.`;
                 document.getElementById('kpi-card-per-var-real').innerText = `(+${perRealVar.toFixed(2)}% Real Neta)`;
             }
@@ -1234,35 +1281,160 @@
         // Tab 2: Evolución Mensual
         function setMensualMode(mode) {
             mensualMode = mode;
-            document.getElementById('btn-mensual-corriente').className = mode === 'corriente' ? 
-                'px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm' : 
-                'px-3 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]';
-            document.getElementById('btn-mensual-constante').className = mode === 'constante' ? 
-                'px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm' : 
-                'px-3 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]';
+            
+            const btnCorr = document.getElementById('btn-mensual-corriente');
+            const btnConst = document.getElementById('btn-mensual-constante');
+            const btnComp = document.getElementById('btn-mensual-comparativa');
 
+            [btnCorr, btnConst, btnComp].forEach(btn => {
+                if (btn) {
+                    btn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all txt-muted hover:text-[#e20039]';
+                }
+            });
+
+            if (mode === 'corriente' && btnCorr) {
+                btnCorr.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm';
+            } else if (mode === 'constante' && btnConst) {
+                btnConst.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#e20039] text-white shadow-sm';
+            } else if (mode === 'comparativa' && btnComp) {
+                btnComp.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#4183ca] text-white shadow-sm';
+            }
+
+            renderMensualKPIs();
             renderMensualChart();
             renderMensualTable();
+        }
+
+        function renderMensualKPIs() {
+            const data = window.INSURANCE_DATA || {};
+            const mensualObj = data.ssn_produccion_mensual || {};
+            const effectiveMode = (mensualMode === 'comparativa') ? 'constante' : mensualMode;
+            const seriesObj = mensualObj[effectiveMode] || {};
+            const history = seriesObj.history || [];
+            
+            if (history.length === 0) return;
+
+            const latest = history[history.length - 1];
+            const prevM = history[history.length - 2];
+            const prevY = history[history.length - 13];
+
+            const isConst = effectiveMode === 'constante';
+            const modeSuffix = isConst ? ' (Constantes IPC)' : ' (Corrientes)';
+
+            document.getElementById('monthly-kpi-1-label').innerText = 'Total Mercado' + modeSuffix;
+            document.getElementById('monthly-kpi-2-label').innerText = 'Patrimoniales & ART' + modeSuffix;
+            document.getElementById('monthly-kpi-3-label').innerText = 'Seguros Personas' + modeSuffix;
+
+            const totVal = latest.total_mercado || 0;
+            const patVal = latest.total_patrimoniales || (totVal * 0.86);
+            const perVal = latest.total_personas || (totVal * 0.14);
+
+            document.getElementById('monthly-kpi-1-val').innerText = fmtARS(totVal) + ' M';
+            document.getElementById('monthly-kpi-2-val').innerText = fmtARS(patVal) + ' M';
+            document.getElementById('monthly-kpi-3-val').innerText = fmtARS(perVal) + ' M';
+
+            if (prevM) {
+                const totMom = ((totVal - prevM.total_mercado) / prevM.total_mercado) * 100;
+                const patMom = ((patVal - prevM.total_patrimoniales) / prevM.total_patrimoniales) * 100;
+                const perMom = ((perVal - prevM.total_personas) / prevM.total_personas) * 100;
+
+                document.getElementById('monthly-kpi-1-mom').innerText = fmtPct(totMom) + ' m/m';
+                document.getElementById('monthly-kpi-1-mom').className = (totMom >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') + ' font-bold';
+                
+                document.getElementById('monthly-kpi-2-mom').innerText = fmtPct(patMom) + ' m/m';
+                document.getElementById('monthly-kpi-2-mom').className = (patMom >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') + ' font-bold';
+
+                document.getElementById('monthly-kpi-3-mom').innerText = fmtPct(perMom) + ' m/m';
+                document.getElementById('monthly-kpi-3-mom').className = (perMom >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]') + ' font-bold';
+            }
+
+            if (prevY) {
+                const totYoy = ((totVal - prevY.total_mercado) / prevY.total_mercado) * 100;
+                document.getElementById('monthly-kpi-1-yoy').innerText = fmtPct(totYoy) + ' i.a.';
+                document.getElementById('monthly-kpi-1-yoy').className = (totYoy >= 0 ? 'text-[#4183ca]' : 'text-[#ff593e]') + ' font-bold';
+            }
+
+            document.getElementById('monthly-kpi-2-share').innerText = 'Cuota: ' + (patVal/totVal*100).toFixed(1) + '%';
+            document.getElementById('monthly-kpi-3-share').innerText = 'Cuota: ' + (perVal/totVal*100).toFixed(1) + '%';
         }
 
         function renderMensualChart() {
             const data = window.INSURANCE_DATA || {};
             const mensualObj = data.ssn_produccion_mensual || {};
-            const seriesObj = mensualObj[mensualMode] || {};
-            const history = seriesObj.history || [];
-
-            const recentHistory = history.slice(-18);
-            const labels = recentHistory.map(h => h.date || `${h.month}/${h.year}`);
-            const totValues = recentHistory.map(h => h.total_mercado || 0);
-            const patValues = recentHistory.map(h => h.total_patrimoniales || (h.total_mercado * 0.85));
-            const perValues = recentHistory.map(h => h.total_personas || (h.total_mercado * 0.15));
-
             const ctx = document.getElementById('chart-mensual-line')?.getContext('2d');
             if (!ctx) return;
 
             const isDark = document.documentElement.classList.contains('dark');
-
             if (charts.mensualLine) charts.mensualLine.destroy();
+
+            if (mensualMode === 'comparativa') {
+                const histCorr = (mensualObj.corriente?.history || []).slice(-24);
+                const histConst = (mensualObj.constante?.history || []).slice(-24);
+                const labels = histCorr.map(h => h.date || `${h.month}/${h.year}`);
+
+                charts.mensualLine = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Total Mercado (Valores Constantes IPC)',
+                                data: histConst.map(h => h.total_mercado),
+                                borderColor: '#3ac792',
+                                backgroundColor: 'rgba(58, 199, 146, 0.1)',
+                                fill: true,
+                                tension: 0.3,
+                                borderWidth: 3
+                            },
+                            {
+                                label: 'Total Mercado (Valores Corrientes)',
+                                data: histCorr.map(h => h.total_mercado),
+                                borderColor: '#e20039',
+                                backgroundColor: 'rgba(226, 0, 57, 0.05)',
+                                fill: true,
+                                tension: 0.3,
+                                borderWidth: 3
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 11, weight: 'bold' } } },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + fmtARS(context.parsed.y) + ' M';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, ticks: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10 } } },
+                            y: { 
+                                grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
+                                ticks: { 
+                                    color: isDark ? '#cbd5e1' : '#0f172a', 
+                                    font: { family: 'JetBrains Mono' }, 
+                                    callback: val => '$ ' + (val/1000).toFixed(0) + 'k M' 
+                                } 
+                            }
+                        }
+                    }
+                });
+                return;
+            }
+
+            const seriesObj = mensualObj[mensualMode] || {};
+            const history = (seriesObj.history || []).slice(-24);
+            const labels = history.map(h => h.date || `${h.month}/${h.year}`);
+            const totValues = history.map(h => h.total_mercado || 0);
+            const patValues = history.map(h => h.total_patrimoniales || (h.total_mercado * 0.86));
+            const perValues = history.map(h => h.total_personas || (h.total_mercado * 0.14));
+
+            const isConst = mensualMode === 'constante';
+            const unitTag = isConst ? 'Constantes' : 'Corrientes';
 
             charts.mensualLine = new Chart(ctx, {
                 type: 'line',
@@ -1270,7 +1442,7 @@
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Total Mercado ($M)',
+                            label: `Total Mercado (${unitTag} $M)`,
                             data: totValues,
                             borderColor: '#e20039',
                             backgroundColor: 'rgba(226, 0, 57, 0.12)',
@@ -1279,7 +1451,7 @@
                             borderWidth: 3
                         },
                         {
-                            label: 'Patrimoniales ($M)',
+                            label: `Patrimoniales (${unitTag} $M)`,
                             data: patValues,
                             borderColor: '#4183ca',
                             tension: 0.3,
@@ -1287,7 +1459,7 @@
                             borderDash: [5, 5]
                         },
                         {
-                            label: 'Personas ($M)',
+                            label: `Personas (${unitTag} $M)`,
                             data: perValues,
                             borderColor: '#3ac792',
                             tension: 0.3,
@@ -1299,21 +1471,23 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 11, weight: 'bold' } }
+                        legend: { labels: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 11, weight: 'bold' } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + fmtARS(context.parsed.y) + ' M';
+                                }
+                            }
                         }
                     },
                     scales: {
-                        x: { 
-                            grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
-                            ticks: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora' } } 
-                        },
+                        x: { grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, ticks: { color: isDark ? '#cbd5e1' : '#0f172a', font: { family: 'Sora', size: 10 } } },
                         y: { 
                             grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, 
                             ticks: { 
-                                color: isDark ? '#cbd5e1' : '#0f172a',
-                                font: { family: 'JetBrains Mono' },
-                                callback: val => '$ ' + (val/1000).toFixed(0) + 'k M'
+                                color: isDark ? '#cbd5e1' : '#0f172a', 
+                                font: { family: 'JetBrains Mono' }, 
+                                callback: val => '$ ' + (val/1000).toFixed(0) + 'k M' 
                             } 
                         }
                     }
@@ -1328,22 +1502,40 @@
 
             const data = window.INSURANCE_DATA || {};
             const mensualObj = data.ssn_produccion_mensual || {};
-            const seriesObj = mensualObj[mensualMode] || {};
-            const history = (seriesObj.history || []).slice(-12).reverse();
+            const effectiveMode = (mensualMode === 'comparativa') ? 'constante' : mensualMode;
+            const seriesObj = mensualObj[effectiveMode] || {};
+            const history = seriesObj.history || [];
 
-            history.forEach(h => {
+            for (let i = history.length - 1; i >= 0; i--) {
+                const curr = history[i];
+                const prevM = history[i - 1];
+                const prevY = history[i - 12];
+
+                const tot = curr.total_mercado || 0;
+                const pat = curr.total_patrimoniales || (tot * 0.86);
+                const per = curr.total_personas || (tot * 0.14);
+
+                const mom = (prevM && prevM.total_mercado > 0) ? (((tot - prevM.total_mercado) / prevM.total_mercado) * 100) : 0;
+                const yoy = (prevY && prevY.total_mercado > 0) ? (((tot - prevY.total_mercado) / prevY.total_mercado) * 100) : 0;
+
+                const patShare = tot > 0 ? (pat / tot * 100).toFixed(1) : 86.0;
+                const perShare = tot > 0 ? (per / tot * 100).toFixed(1) : 14.0;
+
+                const momColor = mom >= 0 ? 'text-[#3ac792]' : 'text-[#e20039]';
+                const yoyColor = yoy >= 0 ? 'text-[#4183ca]' : 'text-[#ff593e]';
+
                 const tr = document.createElement('tr');
-                const tot = h.total_mercado || 0;
                 tr.innerHTML = `
-                    <td class="py-2.5 px-3 font-semibold txt-primary">${h.date || `${h.month}/${h.year}`}</td>
+                    <td class="py-2.5 px-3 font-semibold txt-primary">${curr.date || `${curr.month}/${curr.year}`}</td>
                     <td class="py-2.5 px-3 text-right font-mono font-bold text-[#e20039]">${fmtARS(tot)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono">${fmtARS(h.total_patrimoniales || tot * 0.85)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono">${fmtARS(h.total_personas || tot * 0.15)}</td>
-                    <td class="py-2.5 px-3 text-right font-mono text-[#3ac792] font-bold">+4.5%</td>
-                    <td class="py-2.5 px-3 text-right font-mono text-[#3ac792] font-bold">+135.0%</td>
+                    <td class="py-2.5 px-3 text-right font-mono">${fmtARS(pat)}</td>
+                    <td class="py-2.5 px-3 text-right font-mono">${fmtARS(per)}</td>
+                    <td class="py-2.5 px-3 text-right font-mono font-bold ${momColor}">${fmtPct(mom)}</td>
+                    <td class="py-2.5 px-3 text-right font-mono font-bold ${yoyColor}">${fmtPct(yoy)}</td>
+                    <td class="py-2.5 px-3 text-right font-mono txt-muted">${patShare}% / ${perShare}%</td>
                 `;
                 tbody.appendChild(tr);
-            });
+            }
         }
 
         // Tab 3: Rankings SSN
@@ -1406,7 +1598,7 @@
                         <span>${entidad}</span>
                     </td>
                     <td class="py-3 px-3 text-right font-mono">${fmtARS(prima)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'txt-secondary'}">${fmtPct(part)}</td>
+                    <td class="py-3 px-3 text-right font-mono font-bold ${isLaSegunda ? 'text-[#e20039]' : 'txt-secondary'}">${fmtPct(part).replace('+', '')}</td>
                     <td class="py-3 px-3 text-center">
                         <button onclick="compareWithEntity('${entidad.replace(/'/g, "\'")}')" class="px-2 py-1 rounded subtle-card hover:border-[#e20039] txt-secondary hover:text-[#e20039] text-[10px] font-mono transition-all font-semibold" title="Comparar en Cara a Cara">
                             <i class="fas fa-arrows-split-up-and-left"></i> Comparar
@@ -1416,10 +1608,10 @@
                 tbody.appendChild(tr);
             });
 
-            document.getElementById('metric-top5-share').innerText = fmtPct(top5Sum);
+            document.getElementById('metric-top5-share').innerText = fmtPct(top5Sum).replace('+', '');
             document.getElementById('bar-top5-share').style.width = Math.min(100, top5Sum) + '%';
 
-            document.getElementById('metric-top10-share').innerText = fmtPct(top10Sum);
+            document.getElementById('metric-top10-share').innerText = fmtPct(top10Sum).replace('+', '');
             document.getElementById('bar-top10-share').style.width = Math.min(100, top10Sum) + '%';
 
             document.getElementById('metric-lasegunda-pos').innerText = lsPos !== '-' ? lsPos : 'Participante';
@@ -1565,7 +1757,7 @@
                     <td class="py-3 px-3 font-semibold txt-primary">${r.ramo}</td>
                     <td class="py-3 px-3 txt-secondary">${r.empresa}</td>
                     <td class="py-3 px-3 text-right font-mono font-bold text-[#e20039]">${fmtARS(r.monto)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-semibold">${fmtPct(r.share_grupo)}</td>
+                    <td class="py-3 px-3 text-right font-mono font-semibold">${fmtPct(r.share_grupo).replace('+', '')}</td>
                     <td class="py-3 px-3 text-center"><span class="brand-badge bg-[#3ac792]/15 text-[#3ac792]">${r.pos}</span></td>
                 `;
                 tbody.appendChild(tr);
@@ -1635,7 +1827,7 @@
                     <td class="py-3 px-3 text-right font-mono">${fmtARS(item.compromisos_individuales || item.individual)}</td>
                     <td class="py-3 px-3 text-right font-mono">${fmtARS(item.compromisos_colectivos || item.colectivo)}</td>
                     <td class="py-3 px-3 text-right font-mono font-bold text-[#b91f38] dark:text-[#f8cc59]">${fmtARS(item.total_compromisos || item.total)}</td>
-                    <td class="py-3 px-3 text-right font-mono font-semibold">${fmtPct(item.participacion || item.share)}</td>
+                    <td class="py-3 px-3 text-right font-mono font-semibold">${fmtPct(item.participacion || item.share).replace('+', '')}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -1714,7 +1906,7 @@
                             <span>${item.instrumento}</span>
                         </td>
                         <td class="py-3 px-3 text-right font-mono">${fmtARS(item.monto || (item.porcentaje * 164205))}</td>
-                        <td class="py-3 px-3 text-right font-mono font-bold text-[#e20039]">${fmtPct(item.porcentaje)}</td>
+                        <td class="py-3 px-3 text-right font-mono font-bold text-[#e20039]">${fmtPct(item.porcentaje).replace('+', '')}</td>
                     `;
                     tbody.appendChild(tr);
                 });
