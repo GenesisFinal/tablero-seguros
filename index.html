@@ -3419,14 +3419,14 @@
             const cleanName = (name || '').trim().toLowerCase();
 
             // 1. Check if Consolidated Group
-            const g = grupos.find(x => (x.name || x.entidad || '').toLowerCase() === cleanName || cleanName.includes((x.name || '').toLowerCase()));
+            const g = grupos.find(x => (x.name || x.entidad || '').toLowerCase() === cleanName || cleanName === ('grupo: ' + (x.name || '').toLowerCase()) || cleanName === (x.name || '').toLowerCase());
             if (g) {
                 const gName = g.name || g.entidad;
                 const entities = g.entities || [];
                 let autoVal = 0, artVal = 0, perVal = 0, retVal = 0;
 
                 if (cleanName.includes('sancor')) {
-                    autoVal = 620400; artVal = 680120; perVal = 202851; retVal = 11007;
+                    autoVal = 787248; artVal = 1085408; perVal = 202851; retVal = 11007;
                 } else if (cleanName.includes('segunda')) {
                     autoVal = 452844; artVal = 402548; perVal = 45679; retVal = 14219;
                 } else if (cleanName.includes('patronal')) {
@@ -3471,27 +3471,36 @@
                 };
             }
 
-            // 2. Individual Entity
-            const tRow = tm.find(x => cleanName.includes((x.entidad || x.nombre || '').toLowerCase()) || (x.entidad || '').toLowerCase().includes(cleanName));
-            const aRow = auto.find(x => cleanName.includes((x.entidad || x.nombre || '').toLowerCase()) || (x.entidad || '').toLowerCase().includes(cleanName));
-            const artRow = art.find(x => cleanName.includes((x.entidad || x.nombre || '').toLowerCase()) || (x.entidad || '').toLowerCase().includes(cleanName));
-            const perRow = per.find(x => cleanName.includes((x.entidad || x.nombre || '').toLowerCase()) || (x.entidad || '').toLowerCase().includes(cleanName));
-            const retRow = ret.find(x => cleanName.includes((x.entidad || x.nombre || '').toLowerCase()) || (x.entidad || '').toLowerCase().includes(cleanName));
+            // 2. Individual Entity (Strict exact entity matching without cross-company contamination)
+            const matchEntity = (list) => {
+                return list.find(x => {
+                    const ent = (x.entidad || x.nombre || '').trim().toLowerCase();
+                    return ent === cleanName;
+                }) || list.find(x => {
+                    const ent = (x.entidad || x.nombre || '').trim().toLowerCase();
+                    return ent.startsWith(cleanName) || cleanName.startsWith(ent);
+                });
+            };
 
-            const isLaSegunda = cleanName.includes('segunda');
-            const tot = Number(tRow?.prima_ars_m || tRow?.prima || (isLaSegunda ? 709475 : 0));
-            const autoVal = Number(aRow?.prima_ars_m || (isLaSegunda ? 452844 : 0));
-            const artVal = Number(artRow?.prima_ars_m || (isLaSegunda ? 402548 : 0));
-            const perVal = Number(perRow?.prima_ars_m || (isLaSegunda ? 45679 : 0));
-            const retVal = Number(retRow?.prima_ars_m || (isLaSegunda ? 14219 : 0));
+            const tRow = matchEntity(tm);
+            const aRow = matchEntity(auto);
+            const artRow = matchEntity(art);
+            const perRow = matchEntity(per);
+            const retRow = matchEntity(ret);
+
+            const tot = Number(tRow?.prima_ars_m || tRow?.prima || 0);
+            const autoVal = Number(aRow?.prima_ars_m || aRow?.prima || 0);
+            const artVal = Number(artRow?.prima_ars_m || artRow?.prima || 0);
+            const perVal = Number(perRow?.prima_ars_m || perRow?.prima || 0);
+            const retVal = Number(retRow?.prima_ars_m || retRow?.prima || 0);
             const otrosVal = Math.max(0, tot - (autoVal + artVal + perVal + retVal));
 
             return {
                 isGroup: false,
                 name: tRow?.entidad || name,
-                rank: tRow?.rank || tRow?.posicion || (isLaSegunda ? 2 : '-'),
+                rank: tRow?.rank || tRow?.posicion || '-',
                 prima: tot,
-                share: tRow?.share || tRow?.participacion || (isLaSegunda ? 3.66 : 0),
+                share: tRow?.share || tRow?.participacion || 0,
                 entities: [tRow?.entidad || name],
                 autoVal: autoVal,
                 artVal: artVal,
