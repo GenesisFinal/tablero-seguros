@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-01 17:23:46",
+  "last_updated": "2026-09-01 21:01:52",
   "period_label": "31-03-2026 (9 Meses Acumulados)",
   "comparison_label": "vs. 31-03-2025",
   "ssn_primas_mercado": {
@@ -4297,1404 +4297,1497 @@
     }
   },
   "ssn_rankings": {
-    "1_grupos": {
-      "title": "Ranking Oficial de Grupos Aseguradores Consolidados",
-      "period": "Acumulado 9 Meses (Marzo 2026)",
-      "total_mercado_m": 19409600.79,
-      "rows": [
+    "total_mercado": [
+      {
+        "posicion": 1,
+        "entidad": "FED. PATRONAL",
+        "prima": 1884921421564.0,
+        "participacion": 9.71
+      },
+      {
+        "posicion": 2,
+        "entidad": "SANCOR",
+        "prima": 1414628836868.0,
+        "participacion": 7.29
+      },
+      {
+        "posicion": 3,
+        "entidad": "PREVENCIÓN ART",
+        "prima": 1085408013366.0,
+        "participacion": 5.59
+      },
+      {
+        "posicion": 4,
+        "entidad": "CAJA GENERALES",
+        "prima": 988168287680.0,
+        "participacion": 5.09
+      },
+      {
+        "posicion": 5,
+        "entidad": "PROVINCIA ART",
+        "prima": 859388560410.0,
+        "participacion": 4.43
+      },
+      {
+        "posicion": 6,
+        "entidad": "SAN CRISTÓBAL MUTUAL",
+        "prima": 812069012804.0,
+        "participacion": 4.18
+      },
+      {
+        "posicion": 7,
+        "entidad": "SEGUNDA",
+        "prima": 709475275482.0,
+        "participacion": 3.66
+      },
+      {
+        "posicion": 8,
+        "entidad": "MERCANTIL ANDINA",
+        "prima": 696056598932.0,
+        "participacion": 3.59
+      },
+      {
+        "posicion": 9,
+        "entidad": "ZURICH",
+        "prima": 653019681013.0,
+        "participacion": 3.36
+      },
+      {
+        "posicion": 10,
+        "entidad": "BERNARDINO RIVADAVIA",
+        "prima": 629273602391.0,
+        "participacion": 3.24
+      },
+      {
+        "posicion": 11,
+        "entidad": "NACIÓN",
+        "prima": 604064333413.0,
+        "participacion": 3.11
+      },
+      {
+        "posicion": 12,
+        "entidad": "EXPERTA ART",
+        "prima": 522590656667.0,
+        "participacion": 2.69
+      },
+      {
+        "posicion": 13,
+        "entidad": "PROVINCIA",
+        "prima": 518236471544.0,
+        "participacion": 2.67
+      },
+      {
+        "posicion": 14,
+        "entidad": "ALLIANZ",
+        "prima": 487539173721.0,
+        "participacion": 2.51
+      },
+      {
+        "posicion": 15,
+        "entidad": "ASOCIART ART",
+        "prima": 470334407556.0,
+        "participacion": 2.42
+      },
+      {
+        "posicion": 16,
+        "entidad": "SEGUNDA ART",
+        "prima": 402547833485.0,
+        "participacion": 2.07
+      },
+      {
+        "posicion": 17,
+        "entidad": "MERIDIONAL",
+        "prima": 343196252419.0,
+        "participacion": 1.77
+      },
+      {
+        "posicion": 18,
+        "entidad": "LIFE",
+        "prima": 339884381640.0,
+        "participacion": 1.75
+      },
+      {
+        "posicion": 19,
+        "entidad": "SWISS MEDICAL ART",
+        "prima": 325804372655.0,
+        "participacion": 1.68
+      },
+      {
+        "posicion": 20,
+        "entidad": "GALICIA S.A.",
+        "prima": 319014476347.0,
+        "participacion": 1.64
+      },
+      {
+        "posicion": 21,
+        "entidad": "MAPFRE",
+        "prima": 268411117083.0,
+        "participacion": 1.38
+      },
+      {
+        "posicion": 22,
+        "entidad": "TRIUNFO",
+        "prima": 207880891430.0,
+        "participacion": 1.07
+      },
+      {
+        "posicion": 23,
+        "entidad": "GALICIA SAU",
+        "prima": 167028344483.0,
+        "participacion": 0.86
+      },
+      {
+        "posicion": 24,
+        "entidad": "ZURICH SANTANDER",
+        "prima": 166247557681.0,
+        "participacion": 0.86
+      },
+      {
+        "posicion": 25,
+        "entidad": "RÍO URUGUAY",
+        "prima": 164461455922.0,
+        "participacion": 0.85
+      },
+      {
+        "posicion": 26,
+        "entidad": "SMG",
+        "prima": 161527359799.0,
+        "participacion": 0.83
+      },
+      {
+        "posicion": 27,
+        "entidad": "HOLANDO SUDAMERICANA",
+        "prima": 153025786513.0,
+        "participacion": 0.79
+      },
+      {
+        "posicion": 28,
+        "entidad": "CHUBB SEGUROS",
+        "prima": 151837375502.0,
+        "participacion": 0.78
+      },
+      {
+        "posicion": 29,
+        "entidad": "ATM",
+        "prima": 141172205302.0,
+        "participacion": 0.73
+      },
+      {
+        "posicion": 30,
+        "entidad": "INSTITUTO AUTÁRQUICO",
+        "prima": 130852862974.0,
+        "participacion": 0.67
+      },
+      {
+        "posicion": 31,
+        "entidad": "ANDINA ART",
+        "prima": 120871915503.0,
+        "participacion": 0.62
+      },
+      {
+        "posicion": 32,
+        "entidad": "MUTUAL PATRONAL",
+        "prima": 120469159422.0,
+        "participacion": 0.62
+      },
+      {
+        "posicion": 33,
+        "entidad": "NORTE",
+        "prima": 113709147365.0,
+        "participacion": 0.59
+      },
+      {
+        "posicion": 34,
+        "entidad": "HORIZONTE",
+        "prima": 113244576082.0,
+        "participacion": 0.58
+      },
+      {
+        "posicion": 35,
+        "entidad": "QUALIA",
+        "prima": 110915320456.0,
+        "participacion": 0.57
+      },
+      {
+        "posicion": 36,
+        "entidad": "BERKLEY",
+        "prima": 98199999285.0,
+        "participacion": 0.51
+      },
+      {
+        "posicion": 37,
+        "entidad": "ESTRELLA RETIRO",
+        "prima": 97341991251.0,
+        "participacion": 0.5
+      },
+      {
+        "posicion": 38,
+        "entidad": "BBVA SEGUROS",
+        "prima": 95742637048.0,
+        "participacion": 0.49
+      },
+      {
+        "posicion": 39,
+        "entidad": "BARBUSS",
+        "prima": 88300933132.0,
+        "participacion": 0.45
+      },
+      {
+        "posicion": 40,
+        "entidad": "CAJA DE TUCUMÁN",
+        "prima": 87468875425.0,
+        "participacion": 0.45
+      },
+      {
+        "posicion": 41,
+        "entidad": "ZURICH INTERNATIONAL LIFE",
+        "prima": 87363014363.0,
+        "participacion": 0.45
+      },
+      {
+        "posicion": 42,
+        "entidad": "PARANÁ",
+        "prima": 85418659210.0,
+        "participacion": 0.44
+      },
+      {
+        "posicion": 43,
+        "entidad": "SERENA ART",
+        "prima": 83859218713.0,
+        "participacion": 0.43
+      },
+      {
+        "posicion": 44,
+        "entidad": "CARUSO",
+        "prima": 80887843744.0,
+        "participacion": 0.42
+      },
+      {
+        "posicion": 45,
+        "entidad": "ASSURANT",
+        "prima": 71132031284.0,
+        "participacion": 0.37
+      },
+      {
+        "posicion": 46,
+        "entidad": "PERSEVERANCIA",
+        "prima": 65605049396.0,
+        "participacion": 0.34
+      },
+      {
+        "posicion": 47,
+        "entidad": "BERKLEY ART",
+        "prima": 65175044520.0,
+        "participacion": 0.34
+      },
+      {
+        "posicion": 48,
+        "entidad": "INTÉGRITY",
+        "prima": 65146807113.0,
+        "participacion": 0.34
+      },
+      {
+        "posicion": 49,
+        "entidad": "SMG VIDA",
+        "prima": 60237669691.0,
+        "participacion": 0.31
+      },
+      {
+        "posicion": 50,
+        "entidad": "SEGURCOOP",
+        "prima": 57658832957.0,
+        "participacion": 0.3
+      }
+    ],
+    "grupos_aseguradores": [
+      {
+        "posicion": 1,
+        "entidad": "Sancor Seguros",
+        "prima": 2511044166438.0,
+        "participacion": 12.94
+      },
+      {
+        "posicion": 2,
+        "entidad": "Federación Patronal",
+        "prima": 1889560540868.0,
+        "participacion": 9.74
+      },
+      {
+        "posicion": 3,
+        "entidad": "Provincia (Grupo Bapro)",
+        "prima": 1404996955009.0,
+        "participacion": 7.24
+      },
+      {
+        "posicion": 4,
+        "entidad": "San Cristóbal",
+        "prima": 1312686191273.0,
+        "participacion": 6.76
+      },
+      {
+        "posicion": 5,
+        "entidad": "La Segunda",
+        "prima": 1171920967252.0,
+        "participacion": 6.04
+      },
+      {
+        "posicion": 6,
+        "entidad": "Generali / La Caja",
+        "prima": 988168287680.0,
+        "participacion": 5.09
+      },
+      {
+        "posicion": 7,
+        "entidad": "Zurich Argentina",
+        "prima": 906630253057.0,
+        "participacion": 4.67
+      },
+      {
+        "posicion": 8,
+        "entidad": "Mercantil Andina",
+        "prima": 816928514435.0,
+        "participacion": 4.21
+      },
+      {
+        "posicion": 9,
+        "entidad": "Werthein",
+        "prima": 666423442193.0,
+        "participacion": 3.43
+      },
+      {
+        "posicion": 10,
+        "entidad": "Bernardino Rivadavia",
+        "prima": 629273602391.0,
+        "participacion": 3.24
+      },
+      {
+        "posicion": 11,
+        "entidad": "Galicia (GGAL)",
+        "prima": 557315254573.0,
+        "participacion": 2.87
+      },
+      {
+        "posicion": 12,
+        "entidad": "Grupo ST",
+        "prima": 339884381640.0,
+        "participacion": 1.75
+      },
+      {
+        "posicion": 13,
+        "entidad": "Swiss Medical",
+        "prima": 325804372655.0,
+        "participacion": 1.68
+      }
+    ],
+    "la_segunda": {
+      "empresas": [
         {
-          "rank": 1,
-          "name": "Sancor Seguros",
-          "entidad": "Sancor Seguros",
-          "prima_ars_m": 2511044.17,
-          "share": 12.94,
-          "entities": [
-            "Sancor Seguros",
-            "Prevención ART",
-            "Prevención Retiro"
-          ]
+          "entidad": "SEGUNDA COOP",
+          "prima": 709475275482.0,
+          "participacion": 60.54
         },
         {
-          "rank": 2,
-          "name": "Federación Patronal",
-          "entidad": "Federación Patronal",
-          "prima_ars_m": 1889560.54,
-          "share": 9.74,
-          "entities": [
-            "Fed. Patronal Seguros",
-            "Fed. Patronal Retiro"
-          ]
-        },
-        {
-          "rank": 3,
-          "name": "Provincia (Grupo Bapro)",
-          "entidad": "Provincia (Grupo Bapro)",
-          "prima_ars_m": 1414595.91,
-          "share": 7.29,
-          "entities": [
-            "Provincia ART",
-            "Provincia Seguros",
-            "Provincia Vida",
-            "Tres Provincias Personas"
-          ]
-        },
-        {
-          "rank": 4,
-          "name": "San Cristóbal",
-          "entidad": "San Cristóbal",
-          "prima_ars_m": 1312686.19,
-          "share": 6.76,
-          "entities": [
-            "San Cristóbal Mutual",
-            "Asociart ART",
-            "San Cristóbal Retiro"
-          ]
-        },
-        {
-          "rank": 5,
-          "name": "Grupo La Segunda",
-          "entidad": "Grupo La Segunda",
-          "prima_ars_m": 1171920.97,
-          "share": 6.04,
-          "entities": [
-            "La Segunda Generales",
-            "La Segunda ART",
-            "La Segunda Personas",
-            "La Segunda Retiro"
-          ]
-        },
-        {
-          "rank": 6,
-          "name": "Generali / La Caja",
-          "entidad": "Generali / La Caja",
-          "prima_ars_m": 988168.29,
-          "share": 5.09,
-          "entities": [
-            "Caja de Seguros Generales",
-            "Generali Argentina"
-          ]
-        },
-        {
-          "rank": 7,
-          "name": "Zurich Argentina",
-          "entidad": "Zurich Argentina",
-          "prima_ars_m": 906630.25,
-          "share": 4.67,
-          "entities": [
-            "Zurich Seguros",
-            "Zurich Santander",
-            "Zurich International Life"
-          ]
-        },
-        {
-          "rank": 8,
-          "name": "Mercantil Andina",
-          "entidad": "Mercantil Andina",
-          "prima_ars_m": 816928.51,
-          "share": 4.21,
-          "entities": [
-            "Mercantil Andina Seguros",
-            "Andina ART"
-          ]
-        },
-        {
-          "rank": 9,
-          "name": "Galicia (GGAL)",
-          "entidad": "Galicia (GGAL)",
-          "prima_ars_m": 719351.49,
-          "share": 3.71,
-          "entities": [
-            "Galicia Seguros",
-            "Holando Sudamericana",
-            "Galicia Retiro"
-          ]
-        },
-        {
-          "rank": 10,
-          "name": "Werthein (Experta)",
-          "entidad": "Werthein (Experta)",
-          "prima_ars_m": 666423.44,
-          "share": 3.43,
-          "entities": [
-            "Experta ART",
-            "Experta Seguros",
-            "La Estrella Retiro"
-          ]
-        },
-        {
-          "rank": 11,
-          "name": "Nación Seguros",
-          "entidad": "Nación Seguros",
-          "prima_ars_m": 660976.1,
-          "share": 3.41,
-          "entities": [
-            "Nación Seguros",
-            "Nación Retiro",
-            "Sol Naciente"
-          ]
-        },
-        {
-          "rank": 12,
-          "name": "Bernardino Rivadavia",
-          "entidad": "Bernardino Rivadavia",
-          "prima_ars_m": 640322.79,
-          "share": 3.3,
-          "entities": [
-            "Bernardino Rivadavia Seguros",
-            "Mutual Rivadavia"
-          ]
-        },
-        {
-          "rank": 13,
-          "name": "Swiss Medical",
-          "entidad": "Swiss Medical",
-          "prima_ars_m": 606741.91,
-          "share": 3.13,
-          "entities": [
-            "Swiss Medical ART",
-            "SMG Seguros",
-            "SMG Vida",
-            "Instituto Salta",
-            "SMG Retiro"
-          ]
-        },
-        {
-          "rank": 14,
-          "name": "Grupo ST",
-          "entidad": "Grupo ST",
-          "prima_ars_m": 372338.68,
-          "share": 1.92,
-          "entities": [
-            "Life Seguros",
-            "Orígenes Retiro"
-          ]
-        },
-        {
-          "rank": 15,
-          "name": "Mapfre Argentina",
-          "entidad": "Mapfre Argentina",
-          "prima_ars_m": 281830.0,
-          "share": 1.45,
-          "entities": [
-            "Mapfre Seguros",
-            "Mapfre Vida"
-          ]
-        }
-      ]
-    },
-    "2_total_mercado": {
-      "total_cat_prima_ars_m": 19409600.788527,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 1884921.421564,
-          "share": 9.711283823406484,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "SANCOR",
-          "prima_ars_m": 1414628.836868,
-          "share": 7.2882943460856024,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "PREVENCIÓN ART",
-          "prima_ars_m": 1085408.013366,
-          "share": 5.592119205293413,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "CAJA GENERALES",
-          "prima_ars_m": 988168.28768,
-          "share": 5.091131437716665,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "PROVINCIA ART",
-          "prima_ars_m": 859388.56041,
-          "share": 4.42764675983436,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "SAN CRISTÓBAL MUTUAL",
-          "prima_ars_m": 812069.012804,
-          "share": 4.183852216496969,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "SEGUNDA",
-          "prima_ars_m": 709475.275482,
-          "share": 3.6552801019038488,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "MERCANTIL ANDINA",
-          "prima_ars_m": 696056.598932,
-          "share": 3.5861458796382792,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "ZURICH",
-          "prima_ars_m": 653019.681013,
-          "share": 3.3644158276506104,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "BERNARDINO RIVADAVIA",
-          "prima_ars_m": 629273.602391,
-          "share": 3.2420739058320205,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 11,
-          "entidad": "NACIÓN",
-          "prima_ars_m": 604064.333413,
-          "share": 3.112193496375577,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 12,
-          "entidad": "EXPERTA ART",
-          "prima_ars_m": 522590.656667,
-          "share": 2.6924338236565015,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 13,
-          "entidad": "PROVINCIA",
-          "prima_ars_m": 518236.471544,
-          "share": 2.6700006722978515,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 14,
-          "entidad": "ALLIANZ",
-          "prima_ars_m": 487539.173721,
-          "share": 2.5118454471726386,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 15,
-          "entidad": "ASOCIART ART",
-          "prima_ars_m": 470334.407556,
-          "share": 2.4232049524378385,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 16,
           "entidad": "SEGUNDA ART",
-          "prima_ars_m": 402547.833485,
-          "share": 2.073962457398638,
-          "is_la_segunda_extra": true
+          "prima": 402547833485.0,
+          "participacion": 34.35
         },
         {
-          "rank": 17,
-          "entidad": "MERIDIONAL",
-          "prima_ars_m": 343196.252419,
-          "share": 1.768177801069783,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 18,
-          "entidad": "LIFE",
-          "prima_ars_m": 339884.38164,
-          "share": 1.7511147464759058,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 19,
-          "entidad": "SWISS MEDICAL ART",
-          "prima_ars_m": 325804.372655,
-          "share": 1.6785732803303337,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 20,
-          "entidad": "GALICIA S.A.",
-          "prima_ars_m": 319014.476347,
-          "share": 1.6435911270033396,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 21,
-          "entidad": "MAPFRE",
-          "prima_ars_m": 268411.117083,
-          "share": 1.382878092174145,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 22,
-          "entidad": "TRIUNFO",
-          "prima_ars_m": 207880.89143,
-          "share": 1.071020953469987,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 23,
-          "entidad": "GALICIA SAU",
-          "prima_ars_m": 167028.344483,
-          "share": 0.8605449761837982,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 24,
-          "entidad": "ZURICH SANTANDER",
-          "prima_ars_m": 166247.557681,
-          "share": 0.8565222927164418,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 25,
-          "entidad": "RÍO URUGUAY",
-          "prima_ars_m": 164461.455922,
-          "share": 0.8473201366367774,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 26,
-          "entidad": "SMG",
-          "prima_ars_m": 161527.359799,
-          "share": 0.832203410873235,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 27,
-          "entidad": "HOLANDO SUDAMERICANA",
-          "prima_ars_m": 153025.786513,
-          "share": 0.7884025445976892,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 28,
-          "entidad": "CHUBB SEGUROS",
-          "prima_ars_m": 151837.375502,
-          "share": 0.7822797447320553,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 29,
-          "entidad": "ATM",
-          "prima_ars_m": 141172.205302,
-          "share": 0.7273318335606715,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 30,
-          "entidad": "INSTITUTO AUTÁRQUICO",
-          "prima_ars_m": 130852.862974,
-          "share": 0.6741656585299117,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 31,
-          "entidad": "ANDINA ART",
-          "prima_ars_m": 120871.915503,
-          "share": 0.6227429240814025,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 32,
-          "entidad": "MUTUAL PATRONAL",
-          "prima_ars_m": 120469.159422,
-          "share": 0.620667888714173,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 33,
-          "entidad": "NORTE",
-          "prima_ars_m": 113709.147365,
-          "share": 0.5858397017223218,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 34,
-          "entidad": "HORIZONTE",
-          "prima_ars_m": 113244.576082,
-          "share": 0.5834461889032709,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 35,
-          "entidad": "QUALIA",
-          "prima_ars_m": 110915.320456,
-          "share": 0.571445655500354,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 36,
-          "entidad": "BERKLEY",
-          "prima_ars_m": 98199.999285,
-          "share": 0.5059351830824153,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 37,
-          "entidad": "ESTRELLA RETIRO",
-          "prima_ars_m": 97341.991251,
-          "share": 0.5015146489181723,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 38,
-          "entidad": "BBVA SEGUROS",
-          "prima_ars_m": 95742.637048,
-          "share": 0.4932746329568684,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 39,
-          "entidad": "BARBUSS",
-          "prima_ars_m": 88300.933132,
-          "share": 0.4549343085108407,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 40,
-          "entidad": "CAJA DE TUCUMÁN",
-          "prima_ars_m": 87468.875425,
-          "share": 0.4506474727532922,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 41,
-          "entidad": "ZURICH INTERNATIONAL LIFE",
-          "prima_ars_m": 87363.014363,
-          "share": 0.45010206708960343,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 42,
-          "entidad": "PARANÁÁ",
-          "prima_ars_m": 85418.65921,
-          "share": 0.44008457536381124,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 43,
-          "entidad": "SERENA ART",
-          "prima_ars_m": 83859.218713,
-          "share": 0.4320501983872287,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 44,
-          "entidad": "CARUSO",
-          "prima_ars_m": 80887.843744,
-          "share": 0.4167414086734475,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 45,
-          "entidad": "ASSURANT",
-          "prima_ars_m": 71132.031284,
-          "share": 0.36647858994630167,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 46,
-          "entidad": "PERSEVERANCIA",
-          "prima_ars_m": 65605.049396,
-          "share": 0.33800308471454543,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 47,
-          "entidad": "BERKLEY ART",
-          "prima_ars_m": 65175.04452,
-          "share": 0.33578766111730085,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 48,
-          "entidad": "INTÉGRITY",
-          "prima_ars_m": 65146.807113,
-          "share": 0.3356421794698025,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 49,
-          "entidad": "SMG VIDA",
-          "prima_ars_m": 60237.669691,
-          "share": 0.31034986421053257,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 50,
-          "entidad": "SEGURCOOP",
-          "prima_ars_m": 57658.832957,
-          "share": 0.2970634666071138,
-          "is_la_segunda_extra": false
-        }
-      ]
-    },
-    "3_patrimoniales_total": {
-      "total_cat_prima_ars_m": 16815510.128489,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 1782523.526096,
-          "share": 10.60047249518783,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "SANCOR",
-          "prima_ars_m": 1211777.858244,
-          "share": 7.206310418088322,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "PREVENCIÓN ART",
-          "prima_ars_m": 1085408.013366,
-          "share": 6.4548027688264495,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "CAJA GENERALES",
-          "prima_ars_m": 895550.803986,
-          "share": 5.325742705056263,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "PROVINCIA ART",
-          "prima_ars_m": 859388.56041,
-          "share": 5.110689796761001,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "SAN CRISTÓBAL MUTUAL",
-          "prima_ars_m": 790026.633226,
-          "share": 4.698202000351624,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "SEGUNDA",
-          "prima_ars_m": 709475.275482,
-          "share": 4.21917188393827,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "MERCANTIL ANDINA",
-          "prima_ars_m": 669786.062563,
-          "share": 3.9831444746254947,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "ZURICH",
-          "prima_ars_m": 630873.924163,
-          "share": 3.7517382425060495,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "BERNARDINO RIVADAVIA",
-          "prima_ars_m": 622246.896464,
-          "share": 3.700434252124075,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 16,
-          "entidad": "SEGUNDA ART",
-          "prima_ars_m": 402547.833485,
-          "share": 2.3939079481329535,
-          "is_la_segunda_extra": true
-        }
-      ]
-    },
-    "4_personas_total": {
-      "total_cat_prima_ars_m": 2594177.682214,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "LIFE",
-          "prima_ars_m": 259387.879227,
-          "share": 9.998847843206542,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "SANCOR",
-          "prima_ars_m": 202850.978624,
-          "share": 7.819471272718563,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "NACIÓN",
-          "prima_ars_m": 107945.0512,
-          "share": 4.161050800031335,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 102397.895468,
-          "share": 3.9472198134326923,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "ESTRELLA RETIRO",
-          "prima_ars_m": 97341.991251,
-          "share": 3.75232552181713,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "CAJA GENERALES",
-          "prima_ars_m": 92617.483694,
-          "share": 3.570205862497269,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "ZURICH INTERNATIONAL LIFE (*)",
-          "prima_ars_m": 87362.988608,
-          "share": 3.367656317721463,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "ZURICH SANTANDER",
-          "prima_ars_m": 84597.673405,
-          "share": 3.2610593324047157,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "PROVINCIA",
-          "prima_ars_m": 82536.296663,
-          "share": 3.181597668844311,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "CARUSO",
-          "prima_ars_m": 73812.657202,
-          "share": 2.8453200298525663,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 15,
           "entidad": "SEGUNDA PERSONAS",
-          "prima_ars_m": 45678.718929,
-          "share": 1.760816895549557,
-          "is_la_segunda_extra": true
+          "prima": 45678718929.0,
+          "participacion": 3.9
         },
         {
-          "rank": 46,
           "entidad": "SEGUNDA RETIRO",
-          "prima_ars_m": 14219.139356,
-          "share": 0.5481174035798766,
-          "is_la_segunda_extra": true
+          "prima": 14219139356.0,
+          "participacion": 1.21
         }
-      ]
+      ],
+      "total_grupo": 1171920967252.0,
+      "patrimoniales": {
+        "total": 1112023108967.0,
+        "ramos": [
+          {
+            "ramo": "Automotores",
+            "prima": 440256717063.0,
+            "part_patrimoniales": 39.59,
+            "part_grupo": 37.57
+          },
+          {
+            "ramo": "Riesgos del Trabajo",
+            "prima": 402547833485.0,
+            "part_patrimoniales": 36.2,
+            "part_grupo": 34.35
+          },
+          {
+            "ramo": "RA y F - Granizo y Otros",
+            "prima": 107279163589.0,
+            "part_patrimoniales": 9.65,
+            "part_grupo": 9.15
+          },
+          {
+            "ramo": "CF e I - Integral de Comercio",
+            "prima": 51444171314.0,
+            "part_patrimoniales": 4.63,
+            "part_grupo": 4.39
+          },
+          {
+            "ramo": "Técnico",
+            "prima": 22741408069.0,
+            "part_patrimoniales": 2.05,
+            "part_grupo": 1.94
+          },
+          {
+            "ramo": "Incendio",
+            "prima": 21422672963.0,
+            "part_patrimoniales": 1.93,
+            "part_grupo": 1.83
+          },
+          {
+            "ramo": "CF e I - Combinado Familiar",
+            "prima": 19927804976.0,
+            "part_patrimoniales": 1.79,
+            "part_grupo": 1.7
+          },
+          {
+            "ramo": "Motovehículos",
+            "prima": 12587106166.0,
+            "part_patrimoniales": 1.13,
+            "part_grupo": 1.07
+          },
+          {
+            "ramo": "Transporte de Mercaderías",
+            "prima": 11040087611.0,
+            "part_patrimoniales": 0.99,
+            "part_grupo": 0.94
+          },
+          {
+            "ramo": "RC - Otros",
+            "prima": 9905936252.0,
+            "part_patrimoniales": 0.89,
+            "part_grupo": 0.85
+          },
+          {
+            "ramo": "Aeronavegación",
+            "prima": 5827124627.0,
+            "part_patrimoniales": 0.52,
+            "part_grupo": 0.5
+          },
+          {
+            "ramo": "Robo y Riesgos Similares",
+            "prima": 1707895270.0,
+            "part_patrimoniales": 0.15,
+            "part_grupo": 0.15
+          },
+          {
+            "ramo": "RC - Mala Práctica Médica",
+            "prima": 1375949332.0,
+            "part_patrimoniales": 0.12,
+            "part_grupo": 0.12
+          },
+          {
+            "ramo": "RA y F - Ganado",
+            "prima": 1125929145.0,
+            "part_patrimoniales": 0.1,
+            "part_grupo": 0.1
+          },
+          {
+            "ramo": "Transporte Cascos",
+            "prima": 970876515.0,
+            "part_patrimoniales": 0.09,
+            "part_grupo": 0.08
+          },
+          {
+            "ramo": "RC - Accidentes del Trabajo",
+            "prima": 869694488.0,
+            "part_patrimoniales": 0.08,
+            "part_grupo": 0.07
+          },
+          {
+            "ramo": "Caución-Otros",
+            "prima": 596660013.0,
+            "part_patrimoniales": 0.05,
+            "part_grupo": 0.05
+          },
+          {
+            "ramo": "RC - Profesional Otras Profesiones",
+            "prima": 360814240.0,
+            "part_patrimoniales": 0.03,
+            "part_grupo": 0.03
+          },
+          {
+            "ramo": "Accidentes a Pasajeros",
+            "prima": 21081409.0,
+            "part_patrimoniales": 0.0,
+            "part_grupo": 0.0
+          },
+          {
+            "ramo": "Otros Riesgos Patrimoniales",
+            "prima": 14182440.0,
+            "part_patrimoniales": 0.0,
+            "part_grupo": 0.0
+          }
+        ]
+      },
+      "personas": {
+        "total": 59897858285.0,
+        "ramos": [
+          {
+            "ramo": "Total de Accidentes Personales",
+            "prima": 29791628430.0,
+            "part_personas": 49.74,
+            "part_grupo": 2.54,
+            "sub_ramos": [
+              {
+                "ramo": "Acc. Personales- Colectivo",
+                "prima": 27437286662.0,
+                "part_personas": 45.81,
+                "part_grupo": 2.34
+              },
+              {
+                "ramo": "Acc. Personales- Individual",
+                "prima": 2354341768.0,
+                "part_personas": 3.93,
+                "part_grupo": 0.2
+              }
+            ]
+          },
+          {
+            "ramo": "Total de Vida",
+            "prima": 15822908165.0,
+            "part_personas": 26.42,
+            "part_grupo": 1.35,
+            "sub_ramos": [
+              {
+                "ramo": "Vida - Colectivo",
+                "prima": 9539572912.0,
+                "part_personas": 15.93,
+                "part_grupo": 0.81
+              },
+              {
+                "ramo": "Vida - Individual",
+                "prima": 624244050.0,
+                "part_personas": 1.04,
+                "part_grupo": 0.05
+              },
+              {
+                "ramo": "Vida - Obligatorios",
+                "prima": 3649687435.0,
+                "part_personas": 6.09,
+                "part_grupo": 0.31
+              },
+              {
+                "ramo": "Vida - Saldo Deudor",
+                "prima": 2009403768.0,
+                "part_personas": 3.35,
+                "part_grupo": 0.17
+              }
+            ]
+          },
+          {
+            "ramo": "Total de Salud",
+            "prima": 64182334.0,
+            "part_personas": 0.11,
+            "part_grupo": 0.01,
+            "sub_ramos": [
+              {
+                "ramo": "Salud",
+                "prima": 64182334.0,
+                "part_personas": 0.11,
+                "part_grupo": 0.01
+              }
+            ]
+          },
+          {
+            "ramo": "Total de Retiro",
+            "prima": 14219139356.0,
+            "part_personas": 23.74,
+            "part_grupo": 1.21,
+            "sub_ramos": [
+              {
+                "ramo": "Retiro - Colectivo",
+                "prima": 11530510675.0,
+                "part_personas": 19.25,
+                "part_grupo": 0.98
+              },
+              {
+                "ramo": "Retiro - Individual",
+                "prima": 2688628681.0,
+                "part_personas": 4.49,
+                "part_grupo": 0.23
+              }
+            ]
+          }
+        ]
+      }
     },
-    "5_auto_moto": {
-      "total_cat_prima_ars_m": 7895489.072545,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 1131742.805184,
-          "share": 14.334043081883447,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "CAJA GENERALES",
-          "prima_ars_m": 817323.500808,
-          "share": 10.351778000049174,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "SANCOR",
-          "prima_ars_m": 787247.567342,
-          "share": 9.970852471691686,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "SAN CRISTÓBAL MUTUAL",
-          "prima_ars_m": 669426.847062,
-          "share": 8.478598867165802,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "BERNARDINO RIVADAVIA",
-          "prima_ars_m": 568828.513803,
-          "share": 7.204474714314893,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "MERCANTIL ANDINA",
-          "prima_ars_m": 545135.750782,
-          "share": 6.9043949750700255,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "SEGUNDA",
-          "prima_ars_m": 452843.823229,
-          "share": 5.735475270349935,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "ZURICH",
-          "prima_ars_m": 359169.76087,
-          "share": 4.549050192709933,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "PROVINCIA",
-          "prima_ars_m": 304839.746036,
-          "share": 3.860935570109518,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "ALLIANZ",
-          "prima_ars_m": 280176.84001,
-          "share": 3.54856852356695,
-          "is_la_segunda_extra": false
-        }
-      ]
-    },
-    "6_art": {
-      "total_cat_prima_ars_m": 4637988.840774,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "PREVENCIÓN ART",
-          "prima_ars_m": 1085408.013366,
-          "share": 23.402557673788284,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "PROVINCIA ART",
-          "prima_ars_m": 859388.56041,
-          "share": 18.529336527394122,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "EXPERTA ART",
-          "prima_ars_m": 522590.656667,
-          "share": 11.267613498177125,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "ASOCIART ART",
-          "prima_ars_m": 470334.407556,
-          "share": 10.140912876312772,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "SEGUNDA ART",
-          "prima_ars_m": 402547.833485,
-          "share": 8.679361837744779,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 338651.128073,
-          "share": 7.301680527900645,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "SWISS MEDICAL ART",
-          "prima_ars_m": 325804.372655,
-          "share": 7.024690740752815,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "ANDINA ART",
-          "prima_ars_m": 120871.915503,
-          "share": 2.6061277776345095,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "HORIZONTE",
-          "prima_ars_m": 89675.539132,
-          "share": 1.9335005367765117,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "SERENA ART",
-          "prima_ars_m": 83859.218713,
-          "share": 1.8080944476573029,
-          "is_la_segunda_extra": false
-        }
-      ]
-    },
-    "7_agro": {
-      "total_cat_prima_ars_m": 482292.746118,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "SEGUNDA",
-          "prima_ars_m": 108405.092734,
-          "share": 22.47703155532783,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "SANCOR",
-          "prima_ars_m": 88389.628169,
-          "share": 18.326966117664597,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "ALLIANZ",
-          "prima_ars_m": 64072.664271,
-          "share": 13.28501512550713,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "ZURICH",
-          "prima_ars_m": 34269.538303,
-          "share": 7.1055471140375515,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "MERCANTIL ANDINA",
-          "prima_ars_m": 31591.058143,
-          "share": 6.55018314027696,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "SAN CRISTÓBAL MUTUAL",
-          "prima_ars_m": 29636.886073,
-          "share": 6.144999341488934,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 24792.652467,
-          "share": 5.140581662601684,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "NACIÓN",
-          "prima_ars_m": 24108.641759,
-          "share": 4.998756865628136,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "GALICIA S.A.",
-          "prima_ars_m": 16609.316929,
-          "share": 3.443824743931829,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "NORTE",
-          "prima_ars_m": 10398.470373,
-          "share": 2.1560495065907257,
-          "is_la_segunda_extra": false
-        }
-      ]
-    },
-    "8_otros_patrimoniales": {
-      "total_cat_prima_ars_m": 3799739.469052,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "NACIÓN",
-          "prima_ars_m": 343347.481314,
-          "share": 9.036079555203347,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "SANCOR",
-          "prima_ars_m": 336140.662733,
-          "share": 8.8464134309941,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 287336.940372,
-          "share": 7.56201688858652,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "ZURICH",
-          "prima_ars_m": 237434.62499,
-          "share": 6.24870802126962,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "MERIDIONAL",
-          "prima_ars_m": 217156.922863,
-          "share": 5.71504769291929,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "SEGUNDA",
-          "prima_ars_m": 148226.359519,
-          "share": 3.90096112447365,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "MAPFRE",
-          "prima_ars_m": 135227.326087,
-          "share": 3.5588578424493393,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "ALLIANZ",
-          "prima_ars_m": 129959.47329,
-          "share": 3.4202206321904405,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "PROVINCIA",
-          "prima_ars_m": 129068.124921,
-          "share": 3.396762487855551,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "CHUBB SEGUROS",
-          "prima_ars_m": 125299.384553,
-          "share": 3.297578309606081,
-          "is_la_segunda_extra": false
-        }
-      ]
-    },
-    "9_acc_personales": {
-      "total_cat_prima_ars_m": 376375.71776,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "SANCOR",
-          "prima_ars_m": 55762.34292,
-          "share": 14.815605866358641,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 48782.10027,
-          "share": 12.961011555242369,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "LIFE",
-          "prima_ars_m": 31132.417226,
-          "share": 8.271632774633968,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "SEGUNDA PERSONAS",
-          "prima_ars_m": 29791.62843,
-          "share": 7.915395979130873,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "ZURICH SANTANDER",
-          "prima_ars_m": 28310.905077,
-          "share": 7.521979697705353,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "GALICIA SAU",
-          "prima_ars_m": 14321.600624,
-          "share": 3.8051340583911744,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "CHUBB SEGUROS",
-          "prima_ars_m": 13115.01353,
-          "share": 3.4845535753618755,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "MERCANTIL ANDINA",
-          "prima_ars_m": 11185.371239,
-          "share": 2.971863143980099,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "GALICIA S.A.",
-          "prima_ars_m": 9361.277649,
-          "share": 2.4872161532400767,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "MAPFRE VIDA",
-          "prima_ars_m": 9133.942528,
-          "share": 2.4268150406622024,
-          "is_la_segunda_extra": false
-        }
-      ]
-    },
-    "10_retiro": {
-      "total_cat_prima_ars_m": 268392.955495,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "ESTRELLA RETIRO",
-          "prima_ars_m": 97341.991251,
-          "share": 36.268459830278005,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "GGAL RETIRO",
-          "prima_ars_m": 40647.640045,
-          "share": 15.144823741753251,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "ORÍGENES RETIRO",
-          "prima_ars_m": 32454.29667,
-          "share": 12.092082152508137,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "SAN CRISTÓBAL RETIRO",
-          "prima_ars_m": 30281.918211,
-          "share": 11.282679962725076,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "NACIÓN RETIRO",
-          "prima_ars_m": 25915.821633,
-          "share": 9.655924681481737,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "SEGUNDA RETIRO",
-          "prima_ars_m": 14219.139356,
-          "share": 5.297880985652357,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "PREVENCIÓN RETIRO",
-          "prima_ars_m": 11007.316204,
-          "share": 4.101194155300793,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "SMG RETIRO",
-          "prima_ars_m": 4728.426031,
-          "share": 1.761754894900022,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "FED. PATRONAL RETIRO",
-          "prima_ars_m": 4639.119304,
-          "share": 1.7284802782710977,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "INST. ENTRE RÍOS RETIRO",
-          "prima_ars_m": 3629.183866,
-          "share": 1.3521904326090293,
-          "is_la_segunda_extra": false
-        }
-      ]
-    },
-    "11_vida": {
-      "total_cat_prima_ars_m": 1756369.069014,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "LIFE",
-          "prima_ars_m": 224325.145632,
-          "share": 12.772096115193651,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "SANCOR",
-          "prima_ars_m": 134103.630817,
-          "share": 7.635276274381433,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "NACIÓN",
-          "prima_ars_m": 99143.497993,
-          "share": 5.644798678256029,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "ZURICH INTERNATIONAL LIFE (*)",
-          "prima_ars_m": 87362.982821,
-          "share": 4.974067487424173,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "CAJA GENERALES",
-          "prima_ars_m": 80998.925695,
-          "share": 4.6117258111628905,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "PROVINCIA",
-          "prima_ars_m": 77793.952135,
-          "share": 4.429248584904332,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "CARUSO",
-          "prima_ars_m": 72842.507567,
-          "share": 4.147334911101157,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "ZURICH SANTANDER",
-          "prima_ars_m": 56095.849731,
-          "share": 3.1938532009386496,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "SMG VIDA",
-          "prima_ars_m": 55176.977077,
-          "share": 3.141536596745896,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "QUALIA",
-          "prima_ars_m": 53811.329268,
-          "share": 3.063782562409215,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 32,
-          "entidad": "SEGUNDA PERSONAS",
-          "prima_ars_m": 15822.908165,
-          "share": 0.9008874298772951,
-          "is_la_segunda_extra": true
-        }
-      ]
-    },
-    "12_sepelio": {
-      "total_cat_prima_ars_m": 151702.370936,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "INSTITUTO SALTA",
-          "prima_ars_m": 32152.754622,
-          "share": 21.194628945888105,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "SURCO",
-          "prima_ars_m": 8957.835407,
-          "share": 5.904875020561887,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "TRES PROVINCIAS PERSONAS",
-          "prima_ars_m": 7766.334135,
-          "share": 5.119454684249101,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "INSTITUTO AUTÁRQUICO",
-          "prima_ars_m": 7688.707461,
-          "share": 5.068284307991272,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "TRIUNFO",
-          "prima_ars_m": 7551.555271,
-          "share": 4.977875575976225,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "SOL NACIENTE",
-          "prima_ars_m": 6707.538506,
-          "share": 4.421511980738764,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "NACIÓN",
-          "prima_ars_m": 6570.893469,
-          "share": 4.331437556616778,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "SMSV",
-          "prima_ars_m": 4847.528454,
-          "share": 3.195420364290199,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "MISTA PERSONAS",
-          "prima_ars_m": 4833.777439,
-          "share": 3.1863558948852995,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "BIND",
-          "prima_ars_m": 4225.387728,
-          "share": 2.7853142320251547,
-          "is_la_segunda_extra": false
-        }
-      ]
-    },
-    "13_salud": {
-      "total_cat_prima_ars_m": 41337.569009,
-      "rows": [
-        {
-          "rank": 1,
-          "entidad": "INSTITUTO SALTA",
-          "prima_ars_m": 11677.944863,
-          "share": 28.250197442567277,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 2,
-          "entidad": "SANCOR",
-          "prima_ars_m": 10969.024128,
-          "share": 26.535242373860513,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 3,
-          "entidad": "FED. PATRONAL",
-          "prima_ars_m": 5425.396023,
-          "share": 13.124613161985371,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 4,
-          "entidad": "LIFE",
-          "prima_ars_m": 3349.968782,
-          "share": 8.103932723452232,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 5,
-          "entidad": "SMG VIDA",
-          "prima_ars_m": 1541.247021,
-          "share": 3.7284413620560035,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 6,
-          "entidad": "ASSURANT",
-          "prima_ars_m": 1364.730283,
-          "share": 3.3014284964432026,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 7,
-          "entidad": "QUALIA",
-          "prima_ars_m": 1115.622303,
-          "share": 2.6988096536521224,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 8,
-          "entidad": "FEDERADA",
-          "prima_ars_m": 978.528695,
-          "share": 2.367165555349796,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 9,
-          "entidad": "CAJA GENERALES",
-          "prima_ars_m": 803.172669,
-          "share": 1.9429605761895035,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 10,
-          "entidad": "BHN VIDA",
-          "prima_ars_m": 687.937574,
-          "share": 1.6641945583452729,
-          "is_la_segunda_extra": false
-        },
-        {
-          "rank": 28,
-          "entidad": "SEGUNDA PERSONAS",
-          "prima_ars_m": 64.182334,
-          "share": 0.1552639294923856,
-          "is_la_segunda_extra": true
-        }
+    "total_patrimoniales": [
+      {
+        "posicion": 1,
+        "entidad": "FED. PATRONAL",
+        "prima": 1782523526096.0,
+        "participacion": 10.6
+      },
+      {
+        "posicion": 2,
+        "entidad": "SANCOR",
+        "prima": 1211777858244.0,
+        "participacion": 7.21
+      },
+      {
+        "posicion": 3,
+        "entidad": "PREVENCIÓN ART",
+        "prima": 1085408013366.0,
+        "participacion": 6.45
+      },
+      {
+        "posicion": 4,
+        "entidad": "CAJA GENERALES",
+        "prima": 895550803986.0,
+        "participacion": 5.33
+      },
+      {
+        "posicion": 5,
+        "entidad": "PROVINCIA ART",
+        "prima": 859388560410.0,
+        "participacion": 5.11
+      },
+      {
+        "posicion": 6,
+        "entidad": "SAN CRISTÓBAL MUTUAL",
+        "prima": 790026633226.0,
+        "participacion": 4.7
+      },
+      {
+        "posicion": 7,
+        "entidad": "SEGUNDA",
+        "prima": 709475275482.0,
+        "participacion": 4.22
+      },
+      {
+        "posicion": 8,
+        "entidad": "MERCANTIL ANDINA",
+        "prima": 669786062563.0,
+        "participacion": 3.98
+      },
+      {
+        "posicion": 9,
+        "entidad": "ZURICH",
+        "prima": 630873924163.0,
+        "participacion": 3.75
+      },
+      {
+        "posicion": 10,
+        "entidad": "BERNARDINO RIVADAVIA",
+        "prima": 622246896464.0,
+        "participacion": 3.7
+      },
+      {
+        "posicion": 16,
+        "entidad": "SEGUNDA ART",
+        "prima": 402547833485.0,
+        "participacion": 2.39
+      }
+    ],
+    "total_automotores": [
+      {
+        "posicion": 1,
+        "entidad": "FED. PATRONAL",
+        "prima": 1131742805184.0,
+        "participacion": 14.33
+      },
+      {
+        "posicion": 2,
+        "entidad": "CAJA GENERALES",
+        "prima": 817323500808.0,
+        "participacion": 10.35
+      },
+      {
+        "posicion": 3,
+        "entidad": "SANCOR",
+        "prima": 787247567342.0,
+        "participacion": 9.97
+      },
+      {
+        "posicion": 4,
+        "entidad": "SAN CRISTÓBAL MUTUAL",
+        "prima": 669426847062.0,
+        "participacion": 8.48
+      },
+      {
+        "posicion": 5,
+        "entidad": "BERNARDINO RIVADAVIA",
+        "prima": 568828513803.0,
+        "participacion": 7.2
+      },
+      {
+        "posicion": 6,
+        "entidad": "MERCANTIL ANDINA",
+        "prima": 545135750782.0,
+        "participacion": 6.9
+      },
+      {
+        "posicion": 7,
+        "entidad": "SEGUNDA",
+        "prima": 452843823229.0,
+        "participacion": 5.74
+      },
+      {
+        "posicion": 8,
+        "entidad": "ZURICH",
+        "prima": 359169760870.0,
+        "participacion": 4.55
+      },
+      {
+        "posicion": 9,
+        "entidad": "PROVINCIA",
+        "prima": 304839746036.0,
+        "participacion": 3.86
+      },
+      {
+        "posicion": 10,
+        "entidad": "ALLIANZ",
+        "prima": 280176840010.0,
+        "participacion": 3.55
+      }
+    ],
+    "total_art": [
+      {
+        "posicion": 1,
+        "entidad": "PREVENCIÓN ART",
+        "prima": 1085408013366.0,
+        "participacion": 23.4
+      },
+      {
+        "posicion": 2,
+        "entidad": "PROVINCIA ART",
+        "prima": 859388560410.0,
+        "participacion": 18.53
+      },
+      {
+        "posicion": 3,
+        "entidad": "EXPERTA ART",
+        "prima": 522590656667.0,
+        "participacion": 11.27
+      },
+      {
+        "posicion": 4,
+        "entidad": "ASOCIART ART",
+        "prima": 470334407556.0,
+        "participacion": 10.14
+      },
+      {
+        "posicion": 5,
+        "entidad": "SEGUNDA ART",
+        "prima": 402547833485.0,
+        "participacion": 8.68
+      },
+      {
+        "posicion": 6,
+        "entidad": "FED. PATRONAL",
+        "prima": 338651128073.0,
+        "participacion": 7.3
+      },
+      {
+        "posicion": 7,
+        "entidad": "SWISS MEDICAL ART",
+        "prima": 325804372655.0,
+        "participacion": 7.02
+      },
+      {
+        "posicion": 8,
+        "entidad": "ANDINA ART",
+        "prima": 120871915503.0,
+        "participacion": 2.61
+      },
+      {
+        "posicion": 9,
+        "entidad": "HORIZONTE",
+        "prima": 89675539132.0,
+        "participacion": 1.93
+      },
+      {
+        "posicion": 10,
+        "entidad": "SERENA ART",
+        "prima": 83859218713.0,
+        "participacion": 1.81
+      }
+    ],
+    "total_agro": [
+      {
+        "posicion": 1,
+        "entidad": "SEGUNDA",
+        "prima": 108405092734.0,
+        "participacion": 22.48
+      },
+      {
+        "posicion": 2,
+        "entidad": "SANCOR",
+        "prima": 88389628169.0,
+        "participacion": 18.33
+      },
+      {
+        "posicion": 3,
+        "entidad": "ALLIANZ",
+        "prima": 64072664271.0,
+        "participacion": 13.29
+      },
+      {
+        "posicion": 4,
+        "entidad": "ZURICH",
+        "prima": 34269538303.0,
+        "participacion": 7.11
+      },
+      {
+        "posicion": 5,
+        "entidad": "MERCANTIL ANDINA",
+        "prima": 31591058143.0,
+        "participacion": 6.55
+      },
+      {
+        "posicion": 6,
+        "entidad": "SAN CRISTÓBAL MUTUAL",
+        "prima": 29636886073.0,
+        "participacion": 6.15
+      },
+      {
+        "posicion": 7,
+        "entidad": "FED. PATRONAL",
+        "prima": 24792652467.0,
+        "participacion": 5.14
+      },
+      {
+        "posicion": 8,
+        "entidad": "NACIÓN",
+        "prima": 24108641759.0,
+        "participacion": 5.0
+      },
+      {
+        "posicion": 9,
+        "entidad": "GALICIA S.A.",
+        "prima": 16609316929.0,
+        "participacion": 3.44
+      },
+      {
+        "posicion": 10,
+        "entidad": "NORTE",
+        "prima": 10398470373.0,
+        "participacion": 2.16
+      }
+    ],
+    "total_otros_patrimoniales": [
+      {
+        "posicion": 1,
+        "entidad": "NACIÓN",
+        "prima": 343347481314.0,
+        "participacion": 9.04
+      },
+      {
+        "posicion": 2,
+        "entidad": "SANCOR",
+        "prima": 336140662733.0,
+        "participacion": 8.85
+      },
+      {
+        "posicion": 3,
+        "entidad": "FED. PATRONAL",
+        "prima": 287336940372.0,
+        "participacion": 7.56
+      },
+      {
+        "posicion": 4,
+        "entidad": "ZURICH",
+        "prima": 237434624990.0,
+        "participacion": 6.25
+      },
+      {
+        "posicion": 5,
+        "entidad": "MERIDIONAL",
+        "prima": 217156922863.0,
+        "participacion": 5.72
+      },
+      {
+        "posicion": 6,
+        "entidad": "SEGUNDA",
+        "prima": 148226359519.0,
+        "participacion": 3.9
+      },
+      {
+        "posicion": 7,
+        "entidad": "MAPFRE",
+        "prima": 135227326087.0,
+        "participacion": 3.56
+      },
+      {
+        "posicion": 8,
+        "entidad": "ALLIANZ",
+        "prima": 129959473290.0,
+        "participacion": 3.42
+      },
+      {
+        "posicion": 9,
+        "entidad": "PROVINCIA",
+        "prima": 129068124921.0,
+        "participacion": 3.4
+      },
+      {
+        "posicion": 10,
+        "entidad": "CHUBB SEGUROS",
+        "prima": 125299384553.0,
+        "participacion": 3.3
+      }
+    ],
+    "total_personas": [
+      {
+        "posicion": 1,
+        "entidad": "LIFE",
+        "prima": 259387879227.0,
+        "participacion": 10.0
+      },
+      {
+        "posicion": 2,
+        "entidad": "SANCOR",
+        "prima": 202850978624.0,
+        "participacion": 7.82
+      },
+      {
+        "posicion": 3,
+        "entidad": "NACIÓN",
+        "prima": 107945051200.0,
+        "participacion": 4.16
+      },
+      {
+        "posicion": 4,
+        "entidad": "FED. PATRONAL",
+        "prima": 102397895468.0,
+        "participacion": 3.95
+      },
+      {
+        "posicion": 5,
+        "entidad": "ESTRELLA RETIRO",
+        "prima": 97341991251.0,
+        "participacion": 3.75
+      },
+      {
+        "posicion": 6,
+        "entidad": "CAJA GENERALES",
+        "prima": 92617483694.0,
+        "participacion": 3.57
+      },
+      {
+        "posicion": 7,
+        "entidad": "ZURICH INTERNATIONAL LIFE (*)",
+        "prima": 87362988608.0,
+        "participacion": 3.37
+      },
+      {
+        "posicion": 8,
+        "entidad": "ZURICH SANTANDER",
+        "prima": 84597673405.0,
+        "participacion": 3.26
+      },
+      {
+        "posicion": 9,
+        "entidad": "PROVINCIA",
+        "prima": 82536296663.0,
+        "participacion": 3.18
+      },
+      {
+        "posicion": 10,
+        "entidad": "CARUSO",
+        "prima": 73812657202.0,
+        "participacion": 2.85
+      },
+      {
+        "posicion": 15,
+        "entidad": "SEGUNDA PERSONAS",
+        "prima": 45678718929.0,
+        "participacion": 1.76
+      },
+      {
+        "posicion": 46,
+        "entidad": "SEGUNDA RETIRO",
+        "prima": 14219139356.0,
+        "participacion": 0.55
+      }
+    ],
+    "total_accidentes_personales": [
+      {
+        "posicion": 1,
+        "entidad": "SANCOR",
+        "prima": 55762342920.0,
+        "participacion": 14.82
+      },
+      {
+        "posicion": 2,
+        "entidad": "FED. PATRONAL",
+        "prima": 48782100270.0,
+        "participacion": 12.96
+      },
+      {
+        "posicion": 3,
+        "entidad": "LIFE",
+        "prima": 31132417226.0,
+        "participacion": 8.27
+      },
+      {
+        "posicion": 4,
+        "entidad": "SEGUNDA PERSONAS",
+        "prima": 29791628430.0,
+        "participacion": 7.92
+      },
+      {
+        "posicion": 5,
+        "entidad": "ZURICH SANTANDER",
+        "prima": 28310905077.0,
+        "participacion": 7.52
+      },
+      {
+        "posicion": 6,
+        "entidad": "GALICIA SAU",
+        "prima": 14321600624.0,
+        "participacion": 3.81
+      },
+      {
+        "posicion": 7,
+        "entidad": "CHUBB SEGUROS",
+        "prima": 13115013530.0,
+        "participacion": 3.48
+      },
+      {
+        "posicion": 8,
+        "entidad": "MERCANTIL ANDINA",
+        "prima": 11185371239.0,
+        "participacion": 2.97
+      },
+      {
+        "posicion": 9,
+        "entidad": "GALICIA S.A.",
+        "prima": 9361277649.0,
+        "participacion": 2.49
+      },
+      {
+        "posicion": 10,
+        "entidad": "MAPFRE VIDA",
+        "prima": 9133942528.0,
+        "participacion": 2.43
+      }
+    ],
+    "total_vida": [
+      {
+        "posicion": 1,
+        "entidad": "LIFE",
+        "prima": 224325145632.0,
+        "participacion": 12.77
+      },
+      {
+        "posicion": 2,
+        "entidad": "SANCOR",
+        "prima": 134103630817.0,
+        "participacion": 7.64
+      },
+      {
+        "posicion": 3,
+        "entidad": "NACIÓN",
+        "prima": 99143497993.0,
+        "participacion": 5.64
+      },
+      {
+        "posicion": 4,
+        "entidad": "ZURICH INTERNATIONAL LIFE (*)",
+        "prima": 87362982821.0,
+        "participacion": 4.97
+      },
+      {
+        "posicion": 5,
+        "entidad": "CAJA GENERALES",
+        "prima": 80998925695.0,
+        "participacion": 4.61
+      },
+      {
+        "posicion": 6,
+        "entidad": "PROVINCIA",
+        "prima": 77793952135.0,
+        "participacion": 4.43
+      },
+      {
+        "posicion": 7,
+        "entidad": "CARUSO",
+        "prima": 72842507567.0,
+        "participacion": 4.15
+      },
+      {
+        "posicion": 8,
+        "entidad": "ZURICH SANTANDER",
+        "prima": 56095849731.0,
+        "participacion": 3.19
+      },
+      {
+        "posicion": 9,
+        "entidad": "SMG VIDA",
+        "prima": 55176977077.0,
+        "participacion": 3.14
+      },
+      {
+        "posicion": 10,
+        "entidad": "QUALIA",
+        "prima": 53811329268.0,
+        "participacion": 3.06
+      },
+      {
+        "posicion": 32,
+        "entidad": "SEGUNDA PERSONAS",
+        "prima": 15822908165.0,
+        "participacion": 0.9
+      }
+    ],
+    "total_sepelio": [
+      {
+        "posicion": 1,
+        "entidad": "INSTITUTO SALTA",
+        "prima": 32152754622.0,
+        "participacion": 21.19
+      },
+      {
+        "posicion": 2,
+        "entidad": "SURCO",
+        "prima": 8957835407.0,
+        "participacion": 5.9
+      },
+      {
+        "posicion": 3,
+        "entidad": "TRES PROVINCIAS PERSONAS",
+        "prima": 7766334135.0,
+        "participacion": 5.12
+      },
+      {
+        "posicion": 4,
+        "entidad": "INSTITUTO AUTÁRQUICO",
+        "prima": 7688707461.0,
+        "participacion": 5.07
+      },
+      {
+        "posicion": 5,
+        "entidad": "TRIUNFO",
+        "prima": 7551555271.0,
+        "participacion": 4.98
+      },
+      {
+        "posicion": 6,
+        "entidad": "SOL NACIENTE",
+        "prima": 6707538506.0,
+        "participacion": 4.42
+      },
+      {
+        "posicion": 7,
+        "entidad": "NACIÓN",
+        "prima": 6570893469.0,
+        "participacion": 4.33
+      },
+      {
+        "posicion": 8,
+        "entidad": "SMSV",
+        "prima": 4847528454.0,
+        "participacion": 3.2
+      },
+      {
+        "posicion": 9,
+        "entidad": "MISTA PERSONAS",
+        "prima": 4833777439.0,
+        "participacion": 3.19
+      },
+      {
+        "posicion": 10,
+        "entidad": "BIND",
+        "prima": 4225387728.0,
+        "participacion": 2.79
+      }
+    ],
+    "total_salud": [
+      {
+        "posicion": 1,
+        "entidad": "INSTITUTO SALTA",
+        "prima": 11677944863.0,
+        "participacion": 28.25
+      },
+      {
+        "posicion": 2,
+        "entidad": "SANCOR",
+        "prima": 10969024128.0,
+        "participacion": 26.54
+      },
+      {
+        "posicion": 3,
+        "entidad": "FED. PATRONAL",
+        "prima": 5425396023.0,
+        "participacion": 13.12
+      },
+      {
+        "posicion": 4,
+        "entidad": "LIFE",
+        "prima": 3349968782.0,
+        "participacion": 8.1
+      },
+      {
+        "posicion": 5,
+        "entidad": "SMG VIDA",
+        "prima": 1541247021.0,
+        "participacion": 3.73
+      },
+      {
+        "posicion": 6,
+        "entidad": "ASSURANT",
+        "prima": 1364730283.0,
+        "participacion": 3.3
+      },
+      {
+        "posicion": 7,
+        "entidad": "QUALIA",
+        "prima": 1115622303.0,
+        "participacion": 2.7
+      },
+      {
+        "posicion": 8,
+        "entidad": "FEDERADA",
+        "prima": 978528695.0,
+        "participacion": 2.37
+      },
+      {
+        "posicion": 9,
+        "entidad": "CAJA GENERALES",
+        "prima": 803172669.0,
+        "participacion": 1.94
+      },
+      {
+        "posicion": 10,
+        "entidad": "BHN VIDA",
+        "prima": 687937574.0,
+        "participacion": 1.66
+      },
+      {
+        "posicion": 28,
+        "entidad": "SEGUNDA PERSONAS",
+        "prima": 64182334.0,
+        "participacion": 0.16
+      }
+    ],
+    "total_retiro": [
+      {
+        "posicion": 1,
+        "entidad": "ESTRELLA RETIRO",
+        "prima": 97341991251.0,
+        "participacion": 36.27
+      },
+      {
+        "posicion": 2,
+        "entidad": "GGAL RETIRO",
+        "prima": 40647640045.0,
+        "participacion": 15.14
+      },
+      {
+        "posicion": 3,
+        "entidad": "ORÍGENES RETIRO",
+        "prima": 32454296670.0,
+        "participacion": 12.09
+      },
+      {
+        "posicion": 4,
+        "entidad": "SAN CRISTÓBAL RETIRO",
+        "prima": 30281918211.0,
+        "participacion": 11.28
+      },
+      {
+        "posicion": 5,
+        "entidad": "NACIÓN RETIRO",
+        "prima": 25915821633.0,
+        "participacion": 9.66
+      },
+      {
+        "posicion": 6,
+        "entidad": "SEGUNDA RETIRO",
+        "prima": 14219139356.0,
+        "participacion": 5.3
+      },
+      {
+        "posicion": 7,
+        "entidad": "PREVENCIÓN RETIRO",
+        "prima": 11007316204.0,
+        "participacion": 4.1
+      },
+      {
+        "posicion": 8,
+        "entidad": "SMG RETIRO",
+        "prima": 4728426031.0,
+        "participacion": 1.76
+      },
+      {
+        "posicion": 9,
+        "entidad": "FED. PATRONAL RETIRO",
+        "prima": 4639119304.0,
+        "participacion": 1.73
+      },
+      {
+        "posicion": 10,
+        "entidad": "INST. ENTRE RÍOS RETIRO",
+        "prima": 3629183866.0,
+        "participacion": 1.35
+      }
+    ],
+    "total_retiro_individual": [
+      {
+        "posicion": 1,
+        "entidad": "SAN CRISTÓBAL RETIRO",
+        "prima": 20951595159.0,
+        "participacion": 48.57
+      },
+      {
+        "posicion": 2,
+        "entidad": "PREVENCIÓN RETIRO",
+        "prima": 9356002135.0,
+        "participacion": 21.69
+      },
+      {
+        "posicion": 3,
+        "entidad": "FED. PATRONAL RETIRO",
+        "prima": 4639119304.0,
+        "participacion": 10.76
+      },
+      {
+        "posicion": 4,
+        "entidad": "SEGUNDA RETIRO",
+        "prima": 2688628681.0,
+        "participacion": 6.23
+      },
+      {
+        "posicion": 5,
+        "entidad": "GGAL RETIRO",
+        "prima": 2164771692.0,
+        "participacion": 5.02
+      },
+      {
+        "posicion": 6,
+        "entidad": "ORÍGENES RETIRO",
+        "prima": 1937247089.0,
+        "participacion": 4.49
+      },
+      {
+        "posicion": 7,
+        "entidad": "BINARIA RETIRO",
+        "prima": 800685053.0,
+        "participacion": 1.86
+      },
+      {
+        "posicion": 8,
+        "entidad": "INST. ENTRE RÍOS RETIRO",
+        "prima": 159517569.0,
+        "participacion": 0.37
+      },
+      {
+        "posicion": 9,
+        "entidad": "NACIÓN RETIRO",
+        "prima": 154522363.0,
+        "participacion": 0.36
+      },
+      {
+        "posicion": 10,
+        "entidad": "GALICIA RETIRO",
+        "prima": 140402459.0,
+        "participacion": 0.33
+      }
+    ],
+    "total_retiro_colectivo": [
+      {
+        "posicion": 1,
+        "entidad": "ESTRELLA RETIRO",
+        "prima": 97338736628.0,
+        "participacion": 43.21
+      },
+      {
+        "posicion": 2,
+        "entidad": "GGAL RETIRO",
+        "prima": 38482868353.0,
+        "participacion": 17.08
+      },
+      {
+        "posicion": 3,
+        "entidad": "ORÍGENES RETIRO",
+        "prima": 30517049581.0,
+        "participacion": 13.55
+      },
+      {
+        "posicion": 4,
+        "entidad": "NACIÓN RETIRO",
+        "prima": 25761299270.0,
+        "participacion": 11.44
+      },
+      {
+        "posicion": 5,
+        "entidad": "SEGUNDA RETIRO",
+        "prima": 11530510675.0,
+        "participacion": 5.12
+      },
+      {
+        "posicion": 6,
+        "entidad": "SAN CRISTÓBAL RETIRO",
+        "prima": 9330323052.0,
+        "participacion": 4.14
+      },
+      {
+        "posicion": 7,
+        "entidad": "SMG RETIRO",
+        "prima": 4624031393.0,
+        "participacion": 2.05
+      },
+      {
+        "posicion": 8,
+        "entidad": "INST. ENTRE RÍOS RETIRO",
+        "prima": 3469666297.0,
+        "participacion": 1.54
+      },
+      {
+        "posicion": 9,
+        "entidad": "PREVENCIÓN RETIRO",
+        "prima": 1651314069.0,
+        "participacion": 0.73
+      },
+      {
+        "posicion": 10,
+        "entidad": "BINARIA RETIRO",
+        "prima": 1447714024.0,
+        "participacion": 0.64
+      }
+    ],
+    "personas_retiro": {
+      "mercado_personas": [
+        3.685231119109047,
+        10.72621737589861,
+        12.34291112438259,
+        27.740687364508016,
+        40.044817864797515,
+        17.990163265255443
+      ],
+      "mercado_retiro": [
+        0.003587001527596198,
+        0.13124764058232613,
+        1.0936457568520053,
+        31.945855625352827,
+        33.03824599780434,
+        26.830358047285575
+      ],
+      "l2_personas": [
+        1.181625198024826,
+        34.30096075723589,
+        21.915220760809444,
+        33.87638638257836,
+        55.760458791740476,
+        9.126302809585521
+      ],
+      "l2_retiro": [
+        0.0,
+        0.0,
+        1.2830125469093123,
+        10.637515472142475,
+        11.920528019051787,
+        -9.148816327277016
       ]
     }
   },
@@ -108328,5 +108421,6 @@
     "resultado_financiero_sobre_primas": 12.8,
     "apalancamiento_patrimonial": 2.45
   },
-  "update_time_human": "01/09/2026 17:23 hs"
+  "update_time_human": "01/09/2026 21:01 hs",
+  "audit_status": "VERIFICADO_SSN_OK"
 }
