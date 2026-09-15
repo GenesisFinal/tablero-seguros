@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-14 12:42:00",
+  "last_updated": "2026-09-15 11:11:08",
   "period_label": "31-03-2026 (9 Meses Acumulados)",
   "comparison_label": "vs. 31-03-2025",
   "ssn_primas_mercado": {
@@ -108421,6 +108421,6 @@
     "resultado_financiero_sobre_primas": 12.8,
     "apalancamiento_patrimonial": 2.45
   },
-  "update_time_human": "14/09/2026 12:42 hs",
+  "update_time_human": "15/09/2026 11:11 hs",
   "audit_status": "VERIFICADO_SSN_OK"
 }
